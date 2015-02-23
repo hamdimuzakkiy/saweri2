@@ -15,6 +15,7 @@ class mdl_service extends CI_Model{
 		$this->db->join('service_status', 'service.status = service_status.id');		
 		$this->db->order_by("service.tanggal", "desc");		
 		$this->db->limit($num, $offset);
+		
 		return $this->db->get();
 	}
 	

@@ -56,9 +56,10 @@ class retur_penjualan extends My_Controller
 		
 		
 		
-		$data['results'] = $this->retur_penjualan->getItem($config['per_page'], $this->uri->segment(3));
+		$data['results'] = $this->retur_penjualan->getItem($config['per_page'], $this->uri->segment(3));	 	
 		
-		
+
+
 		$this->load->view('retur_penjualan/retur_penjualan_list', $data);
 		
 		$this->close();

@@ -21,8 +21,11 @@ class mdl_retur_penjualan extends CI_Model{
 		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');
 		$this->db->where('penjualan.id_cabang', get_idcabang());
 		$this->db->limit($num, $offset);
+
 		return $this->db->get();
 	}
+
+	
 	
 	function getItemById($id)
 	{

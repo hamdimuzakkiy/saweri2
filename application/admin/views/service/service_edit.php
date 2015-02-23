@@ -88,7 +88,7 @@
 					<p class="colx2-left">
 						<label for="complex-en-url">Tanggal (*) :</label>
 						<span class="relative">
-							<? 
+							<?php 
 								if (form_error('tanggal') != null)
 								{
 									echo '	<span class="input-type-text margin-right relative">
@@ -110,7 +110,7 @@
 					<p class="colx2-right">
 						<label for="complex-en-url">Kerusakan (*) :</label>
 						<span class="relative">
-							<? 
+							<?php 
 								if (form_error('kerusakan') != null)
 								{
 									echo '<input type="text" name="kerusakan" id="kerusakan" value="'.set_value('kerusakan').'" class="duapertiga-width">';
@@ -126,7 +126,7 @@
 					<p class="colx2-left">
 						<label for="complex-en-url">Total Bayar :</label>
 						<span class="relative">
-							<? 
+							<?php 
 								if (form_error('total_bayar') != null)
 								{
 									echo '<input type="text" name="total_bayar" id="total_bayar" value="'.set_value('total_bayar').'" class="duapertiga-width">';
