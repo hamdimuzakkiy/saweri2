@@ -21,7 +21,7 @@
 					<p class="colx2-left">
 						<label for="complex-en-url">Kode :</label>
 						<span class="relative">
-							<? 
+							<?php 
 								if (form_error('level_id') != null)
 								{
 									echo '<input type="text" name="level_id" id="level_id" value="'.set_value('level_id').'" class="duapertiga-width">';
@@ -39,7 +39,7 @@
 					<p class="colx2-left">
 						<label for="complex-en-url">Nama Level :</label>
 						<span class="relative">
-							<? 
+							<?php 
 								if (form_error('nama') != null)
 								{
 									echo '<input type="text" name="nama" id="nama" value="'.set_value('nama').'" class="duapertiga-width">';

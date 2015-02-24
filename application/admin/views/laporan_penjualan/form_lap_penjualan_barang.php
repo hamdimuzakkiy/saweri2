@@ -54,7 +54,9 @@
 		var periode_awal=document.getElementById('tanggal_awal').value;
 		var periode_akhir=document.getElementById('tanggal_akhir').value;
 		var nama_barang = document.getElementById('nama_barang').value;
-		
+
+		alert(nama_barang);
+
 		if ((periode_awal=='')||(periode_akhir=='')){
 			alert('Isilah periode awal dan akhir');
 		}else{
