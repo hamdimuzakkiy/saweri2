@@ -39,6 +39,7 @@ class laporan_penjualan extends My_Controller
 	
 	
 	function view_lap_penjualan_periode(){
+
 		$periode_awal = $this->uri->segment('3');
 		$periode_akhir = $this->uri->segment('4');
 		

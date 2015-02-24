@@ -68,7 +68,16 @@
 						<!--<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_service?>" type="checkbox" /></td>-->
 						<td align="left" valign="top"><?=$row->nama_pelanggan?> </td>
 						<td align="left" valign="top"><?=$row->nama_barang?> </td>
-						<td align="left" valign="top"><?=convert_date_mysql_indo($row->tanggal)?> </td>
+						<td align="left" valign="top">
+							<?php 
+							 	$date =  $row->tanggal;
+							 	$tgl = explode("-",$row->tanggal)[2];
+							 	$bln = explode("-",$row->tanggal)[1];
+							 	$thn = explode("-",$row->tanggal)[0];
+
+							 	print $tgl.'-'.$bln.'-'.$thn;
+							?> 
+						</td>
 						<td align="left" valign="top"><?=$row->kerusakan?> </td>
 						<td align="left" valign="top"><?=convert_rupiah($row->total_bayar)?> </td>
 						<td align="left" valign="top"><?=$row->deskripsi?> </td>		
@@ -96,7 +105,7 @@
 			
 			<div class="block-footer">
 				
-				<!--<img src="images/icons/fugue/arrow-curve-000-left.png" width="16" height="16" class="picto"> 
+				<img src="images/icons/fugue/arrow-curve-000-left.png" width="16" height="16" class="picto"> 
 				<a href="javascript:void(0)" class="button" onClick="check_all(0)" >Select All</a> 
 				<a href="javascript:void(0)" class="button" onClick="uncheck_all(0)" >Unselect All</a>
 				<span class="sep"></span>
@@ -107,7 +116,7 @@
 					<option value="validate">Validate</option>
 					<option value="delete">Delete</option>
 				</select>
-				<button type="submit" class="small">Ok</button>-->
+				<button type="submit" class="small">Ok</button>
 			</div>
 				
 		</form>

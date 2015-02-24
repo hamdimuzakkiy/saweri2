@@ -58,7 +58,7 @@
 	
 	<?php
 		$i=0;
-		foreach ($dt_nama_barang as $nama_barang){
+		/*foreach ($dt_nama_barang as $nama_barang)*/{
 			echo "<input type='hidden' id='nama_barang' name='nama_barang[$i]' value='" . $nama_barang . "' checked />";
 			$i++;
 		}

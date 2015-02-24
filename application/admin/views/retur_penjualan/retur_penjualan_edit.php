@@ -53,7 +53,7 @@
 					<p class="colx2-right">
 						<label for="complex-en-url">Tanggal (*) :</label>
 						<span class="relative">
-							<? 
+							<?php 
 								if (form_error('tanggal') != null)
 								{
 									echo '	<span class="input-type-text margin-right relative">
@@ -98,7 +98,7 @@
 					<p class="colx2-right">
 						<label for="complex-en-url">QTY (*) :</label>
 						<span class="relative">
-							<? 
+							<?php 
 								if (form_error('qty') != null)
 								{
 									echo '<input type="text" name="qty" id="qty" value="'.set_value('qty').'" class="duapertiga-width">';

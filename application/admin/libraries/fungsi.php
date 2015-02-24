@@ -1,10 +1,11 @@
-<?
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 Class Fungsi
 {
 function Fungsi()
 	{
 		$this->CI =& get_instance();
-		//$this->CI->load->library('fpdf',array('orientasi'=>'P','unit'=>'cm','format'=>'legal'));
+		$this->CI->load->library('fpdf');
+		
 		@$kbase="8aHe3nUv9Wo4";
 	}
 function jam()
