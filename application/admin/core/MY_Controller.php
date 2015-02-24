@@ -66,12 +66,13 @@ class MY_Controller extends CI_Controller{
 			if (($field->name != 'level_id') and ($field->name != 'nama'))
 			{				
 				
-				$tmp_pri = str_split($row_pri[$field->name]);				
-				$privilage[$field->name][0] = isset($tmp_pri[0]) ? $tmp_pri[0]:'';
-				$privilage[$field->name][1] = isset($tmp_pri[1]) ? $tmp_pri[1]:'';
-				$privilage[$field->name][2] = isset($tmp_pri[2]) ? $tmp_pri[2]:'';
-				$privilage[$field->name][3] = isset($tmp_pri[3]) ? $tmp_pri[3]:'';
-				$privilage[$field->name][4] = isset($tmp_pri[4]) ? $tmp_pri[4]:'';
+				$tmp_pri = str_split($row_pri[$field->name]);
+//				print $field->name.'<br>';		
+				$privilage[$field->name][0] = isset($tmp_pri[0]) ? $tmp_pri[0]:'0';
+				$privilage[$field->name][1] = isset($tmp_pri[1]) ? $tmp_pri[1]:'0';
+				$privilage[$field->name][2] = isset($tmp_pri[2]) ? $tmp_pri[2]:'0';
+				$privilage[$field->name][3] = isset($tmp_pri[3]) ? $tmp_pri[3]:'0';
+				$privilage[$field->name][4] = isset($tmp_pri[4]) ? $tmp_pri[4]:'0';
 				 // echo 'Field : '.$field->name.'&nbsp;&nbsp;&nbsp;0.'.$tmp_pri[0].
 												// '&nbsp;&nbsp;&nbsp;1.'.$tmp_pri[1].
 												// '&nbsp;&nbsp;&nbsp;2.'.$tmp_pri[2].

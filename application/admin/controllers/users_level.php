@@ -198,41 +198,46 @@ class users_level extends My_Controller
 					$level = $this->input->post('level');
 					$data[$field->name] = '';
 					
-					/* akses */
-					if($level[$field->name][0]){
+
+								
+					print $field->name.'<br>';
+
+					/* akses */					
+					if(isset($level[$field->name][0]) ){		
 						$data[$field->name] = $data[$field->name].'1';
-					}else{
+					}					
+					else{						
 						$data[$field->name] = $data[$field->name].'0';
 					}
 					
 					/* view */
-					if($level[$field->name][1]){
+					if(isset($level[$field->name][1])  ){
 						$data[$field->name] = $data[$field->name].'1';
 					}else{
 						$data[$field->name] = $data[$field->name].'0';
 					}
 					
 					/*insert */
-					if($level[$field->name][2]){
+					if(isset($level[$field->name][2])  ){
 						$data[$field->name] = $data[$field->name].'1';
 					}else{
 						$data[$field->name] = $data[$field->name].'0';
 					}
 					
 					/* update */
-					if($level[$field->name][3]){
+					if(isset($level[$field->name][3])  ){
 						$data[$field->name] = $data[$field->name].'1';
 					}else{
 						$data[$field->name] = $data[$field->name].'0';
 					}
 					
 					/* delete */
-					if($level[$field->name][4]){
+					if(isset($level[$field->name][4])  ){
 						$data[$field->name] = $data[$field->name].'1';
 					}else{
 						$data[$field->name] = $data[$field->name].'0';
 					}
-					
+					print $field->name.'<br>';	
 				}
 			}
 			

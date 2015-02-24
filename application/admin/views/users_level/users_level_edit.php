@@ -82,12 +82,12 @@
 											$level = str_split($field_level);
 								?>
 											<tr>
-												<td><?=str_replace('_', ' ', strtoupper($field->name))?></td>
+												<td><?=str_replace('_', ' ', strtoupper($field->name))?></td>												
 												<td><input name="level[<?=$field->name?>][0]" type="checkbox" <?=$level[0]=='1'?'checked="checked"':''?> value="1" /></td>
 												<td><input name="level[<?=$field->name?>][1]" type="checkbox" <?=$level[1]=='1'?'checked="checked"':''?> value="1" /></td>
 												<td><input name="level[<?=$field->name?>][2]" type="checkbox" <?=$level[2]=='1'?'checked="checked"':''?> value="1" /></td>
 												<td><input name="level[<?=$field->name?>][3]" type="checkbox" <?=$level[3]=='1'?'checked="checked"':''?> value="1" /></td>
-												<td><input name="level[<?=$field->name?>][4]" type="checkbox" <?=$level[4]=='1'?'checked="checked"':''?> value="1" /></td>
+												<td><input name="level[<?=$field->name?>][4]" type="checkbox" <?=$level[4]=='1'?'checked="checked"':''?> value="1" /></td>												
 											</tr>
 								<?php 
 										}
