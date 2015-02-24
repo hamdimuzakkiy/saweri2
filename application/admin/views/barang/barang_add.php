@@ -54,6 +54,7 @@
 						</span>
 					</p>
 				</div>
+
 				<div class="columns">
 					<p class="colx2-left">
 						<label for="complex-en-url">Golongan :</label>
@@ -92,6 +93,7 @@
 						</span>
 					</p>	
 				</div>
+
 				<div class="columns">					
 					<p class="colx3-left">
 						<label for="complex-en-url">Satuan :</label>
@@ -131,9 +133,17 @@
 						<span class="relative">
 							<input type="text" name="hpp" id="hpp" value="<?=set_value('hpp')?>" class="duapertiga-width">
 						</span>
-					</p>	
+					</p>
+
+						<p class="colx2-right">
+						<label for="complex-en-url">Serial Number :</label>
+						<span class="relative">
+							<input type="text" name="sn" id="sn" value="<?=set_value('sn')?>" class="duapertiga-width">
+						</span>
+					</p>		
 				</div>
-				<!--<div class="columns">					
+
+				<div class="columns">					
 					<p class="colx3-left">
 						<label for="complex-en-url">Harga Toko :</label>
 						<span class="relative">
@@ -167,6 +177,7 @@
 						</span>
 					</p>		
 				</div>
+
 				<div class="columns">					
 					<p class="colx3-left">
 						<label for="complex-en-url">Harga Partai :</label>
@@ -183,9 +194,9 @@
 							</select>
 						</span>
 					</p>		
-				</div>-->
+				</div>
 					
-				<p><i> Field yang diberi tanda (*) harus di isi ! </i></p>
+				<p><i> Field yang diberi tanda (*) harus diisi ! </i></p>
 				
 			</fieldset>
 				

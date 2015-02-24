@@ -90,7 +90,8 @@
 					<?php } ?>	
 				</tbody>
 			
-			</table></div>
+			</table>
+			</div>
 			
 			<ul class="message no-margin">
 				&nbsp;

@@ -58,7 +58,7 @@
 					<p class="colx2-left">
 						<label for="complex-en-url">Kode Pelanggan :</label>
 						<span class="relative">
-							<input type="text" name="kode_pelanggan" id="kode_pelanggan" readOnly="true" value="<?=$this->pelanggan->get_kode_pelanggan()?>" class="duapertiga-width">
+							<input type="text" name="kode_pelanggan" id="kode_pelanggan" value="<?=set_value('kode_pelanggan')?>" class="duapertiga-width">
 						</span>
 					</p>
 					<p class="colx2-right">
