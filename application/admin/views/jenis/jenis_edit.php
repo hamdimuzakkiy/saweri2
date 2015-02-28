@@ -32,7 +32,7 @@
 				<div class="columns">
 					<p class="colx2-left">
 						<label for="complex-en-url">Jenis (*) :</label>
-						<input type="hidden" name="id_jenis" value="<?php echo "string"; $id_jenis?>">
+						<input type="hidden" name="id_jenis" value="<?php echo $id_jenis;?>">
 						<span class="relative">
 							<?php 
 								if (form_error('jenis') != null)

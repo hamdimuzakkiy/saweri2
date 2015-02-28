@@ -82,12 +82,149 @@
 											$level = str_split($field_level);
 								?>
 											<tr>
-												<td><?=str_replace('_', ' ', strtoupper($field->name))?></td>												
-												<td><input name="level[<?=$field->name?>][0]" type="checkbox" <?=$level[0]=='1'?'checked="checked"':''?> value="1" /></td>
-												<td><input name="level[<?=$field->name?>][1]" type="checkbox" <?=$level[1]=='1'?'checked="checked"':''?> value="1" /></td>
-												<td><input name="level[<?=$field->name?>][2]" type="checkbox" <?=$level[2]=='1'?'checked="checked"':''?> value="1" /></td>
-												<td><input name="level[<?=$field->name?>][3]" type="checkbox" <?=$level[3]=='1'?'checked="checked"':''?> value="1" /></td>
-												<td><input name="level[<?=$field->name?>][4]" type="checkbox" <?=$level[4]=='1'?'checked="checked"':''?> value="1" /></td>												
+												<td><?=str_replace('_', ' ', strtoupper($field->name))?></td>
+
+												<td>
+													<?php
+														if (isset($level[0]))
+														{
+															if ($level[0] == '1')															
+																$tanda = true;
+															
+															else
+																$tanda = false;
+														}
+														else
+														{
+															$tanda = false;
+														}
+														if ($tanda)
+														{
+													?>
+													<input name="level[<?=$field->name?>][0]" type="checkbox" checked='checked' value="1" />
+													<?php 
+
+														} 
+														else
+														{
+													?>
+													<input name="level[<?=$field->name?>][0]" type="checkbox"  value="1" />
+													<?php } ?>
+												</td>
+
+
+												<td>
+													<?php
+														if (isset($level[1]))
+														{
+															if ($level[1] == '1')															
+																$tanda = true;
+															
+															else
+																$tanda = false;
+														}
+														else
+														{
+															$tanda = false;
+														}
+														if ($tanda)
+														{
+													?>
+													<input name="level[<?=$field->name?>][1]" type="checkbox" checked='checked' value="1" />
+													<?php 
+
+														} 
+														else
+														{
+													?>
+													<input name="level[<?=$field->name?>][1]" type="checkbox"  value="1" />
+													<?php } ?>
+												</td>
+
+												<td>
+													<?php
+														if (isset($level[2]))
+														{
+															if ($level[2] == '1')															
+																$tanda = true;
+															
+															else
+																$tanda = false;
+														}
+														else
+														{
+															$tanda = false;
+														}
+														if ($tanda)
+														{
+													?>
+													<input name="level[<?=$field->name?>][2]" type="checkbox" checked='checked' value="1" />
+													<?php 
+
+														} 
+														else
+														{
+													?>
+													<input name="level[<?=$field->name?>][2]" type="checkbox"  value="1" />
+													<?php } ?>
+												</td>
+
+												<td>
+													<?php
+														if (isset($level[3]))
+														{
+															if ($level[3] == '1')															
+																$tanda = true;
+															
+															else
+																$tanda = false;
+														}
+														else
+														{
+															$tanda = false;
+														}
+														if ($tanda)
+														{
+													?>
+													<input name="level[<?=$field->name?>][3]" type="checkbox" checked='checked' value="1" />
+													<?php 
+
+														} 
+														else
+														{
+													?>
+													<input name="level[<?=$field->name?>][2]" type="checkbox"  value="1" />
+													<?php } ?>
+												</td>
+
+												
+												<td>
+													<?php
+														if (isset($level[4]))
+														{
+															if ($level[4] == '1')															
+																$tanda = true;
+															
+															else
+																$tanda = false;
+														}
+														else
+														{
+															$tanda = false;
+														}
+														if ($tanda)
+														{
+													?>
+													<input name="level[<?=$field->name?>][4]" type="checkbox" checked='checked' value="1" />
+													<?php 
+
+														} 
+														else
+														{
+													?>
+													<input name="level[<?=$field->name?>][4]" type="checkbox"  value="1" />
+													<?php } ?>
+												</td>
 											</tr>
 								<?php 
 										}

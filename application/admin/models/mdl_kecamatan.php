@@ -13,9 +13,18 @@ class mdl_kecamatan extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('kabupaten');
 		$this->db->join('kecamatan','kabupaten.id_kabupaten = kecamatan.id_kabupaten');
+		$this->db->limit($num, $offset);
 		return $this->db->get();
 	}
 	
+	function count($num=0, $offset=0)
+	{
+		$this->db->flush_cache();
+		$this->db->select('*');
+		$this->db->from('kabupaten');
+		$this->db->join('kecamatan','kabupaten.id_kabupaten = kecamatan.id_kabupaten');
+		return $this->db->get();
+	}
 	
 	function getItemById($id)
 	{

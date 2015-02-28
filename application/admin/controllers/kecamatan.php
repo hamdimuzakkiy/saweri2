@@ -22,7 +22,7 @@ class kecamatan extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/kecamatan/index/';
-		$config['total_rows'] = $this->db->count_all('kecamatan');
+		$config['total_rows'] = $this->db->count_all('kecamatan');		
 		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';

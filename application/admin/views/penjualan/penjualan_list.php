@@ -77,7 +77,7 @@
 			
 			<div class="block-footer">
 				
-				<!--<img src="images/icons/fugue/arrow-curve-000-left.png" width="16" height="16" class="picto"> 
+				<img src="images/icons/fugue/arrow-curve-000-left.png" width="16" height="16" class="picto"> 
 				<a href="javascript:void(0)" class="button">Select All</a> 
 				<a href="javascript:void(0)" class="button">Unselect All</a>
 				<span class="sep"></span>
@@ -88,7 +88,7 @@
 					<option value="validate">Validate</option>
 					<option value="delete">Delete</option>
 				</select>
-				<button type="submit" class="small">Ok</button>-->
+				<button type="submit" class="small">Ok</button>
 			</div>
 				
 		</form>

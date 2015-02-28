@@ -12,8 +12,14 @@
 		
 		var isi = document.getElementById('detail').innerHTML;
 		//document.arrayForm.myResult.value=MultiArray[row][col];
+
+		
+
+		//alert($( "#id_pelanggan" ).val());
+
+
 		var result_saldo_piutang = "";
-		if (document.getElementById('pelanggan').checked==true){
+		if (document.getElementById('pelanggan').checked==true && $( "#cara_bayar" ).val() == 2){			
 			$.ajax({
 				type:'POST', 
 				url: '<?php echo base_url().'index.php/penjualan/check_saldo_piutang';?>', 
@@ -21,18 +27,22 @@
 				success: function(response) {
 				/*$('#form1').find('.form_result').html(response);*/
 					if (response=='berhasil'){
+						
 						if( isi == false){
+							
 							document.getElementById('alert_yanto').innerHTML = '<ul class="message error grid_12"><li>List data barang tidak boleh kosong</li><li class="close-bt"></li></ul><br>';
 							//alert('kosong');
 							$('html, body').stop().animate({
 								scrollTop: 0 //$($anchor.attr('href')).offset().top
 							}, 700, 'easeInOutExpo');
 						}else{
+							
 							document.getElementById('alert_yanto').innerHTML = '';
 							//alert('berisi');
 							document.forms["form1"].submit();
 						}
 					}else{
+						
 						document.getElementById('alert_yanto').innerHTML = '<ul class="message error grid_12"><li>Pelanggan Telah Melebihi Saldo Piutang</li><li class="close-bt"></li></ul><br>';
 					}
 			}});
@@ -80,33 +90,44 @@
 		tanggal.focus();
 	}
 	
+	function test()
+	{
+		$.post('<?php echo base_url()."index.php/penjualan/get_cabang"; ?>', {},function(data){
+			alert(data);
+		});
+	}
+
 	function handleChange(cb){
 		var result_checked;
 		if (document.getElementById('cabang').checked==true){
-			result_checked =  document.getElementById('cabang').value;
+			result_checked =  'http://localhost/saweri/index.php/penjualan/get_cabang/cabang';
 		}else{
-			result_checked =  document.getElementById('pelanggan').value;
+			result_checked =  'http://localhost/saweri/index.php/penjualan/get_cabang/pelanggan';
 		}
-		
-		
+		//alert(result_checked);
 		$('#id_pelanggan').empty();
-		
-		var dataString = $(this).val();
-		
-		$.ajax
-		({
-			type: "POST",
-			url: "<? echo base_url().'index.php/penjualan/get_cabang/';?>" + result_checked,
-			data: dataString,
-			cache: false,
-			success: function(html)
-			{
-				$("#id_pelanggan").html(html);
-				
-			}
+		//alert(result_checked);
+		$.post(result_checked, {},function(data){
+		$("#id_pelanggan").html(data);
 		});
+		/*var dataString = $(this).val();		
+		$.ajax
+		({			
+			type: "POST",			
+			url: "<? echo base_url().'index.php/penjualan/get_cabang/';?>" + result_checked,						
+			
+			success: function(datas)
+			{								
+				//test = berubah;
+				alert(datas);
+				//$("#id_pelanggan").html(berubah);
+				//document.getElementById('hamdi').innerHTML = 'hamdi ganteng';
+			},*/
+			
 
-
+			//var url = <?php echo base_url()."index.php/penjualan/get_cabang"; ?>
+			
+				
 	}
 	
 
@@ -115,7 +136,7 @@
 
 <script type="text/javascript">
 	
-	$(document).ready(function() {
+	$(document).ready(function() {		
 		$("#getbarang").fancybox();
 		
 		/*var saldo_piutang_text = document.getElementById("saldo_piutang_text").value;*/
@@ -132,8 +153,8 @@
 	
 
 	
-	function set_jenispenjualan(id){
-		url = '<?=base_url().'index.php/penjualan/show_barang/'?>' + id;
+	function set_jenispenjualan(id){		
+		url = '<?=base_url().'index.php/penjualan/show_barang/'?>' + id;		
 		document.getElementById('getbarang').href = url;
 	}
 	
@@ -237,15 +258,15 @@
 				</div>
 				<div class="columns">
 					<p class="colx2-left">	
-						<label for="complex-en-url">Pelanggan :</label>
+						<label for="complex-en-url">Jenis Pembeli :</label>
 						<input type="radio" name="pil_penjualan" value="cabang" id="cabang" onchange='handleChange(this)';>Cabang &nbsp; &nbsp; &nbsp; 
-						<input type="radio" name="pil_penjualan" value="pelanggan" id="pelanggan" onchange='handleChange(this)'; >Pelanggan<br/><br/>
-						
+						<input type="radio" name="pil_penjualan" value="pelanggan" id="pelanggan" onchange='handleChange(this)'; >Pelanggan<br/><br/>						
 						<span class="relative">
 						
 							<select name="id_pelanggan" id="id_pelanggan">
 								
 								<?php
+									
 									echo '<option value="-">Pilih Nama Pelanggan</option>';
 				
 								
@@ -263,7 +284,7 @@
 				</div>
 				
 				<div class="columns">
-					<p class="colx2-left">
+					<!--p class="colx2-left">
 						<label for="complex-en-url">Cabang :</label>
 						<span class="relative">
 							<select name="id_cabang" id="id_cabang" >
@@ -290,7 +311,7 @@
 							</select>
 							<?=form_error('id_cabang')?>
 						</span>
-					</p>
+					</p-->
 					<p class="colx2-right">
 						<label for="complex-en-url">Diskon (%) :</label>
 						<span class="relative">

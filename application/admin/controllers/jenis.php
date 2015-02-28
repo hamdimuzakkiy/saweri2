@@ -136,6 +136,7 @@ class jenis extends My_Controller
 		
 		$data['id_jenis'] = $id;
 
+
 		
 		$this->load->view('jenis/jenis_edit', $data);
 		
@@ -152,7 +153,9 @@ class jenis extends My_Controller
 		
 		
 		$data['id_jenis'] = $this->input->post('id_jenis');
-		$data['jenis'] = $this->input->post('jenis');
+
+		$data['jenis'] = $this->input->post('jenis');		
+
 		$data['userid'] = get_userid();
 		
 		
@@ -167,6 +170,7 @@ class jenis extends My_Controller
 		$this->form_validation->set_message('required', 'Field %s harus diisi!');
 		
 		
+
 		if ($this->form_validation->run() == FALSE){
 			
 			$this->load->view('jenis/jenis_edit',$data);
