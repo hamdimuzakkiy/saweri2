@@ -34,7 +34,7 @@ class mdl_terima_barang_retur extends CI_Model{
 	function insert($data)
 	{
 		$this->db->flush_cache();
-		$this->db->insert('retur_pembelian', $data);
+		$this->db->insert('terima_barang_retur', $data);
 	}
 	
 	function update($id, $data)

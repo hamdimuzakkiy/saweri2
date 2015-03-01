@@ -75,9 +75,9 @@ class terima_barang_retur extends My_Controller
 		$this->open();
 		
 		$data['tanggal'] = $this->input->post('tanggal');
-		$data['detail'] = $this->input->post('detail');
+		//print $data['detail'] = $this->input->post('detail');
 		$data['userid'] = get_userid();
-		
+		$data['id_retur_pembelian'] = $this->input->post('po_no');	
 		
 		
 		$this->form_validation->set_rules('tanggal', 'tanggal', 'required');
@@ -95,9 +95,11 @@ class terima_barang_retur extends My_Controller
 			
 		}else{
 			
+			$this->terima_barang_retur->insert($data);
 			# insert return pembelian
-			$detail = $data['detail'];
-			$count_detail = count($detail);
+			//$detail = $data['detail'];
+			
+			/*$count_detail = count($detail);
 		
 			for($i=0; $i<$count_detail; $i++)
 			{
@@ -110,10 +112,12 @@ class terima_barang_retur extends My_Controller
 					
 					$this->retur_pembelian->insert($_data);
 				}
-			}
+			}*/
+
+
 			
 			$this->session->set_flashdata('message', 'Data Berhasil disimpan.');
-			redirect('retur_pembelian');
+			redirect('terima_barang_retur');
 		}
 		
 		$this->close();
@@ -197,13 +201,36 @@ class terima_barang_retur extends My_Controller
 		redirect('retur_pembelian');
 	}
 	
-	function get_barang_by_po($po){
+	function get_barang_id_retur($po){
 		# ambil id pembelian berdasarkan no po di tabel pembelian
-		$this->db->flush_cache();
-		$this->db->from('pembelian');
-		$this->db->where('po_no', $po);
-		$que1 = $this->db->get();
 		
+		$this->db->flush_cache();
+		$this->db->select('retur_pembelian.id_retur_pembelian, pembelian.po_no, supplier.kode_supplier, detail_pembelian.sn, supplier.nama AS nama_supplier, retur_pembelian.tanggal, barang.nama_barang, retur_pembelian.qty');
+		$this->db->from('retur_pembelian');
+		$this->db->join('detail_pembelian', 'retur_pembelian.id_detail_pembelian = detail_pembelian.id_detail_pembelian');
+		$this->db->join('pembelian', 'pembelian.id_pembelian = detail_pembelian.id_pembelian');
+		$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
+		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');		
+		$this->db->where('retur_pembelian.id_retur_pembelian', $po);		
+		
+		$res =  $this->db->get();
+	 	$res = $res->result();
+	 	$i=0;
+		foreach ($res as $row) {					
+		echo
+							'<tr>								
+								<td>'.($i + 1).'</td>
+								<td>'.$row->nama_barang.'</td>
+								<td>'.$row->sn.'</td>
+								<td>'.$row->nama_supplier.'</td>
+								<td>'.$row->qty.'</td>
+								<td>'.$row->qty.'
+								<input name="detail['.$i.'][qty]" type="hidden" value="1" /></td>
+							</tr>'
+					;
+		}
+
+		/*
 		if($que1->num_rows() > 0){
 			$id_pembelian = $que1->row()->id_pembelian;
 			
@@ -245,9 +272,9 @@ class terima_barang_retur extends My_Controller
 					;
 					
 					$i++;
-				}
+				}				
 			}
-		}
+		}*/
 	}
 	
 }
