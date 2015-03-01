@@ -9,7 +9,21 @@ class mdl_master_akun extends CI_Model{
 	
 	function getItem($num=0, $offset=0)
 	{
-				$this->db->flush_cache();		$this->db->select('distinct(AKUNID),NAKUN');		$this->db->from('master_akun');		$this->db->order_by('AKUNID');		$this->db->limit($num, $offset);		return $this->db->get();
+		$this->db->flush_cache();
+		$this->db->select('*');		
+		$this->db->from('master_akun');		
+		$this->db->order_by('AKUNID');		
+		$this->db->limit($num, $offset);		
+		return $this->db->get();
+	}
+
+	function getallItem()
+	{
+		$this->db->flush_cache();
+		$this->db->select('*');		
+		$this->db->from('master_akun');		
+		$this->db->order_by('AKUNID');		
+		return $this->db->count_all_results();
 	}
 	
 	function getItemById($id)

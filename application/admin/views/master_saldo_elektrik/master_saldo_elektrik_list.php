@@ -93,7 +93,7 @@
 				<a href="javascript:void(0)" class="button" onClick="check_all(0)" >Select All</a> 
 				<a href="javascript:void(0)" class="button" onClick="uncheck_all(0)" >Unselect All</a>
 				<span class="sep"></span>
-				<?=anchor('master_pulsa/insert', 'Tambah Data', array('class'=>'button'))?>
+				<?=anchor('master_saldo_elektrik/insert', 'Tambah Data', array('class'=>'button'))?>
 				<span class="sep"></span>
 				<select name="table-action" id="table-action" class="small">
 					<option value="">Aksi</option>

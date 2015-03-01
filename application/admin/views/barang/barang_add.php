@@ -113,14 +113,16 @@
 								?>
 							</select>
 						</span>
-					</p>						
-					<p class="colx3-center">
+					</p>
+				</div>						
+				<div class="columns">
+					<p class="colx2-left">
 						<label for="complex-en-url">Point Karyawan :</label>
 						<span class="relative">
 							<input type="text" name="point_karyawan" id="point_karyawan" value="<?=set_value('point_karyawan')?>" class="duapertiga-width">
 						</span>
 					</p>
-					<p class="colx3-right">
+					<p class="colx2-right">
 						<label for="complex-en-url">Point Member :</label>
 						<span class="relative">
 							<input type="text" name="point_member" id="point_member" value="<?=set_value('point_member')?>" class="duapertiga-width">

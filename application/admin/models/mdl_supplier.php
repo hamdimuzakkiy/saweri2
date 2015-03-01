@@ -10,8 +10,19 @@ class mdl_supplier extends CI_Model{
 	function getItem($num=0, $offset=0)
 	{
 		$this->db->flush_cache();
+		$this->db->select('supplier.id_supplier, supplier.kode_supplier, supplier.nama, supplier.alamat, supplier.telpon, supplier.saldo_hutang');
+		$this->db->from('supplier');	
 		$this->db->order_by("nama", "asc");
-		return $this->db->get('supplier', $num, $offset);
+		$this->db->limit($num, $offset);				
+		return $this->db->get();
+	}
+
+	function getallItem()
+	{
+		$this->db->flush_cache();
+		$this->db->select('supplier.id_supplier, supplier.kode_supplier, supplier.nama, supplier.alamat, supplier.telpon, supplier.saldo_hutang');
+		$this->db->from('supplier');	
+		return $this->db->count_all_results();	
 	}
 	
 	function getItemById($id)

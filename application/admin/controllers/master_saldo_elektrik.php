@@ -22,7 +22,7 @@ class master_saldo_elektrik extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/master_saldo_elektrik/index/';
-		$config['total_rows'] = $this->db->count_all('master_saldo_elektrik');
+		$config['total_rows'] = $this->master_saldo_elektrik->getallItem('master_saldo_elektrik');
 		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
@@ -67,7 +67,8 @@ class master_saldo_elektrik extends My_Controller
 	
 	function insert()
 	{
-		if ($this->can_insert() == FALSE){
+		if ($this->can_insert() == FALSE)
+		{
 			redirect('auth/failed');
 		}
 		
@@ -78,8 +79,6 @@ class master_saldo_elektrik extends My_Controller
 		$data['saldo'] = $this->input->post('saldo');
 		$data['userid'] = get_userid();
 		
-		
-		
 		$this->form_validation->set_rules('id_saldo');		
 		$this->form_validation->set_rules('nama_mastersaldo', 'nama_mastersaldo', 'required');		
 		$this->form_validation->set_rules('saldo', 'saldo', 'trim|numeric');						
@@ -88,10 +87,12 @@ class master_saldo_elektrik extends My_Controller
 		$this->form_validation->set_message('numeric', 'Field %s harus diisi hanya dengan angka!');
 		if ($this->form_validation->run() == FALSE){						
 		$this->load->view('master_saldo_elektrik/master_saldo_elektrik_add',$data);					
-		}else{				
-		$this->master_saldo_elektrik->insert($data);						
-		$this->session->set_flashdata('message', 'Data Master Saldo Berhasil disimpan.');			
-		redirect('master_saldo_elektrik');		
+		}
+		else
+		{				
+			$this->master_saldo_elektrik->insert($data);						
+			$this->session->set_flashdata('message', 'Data Master Saldo Berhasil disimpan.');			
+			redirect('master_saldo_elektrik');		
 		}
 		
 		$this->close();
@@ -103,17 +104,35 @@ class master_saldo_elektrik extends My_Controller
 		
 		$this->open();
 		
-		if($str == ''){			$this->form_validation->set_message('cek_nama', 'Field %s tidak boleh kosong.');			return FAlSE;		}				$this->db->flush_cache();		$this->db->select('*');		$this->db->where('nama_mastersaldo', $str);		$q = $this->db->get('master_saldo_elektrik');				if($q->num_rows() > 0){			$this->form_validation->set_message('cek_nama', 'Nama "'. $str . '" sudah terdaftar, coba masukan nama yang lain.');			return FALSE;		}else{			return TRUE;		}
+		if($str == '')
+			{			
+				$this->form_validation->set_message('cek_nama', 'Field %s tidak boleh kosong.');			
+				return FAlSE;		
+			}				
+			$this->db->flush_cache();		
+			$this->db->select('*');		
+			$this->db->where('nama_mastersaldo', $str);		
+			$q = $this->db->get('master_saldo_elektrik');				
+			if($q->num_rows() > 0)
+				{			
+					$this->form_validation->set_message('cek_nama', 'Nama "'. $str . '" sudah terdaftar, coba masukan nama yang lain.');			return FALSE;		}else{			return TRUE;		}
+		
 		$this->close();
 	}
-	function update($id)	{		if ($this->can_update() == FALSE){			redirect('auth/failed');		
-	}				$this->open();				
-	$data['result'] 		= $this->master_saldo_elektrik->getItemById($id);				
-	$data['id_saldo'] = $id;		$data['nama_mastersaldo'] = $data['result']->row()->nama_mastersaldo;		
+
+	function update($id)
+	{		
+		if ($this->can_update() == FALSE){			redirect('auth/failed');		
+	}				
+	$this->open();				
+	$data['result'] = $this->master_saldo_elektrik->getItemById($id);				
+	$data['id_saldo'] = $id;
+	$data['nama_mastersaldo'] = $data['result']->row()->nama_mastersaldo;		
 	$data['saldo'] = $data['result']->row()->saldo;						
 	$this->load->view('master_saldo_elektrik/master_saldo_elektrik_edit', $data);				
 	$this->close();	
 	}		
+
 	function process_update()
 	{
 		if ($this->can_update() == FALSE){			

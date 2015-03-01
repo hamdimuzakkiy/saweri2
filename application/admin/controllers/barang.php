@@ -22,9 +22,9 @@ class barang extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/barang/index/';
-		$config['total_rows'] = $this->db->count_all('barang');
-		$config['per_page'] = '5';
-		$config['num_links'] = '10';
+		$config['total_rows'] = $this->barang->getallItem('barang');
+		$config['per_page'] = '10';
+		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		
 		$config['full_tag_open'] = '';

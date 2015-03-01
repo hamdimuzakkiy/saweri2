@@ -22,7 +22,7 @@ class master_pulsa extends My_Controller
 		
 		/*config pagination*/
 		$config['base_url'] = base_url().'index.php/master_pulsa/index/';
-		$config['total_rows'] = $this->db->count_all('master_pulsa');
+		$config['total_rows'] = $this->master_pulsa->getallItem('master_pulsa');
 		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
@@ -245,13 +245,14 @@ class master_pulsa extends My_Controller
 	
 	function delete($id)
 	{
-		if ($this->can_delete() == FALSE){
+		if ($this->can_delete() == FALSE)
+		{
 			redirect('auth/failed');
 		}
 		
-		$this->satuan->delete($id);
-		$this->session->set_flashdata('message', 'Data Satuan Barang Berhasil dihapus.');
-		redirect('satuan');
+		$this->master_pulsa->delete($id);
+		$this->session->set_flashdata('message', 'Data master pulsa berhasil dihapus.');
+		redirect('master_pulsa');
 	}
 	
 }

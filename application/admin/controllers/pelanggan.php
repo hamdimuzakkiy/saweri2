@@ -22,9 +22,9 @@ class pelanggan extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/pelanggan/index/';
-		$config['total_rows'] = $this->db->count_all('pelanggan');
-		$config['per_page'] = '50';
-		$config['num_links'] = '10';
+		$config['total_rows'] = $this->pelanggan->getallItem('pelanggan');
+		$config['per_page'] = '10';
+		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		
 		$config['full_tag_open'] = '';

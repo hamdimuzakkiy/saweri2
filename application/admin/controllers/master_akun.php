@@ -20,10 +20,9 @@ class master_akun extends My_Controller
 		
 		$this->open();
 		
-		
 		$config['base_url'] = base_url().'index.php/master_akun/index/';
-		$config['total_rows'] = $this->db->count_all('master_akun');
-		$config['per_page'] = '20';
+		$config['total_rows'] = $this->master_akun->getallItem('master_akun');
+		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		

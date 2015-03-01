@@ -10,12 +10,20 @@ class mdl_pelanggan extends CI_Model{
 	function getItem($num=0, $offset=0)
 	{
 		$this->db->flush_cache();
-		$this->db->select('pelanggan.*');
+		$this->db->select('id_pelanggan, kode_pelanggan, nama, alamat, jenis_pengenal, no_pengenal, tgl_lahir, agama, pekerjaan, tel, saldo_piutang, point');
 		$this->db->from('pelanggan');
-		
 		$this->db->order_by("pelanggan.nama", "asc");
 		$this->db->limit($num, $offset);
 		return $this->db->get();
+	}
+
+	function getallItem($num=0, $offset=0)
+	{
+		$this->db->flush_cache();
+		$this->db->select('id_pelanggan, kode_pelanggan, nama, alamat, jenis_pengenal, no_pengenal, tgl_lahir, agama, pekerjaan, tel, saldo_piutang, point');
+		$this->db->from('pelanggan');
+		$this->db->order_by("pelanggan.nama", "asc");
+		return $this->db->count_all_results();
 	}
 	
 	function getItemById($id)

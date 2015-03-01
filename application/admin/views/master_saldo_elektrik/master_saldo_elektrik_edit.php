@@ -32,8 +32,7 @@
 					<p class="colx2-left">
 					
 						<label for="complex-en-url">Nama Master Saldo (*) :</label>
-						
-						<input type="hidden" name="id" value="<?=$id;?>">
+						<input type="hidden" name="id_saldo" value="<?=$id_saldo;?>">
 						<span class="relative">
 							<?php 
 

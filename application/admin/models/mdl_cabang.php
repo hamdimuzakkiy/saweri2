@@ -10,7 +10,18 @@ class mdl_cabang extends CI_Model{
 	function getItem($num=0, $offset=0)
 	{
 		$this->db->flush_cache();
-		return $this->db->get('cabang', $num, $offset);
+		$this->db->select('cabang.id_cabang, cabang.kode_cabang, cabang.nama_cabang, cabang.alamat, cabang.telepon, cabang.max_piutang, cabang.saldo_piutang');
+		$this->db->from('cabang');
+		$this->db->limit($num, $offset);
+		return $this->db->get();
+	}
+
+	function getallItem()
+	{
+		$this->db->flush_cache();
+		$this->db->select('cabang.id_cabang, cabang.kode_cabang, cabang.nama_cabang, cabang.alamat, cabang.telepon, cabang.max_piutang, cabang.saldo_piutang');
+		$this->db->from('cabang');
+		return $this->db->count_all_results();
 	}
 	
 	function getItemById($id)

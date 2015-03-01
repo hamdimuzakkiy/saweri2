@@ -7,7 +7,8 @@ class supplier extends My_Controller
 	{
 		parent::__construct();
 		
-		$this->load->model('mdl_supplier', 'supplier');		$this->load->model('mdl_hutang', 'hutang');
+		$this->load->model('mdl_supplier', 'supplier');		
+		$this->load->model('mdl_hutang', 'hutang');
 		
 	}
 	
@@ -22,9 +23,9 @@ class supplier extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/supplier/index/';
-		$config['total_rows'] = $this->db->count_all('supplier');
-		$config['per_page'] = '50';
-		$config['num_links'] = '10';
+		$config['total_rows'] = $this->supplier->getallItem('supplier');
+		$config['per_page'] = '10';
+		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		
 		$config['full_tag_open'] = '';
@@ -52,12 +53,9 @@ class supplier extends My_Controller
 		$config['first_tag_open'] = '<li>';
 		$config['first_tag_close'] = '</li>';
 		
-		$this->pagination->initialize($config);	
-		
-		
+		$this->pagination->initialize($config);			
 		
 		$data['results'] = $this->supplier->getItem($config['per_page'], $this->uri->segment(3));
-		
 		
 		$this->load->view('supplier/supplier_list', $data);
 		

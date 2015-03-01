@@ -36,7 +36,7 @@
 							<input type="text" name="kode_pulsa" id="kode_pulsa" value="<?=set_value('kode_pulsa')?>" class="setengah-width">
 						</span>
 					</p>
-					<p class="colx2-left">
+					<p class="colx2-right">
 						<label for="complex-en-url">Nama Pulsa (*) :</label>
 						<span class="relative">
 							<input type="text" name="nama_pulsa" id="nama_pulsa" value="<?=set_value('nama_pulsa')?>" class="setengah-width">
@@ -139,13 +139,13 @@
 					</p>
 					</div>
 					<div class="columns">
-					<p class="colx3-left">
+					<p class="colx2-left">
 						<label for="complex-en-url">Point Karyawan :</label>
 						<span class="relative">
 							<input type="text" name="point_karyawan" id="point_karyawan" value="<?=set_value('point_karyawan')?>" class="duapertiga-width">
 						</span>
 					</p>
-					<p class="colx3-center">
+					<p class="colx2-right">
 						<label for="complex-en-url">Point Member :</label>
 						<span class="relative">
 							<input type="text" name="point_member" id="point_member" value="<?=set_value('point_member')?>" class="duapertiga-width">

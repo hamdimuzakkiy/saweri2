@@ -46,7 +46,8 @@
 				
 			</div>
 		
-			<div class="no-margin"><table class="table" cellspacing="0" width="100%">
+			<div class="no-margin">
+				<table class="table" cellspacing="0" width="100%">
 			
 				<thead>
 					<tr>
@@ -86,7 +87,6 @@
 			
 			<ul class="message no-margin">
 				&nbsp;
-				<!--<li>Results x - y out of z</li>-->
 			</ul>
 			
 			<div class="block-footer">

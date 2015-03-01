@@ -22,8 +22,8 @@ class cabang extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/cabang/index/';
-		$config['total_rows'] = $this->db->count_all('cabang');
-		$config['per_page'] = '20';
+		$config['total_rows'] = $this->cabang->getallItem('cabang');
+		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		

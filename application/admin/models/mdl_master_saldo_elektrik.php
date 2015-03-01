@@ -9,7 +9,21 @@ class mdl_master_saldo_elektrik extends CI_Model{
 	
 	function getItem($num=0, $offset=0)
 	{
-		$this->db->flush_cache();		$this->db->order_by("nama_mastersaldo", "asc");		return $this->db->get('master_saldo_elektrik', $num, $offset);
+		$this->db->flush_cache();
+		$this->db->select('*');		
+		$this->db->from('master_saldo_elektrik');		
+//		$this->db->order_by('AKUNID');		
+		$this->db->limit($num, $offset);		
+		return $this->db->get();
+	}
+
+	function getallItem()
+	{
+		$this->db->flush_cache();
+		$this->db->select('*');		
+		$this->db->from('master_saldo_elektrik');		
+		//$this->db->order_by('AKUNID');		
+		return $this->db->count_all_results();
 	}
 	
 	function getItemById($id)
