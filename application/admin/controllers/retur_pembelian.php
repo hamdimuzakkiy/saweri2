@@ -220,7 +220,7 @@ class retur_pembelian extends My_Controller
 			$this->db->join('detail_pembelian', 'detail_pembelian.id_pembelian = pembelian.id_pembelian');
 			$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
 			$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');
-			$this->db->where('pembelian.id_pembelian', $id_pembelian);
+			$this->db->where('pembelian.id_pembelian', $id_pembelian);			
 			$que2 = $this->db->get();
 			
 			if($que2->num_rows() > 0){

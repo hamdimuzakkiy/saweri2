@@ -32,9 +32,8 @@
 			var cara_bayar = document.getElementById("cara_bayar").value;		
 			var detail_qty = document.getElementById("detail_qty").value;		
 			var detail_idjenis = document.getElementById("detail_idjenis").value;		
-			var sn = document.getElementById("sn").checked;			
-
-			
+			var sn = document.getElementById("sn").checked;		
+			document.getElementById("sn").value = false;
 			
 			if(document.getElementById('detail_namabarang').value == ''){
 				alert('Isi nama barang terlebih dahulu.');	
@@ -51,7 +50,7 @@
 
 					}
 				});
-				document.getElementById('detail_idbarang').value = '';				document.getElementById('detail_namabarang').value = '';			document.getElementById('detail_harga').value = '';			document.getElementById('detail_harga_toko').value = '';			document.getElementById('detail_harga_partai').value = '';			document.getElementById('detail_harga_cabang').value = '';			document.getElementById('detail_qty').value = '';			document.getElementById('detail_jatuh_tempo').value = '';						document.getElementById('detail_idjenis').value = '';
+				document.getElementById('detail_idbarang').value = '';				document.getElementById('detail_namabarang').value = '';			document.getElementById('detail_harga').value = '';			document.getElementById('detail_harga_toko').value = '';			document.getElementById('detail_harga_partai').value = '';			document.getElementById('detail_harga_cabang').value = '';			document.getElementById('detail_qty').value = '';			document.getElementById('detail_jatuh_tempo').value = '';						document.getElementById('detail_idjenis').value = ''; document.getElementById('sn').checked = false;
 							counter_list = counter_list + parseInt(detail_qty);
 			}
 			else{
@@ -65,7 +64,7 @@
 
 					}
 				});
-				document.getElementById('detail_idbarang').value = '';				document.getElementById('detail_namabarang').value = '';			document.getElementById('detail_harga').value = '';			document.getElementById('detail_harga_toko').value = '';			document.getElementById('detail_harga_partai').value = '';			document.getElementById('detail_harga_cabang').value = '';			document.getElementById('detail_qty').value = '';			document.getElementById('detail_jatuh_tempo').value = '';						document.getElementById('detail_idjenis').value = '';
+				document.getElementById('detail_idbarang').value = '';				document.getElementById('detail_namabarang').value = '';			document.getElementById('detail_harga').value = '';			document.getElementById('detail_harga_toko').value = '';			document.getElementById('detail_harga_partai').value = '';			document.getElementById('detail_harga_cabang').value = '';			document.getElementById('detail_qty').value = '';			document.getElementById('detail_jatuh_tempo').value = '';						document.getElementById('detail_idjenis').value = ''; document.getElementById('sn').value = false;
 							counter_list = counter_list + parseInt(detail_qty);
 			}		
 	}		
@@ -212,7 +211,7 @@
 					<p class="colx3-center">
 						<label for="complex-en-url">SN ? :</label>
 						<span class="relative">
-								<input type="checkbox" id = 'sn' name="sn" value="bersn">Barang Mempunyai Serial Number<br>
+								<input type="checkbox" id = 'sn'>Barang Mempunyai Serial Number<br>
 						</span>
 					</p>
 					
