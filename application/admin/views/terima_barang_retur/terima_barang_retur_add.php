@@ -98,6 +98,7 @@
 									$no = 0;
 									foreach ($not as $row) {										
 										$nots[$no] = $row->id_retur_pembelian;
+										$no++;
 									}
 									
 									$this->db->select('retur_pembelian.id_retur_pembelian, pembelian.po_no, supplier.kode_supplier, detail_pembelian.sn, supplier.nama AS nama_supplier, retur_pembelian.tanggal, barang.nama_barang, retur_pembelian.qty');
@@ -109,7 +110,7 @@
 									$this->db->where('pembelian.id_cabang', get_idcabang());
 									$this->db->where_not_in('retur_pembelian.id_retur_pembelian',$nots);
 									$query = $this->db->get();
-																									
+
 									if($query->num_rows() > 0)
 									{
 										foreach($query->result() as $row)
