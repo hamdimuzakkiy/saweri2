@@ -22,8 +22,8 @@ class kategori extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/kategori/index/';
-		$config['total_rows'] = $this->db->count_all('kategori');
-		$config['per_page'] = '20';
+		$config['total_rows'] = $this->kategori->getallItem('kategori');
+		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		
@@ -74,9 +74,8 @@ class kategori extends My_Controller
 		$this->open();
 		
 		$data['id_kategori'] = $this->input->post('id_kategori');
-		$data['kategori'] = $this->input->post('kategori');
-		$data['userid'] = get_userid();
-		
+		$data['kategori'] = $this->input->post('kategori');		
+		$data['jenis'] = $this->input->post('jenis');
 		
 		
 		$this->form_validation->set_rules('kategori', 'kategori', 'callback_cek_nama|required');
@@ -135,6 +134,7 @@ class kategori extends My_Controller
 		
 		$data['id_kategori'] = $id;
 		$data['kategori'] = $data['result']->row()->kategori;		
+		$data['jenis'] = $data['result']->row()->jenis;		
 		
 		$this->load->view('kategori/kategori_edit', $data);
 		
@@ -143,41 +143,34 @@ class kategori extends My_Controller
 	
 	function process_update()
 	{
-		if ($this->can_update() == FALSE){
+		if ($this->can_update() == FALSE)
+		{
 			redirect('auth/failed');
 		}
 		
 		$this->open();
 		
-		
 		$data['id_kategori'] = $this->input->post('id_kategori');
 		$data['kategori'] = $this->input->post('kategori');
-		$data['userid'] = get_userid();
+		$data['jenis'] = $this->input->post('jenis');
 		
-		
-		
-		$this->form_validation->set_rules('kategori', 'kategori', 'callback_cek_nama|required');
-		
-		
+		$this->form_validation->set_rules('kategori', 'kategori', 'required');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		
-		
 		$this->form_validation->set_message('required', 'Field %s harus diisi!');
 		
 		
-		if ($this->form_validation->run() == FALSE){
-			
+		if ($this->form_validation->run() == FALSE)
+		{
 			$this->load->view('kategori/kategori_edit',$data);
-			
-		}else{	
+		}
+		else
+		{	
 			$this->kategori->update($data['id_kategori'], $data);
 			
 			$this->session->set_flashdata('message', 'Data Kategori Berhasil diupdate.');
 			redirect('kategori');
 		}
-		
 		$this->close();
-		
 	}
 	
 	function delete($id)

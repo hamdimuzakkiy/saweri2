@@ -30,7 +30,7 @@
 <section class="grid_12">
 	<div class="block-border">
 		<form class="block-content form" name="table_form" id="table_form" method="post" action="">
-			<h1>Master >  Akun</h1>
+			<h1>Master >  Master Akun</h1>
 			
 			<div class="block-controls">
 				
@@ -51,10 +51,9 @@
 			
 				<thead>
 					<tr>
-						<!--<th align="left" valign="top" scope="col">&nbsp;</th>-->
+						<th align="left" valign="top" scope="col">&nbsp;</th>
 						<th align="left" valign="top" scope="col">Kode Akun</th>
 						<th align="left" valign="top" scope="col">Nama Akun</th>
-						
 						<th align="left" valign="top" scope="col">Aksi</th>
 					</tr>
 				</thead>
@@ -63,7 +62,7 @@
 					
 					<?php foreach($results->result() as $row) {?>
 					<tr>
-						<!--<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_cabang?>" type="checkbox" /></td>-->
+						<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->AKUNID?>" type="checkbox" /></td>
 						<td align="left" valign="top"><?=$row->AKUNID?> </td>
 						<td align="left" valign="top"><?=$row->NAKUN?> </td>
 						
@@ -103,9 +102,9 @@
 				?>
 				<span class="sep"></span>
 				<select name="table-action" id="table-action" class="small">
-					<option value="">Action for selected...</option>
-					<option value="validate">Validate</option>
-					<option value="delete">Delete</option>
+					<option value="">Aksi</option>
+					<option value="validate">Validasi</option>
+					<option value="delete">Hapus</option>
 				</select>
 				<button type="submit" class="small">Ok</button>
 			</div>

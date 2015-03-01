@@ -29,7 +29,7 @@ class karyawan extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/karyawan/index/';
-		$config['total_rows'] = $this->db->count_all('karyawan');
+		$config['total_rows'] = $this->karyawan->countallItem('karyawan');
 		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
@@ -90,10 +90,6 @@ class karyawan extends My_Controller
 		$data['no_pengenal'] = $this->input->post('no_pengenal');
 		$data['point'] = $this->input->post('point');
 		$data['status'] = $this->input->post('status');
-		$data['telp2'] = $this->input->post('telp2');
-		$data['telp3'] = $this->input->post('telp3');
-		$data['telp4'] = $this->input->post('telp4');
-		$data['telp5'] = $this->input->post('telp5');
 		$data['username'] = $this->input->post('username');
 		$data['password'] = $this->input->post('password');
 		$data['level_id'] = $this->input->post('level_id');
@@ -108,11 +104,7 @@ class karyawan extends My_Controller
 		$this->form_validation->set_rules('jenis_pengenal', 'Jenis Pengenal', 'required');
 		$this->form_validation->set_rules('no_pengenal', 'No Pengenal', 'required|numeric');
 		$this->form_validation->set_rules('point', 'Point', 'trim');
-		$this->form_validation->set_rules('telp1', 'Telepon 1', 'trim|numeric');
-		$this->form_validation->set_rules('telp2', 'Telepon 2', 'trim|numeric');
-		$this->form_validation->set_rules('telp3', 'Telepon 3', 'trim|numeric');
-		$this->form_validation->set_rules('telp4', 'Telepon 4', 'trim|numeric');
-		$this->form_validation->set_rules('telp5', 'Telepon 5', 'trim|numeric');		
+		$this->form_validation->set_rules('telp1', 'Telepon 1', 'trim|numeric');	
 		$this->form_validation->set_rules('username', 'Username', 'required|alpha_dash');
 		$this->form_validation->set_rules('password', 'Password', 'required|matches[confpassword]');
 		$this->form_validation->set_rules('confpassword', 'Password Confirmation', 'required');
@@ -144,10 +136,6 @@ class karyawan extends My_Controller
 			$data_karyawan['point'] = $this->input->post('point');
 			$data_karyawan['status'] = $this->input->post('status');
 			$data_karyawan['telp1'] = $this->input->post('telp1');
-			$data_karyawan['telp2'] = $this->input->post('telp2');
-			$data_karyawan['telp3'] = $this->input->post('telp3');
-			$data_karyawan['telp4'] = $this->input->post('telp4');
-			$data_karyawan['telp5'] = $this->input->post('telp5');
 			
 			$this->karyawan->insert($data_karyawan);
 			
@@ -182,10 +170,6 @@ class karyawan extends My_Controller
 		$data['nama'] = $data['result']->row()->nama;
 		$data['alamat'] = $data['result']->row()->alamat;
 		$data['telp1'] = $data['result']->row()->telp1;
-		$data['telp2'] = $data['result']->row()->telp2;
-		$data['telp3'] = $data['result']->row()->telp3;
-		$data['telp4'] = $data['result']->row()->telp4;
-		$data['telp5'] = $data['result']->row()->telp5;
 		$data['jenis_pengenal'] = $data['result']->row()->jenis_pengenal;
 		$data['no_pengenal'] = $data['result']->row()->no_pengenal;
 		$data['status'] = $data['result']->row()->status;
@@ -220,10 +204,6 @@ class karyawan extends My_Controller
 		$data['no_pengenal'] = $this->input->post('no_pengenal');
 		$data['point'] = $this->input->post('point');
 		$data['status'] = $this->input->post('status');
-		$data['telp2'] = $this->input->post('telp2');
-		$data['telp3'] = $this->input->post('telp3');
-		$data['telp4'] = $this->input->post('telp4');
-		$data['telp5'] = $this->input->post('telp5');
 		$data['username'] = $this->input->post('username');
 		$data['password'] = $this->input->post('password');
 		$data['confpassword'] = $this->input->post('confpassword');
@@ -238,11 +218,7 @@ class karyawan extends My_Controller
 		$this->form_validation->set_rules('jenis_pengenal', 'Jenis Pengenal', 'required');
 		$this->form_validation->set_rules('no_pengenal', 'No Pengenal', 'required|numeric');
 		$this->form_validation->set_rules('point', 'Point', 'trim');
-		$this->form_validation->set_rules('telp1', 'Telepon 1', 'trim|numeric');
-		$this->form_validation->set_rules('telp2', 'Telepon 2', 'trim|numeric');
-		$this->form_validation->set_rules('telp3', 'Telepon 3', 'trim|numeric');
-		$this->form_validation->set_rules('telp4', 'Telepon 4', 'trim|numeric');
-		$this->form_validation->set_rules('telp5', 'Telepon 5', 'trim|numeric');		
+		$this->form_validation->set_rules('telp1', 'Telepon 1', 'trim|numeric');		
 		$this->form_validation->set_rules('username', 'Username', 'required|alpha_dash');
 		$this->form_validation->set_rules('password', 'Password', 'required|matches[confpassword]');
 		$this->form_validation->set_rules('confpassword', 'Password Confirmation', 'required');
@@ -276,10 +252,6 @@ class karyawan extends My_Controller
 			$data_karyawan['point'] = $this->input->post('point');
 			$data_karyawan['status'] = $this->input->post('status');
 			$data_karyawan['telp1'] = $this->input->post('telp1');
-			$data_karyawan['telp2'] = $this->input->post('telp2');
-			$data_karyawan['telp3'] = $this->input->post('telp3');
-			$data_karyawan['telp4'] = $this->input->post('telp4');
-			$data_karyawan['telp5'] = $this->input->post('telp5');
 						
 			$this->karyawan->update($data_karyawan['id_karyawan'], $data_karyawan);
 			

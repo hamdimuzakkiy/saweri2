@@ -10,8 +10,20 @@ class mdl_golongan extends CI_Model{
 	function getItem($num=0, $offset=0)
 	{
 		$this->db->flush_cache();
+		$this->db->select('golongan.id_golongan, golongan.golongan, golongan.jenis');
+		$this->db->from('golongan');
+		$this->db->order_by("golongan.golongan", "asc");
+		$this->db->limit($num, $offset);
+		return $this->db->get();
+	}
+
+	function getallItem()
+	{
+		$this->db->flush_cache();
+		$this->db->select('golongan.id_golongan, golongan.golongan, golongan.jenis');
+		$this->db->from('golongan');
 		$this->db->order_by("golongan", "asc");
-		return $this->db->get('golongan', $num, $offset);
+		return $this->db->count_all_results();
 	}
 	
 	function getItemById($id)

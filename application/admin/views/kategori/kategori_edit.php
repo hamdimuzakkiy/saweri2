@@ -45,6 +45,18 @@
 						</span>
 					</p>
 				</div>
+
+				<div class="columns">
+					<p class="colx2-left">
+						<label for="complex-en-url">Jenis Barang :</label>
+						<span class="relative">
+							<select name="jenis" id="jenis" class="seperempat-width">
+								<option value="BARANG">BARANG</option>
+								<option value="PULSA">PULSA</option>
+							</select>
+						</span>
+					</p>
+				</div>
 		
 				<p><i> Field yang diberi tanda (*) harus di isi ! </i></p>
 				

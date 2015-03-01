@@ -51,7 +51,7 @@
 			
 				<thead>
 					<tr>
-						<!--<th align="left" valign="top" scope="col">&nbsp;</th>-->
+						<th align="left" valign="top" scope="col">&nbsp;</th>
 						<th align="left" valign="top" scope="col">kabupaten</th>
 						<th align="left" valign="top" scope="col">Aksi</th>
 					</tr>
@@ -61,7 +61,7 @@
 					
 					<?php foreach($results->result() as $row) {?>
 					<tr>
-						<!--<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_kabupaten?>" type="checkbox" /></td>-->
+						<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_kabupaten?>" type="checkbox" /></td>
 						<td align="left" valign="top"><?=$row->kabupaten?> </td>
 		
 						<td align="left" valign="top" class="table-actions">
@@ -97,9 +97,9 @@
 				<?=anchor('kabupaten/insert', 'Tambah Data', array('class'=>'button'))?>
 				<span class="sep"></span>
 				<select name="table-action" id="table-action" class="small">
-					<option value="">Action for selected...</option>
-					<option value="validate">Validate</option>
-					<option value="delete">Delete</option>
+					<option value="">Aksi</option>
+					<option value="validate">Validasi</option>
+					<option value="delete">Hapus</option>
 				</select>
 				<button type="submit" class="small">Ok</button>
 				

@@ -29,9 +29,21 @@
 			<fieldset>				
 				<div class="columns">
 					<p class="colx2-left">
-						<label for="complex-en-url">Kategori (*) :</label>
+						<label for="complex-en-url">Nama Kategori (*) :</label>
 						<span class="relative">
 							<input type="text" name="kategori" id="kategori" value="<?=set_value('kategori')?>" >
+						</span>
+					</p>
+				</div>
+
+				<div class="columns">
+					<p class="colx2-left">
+						<label for="complex-en-url">Jenis Barang :</label>
+						<span class="relative">
+							<select name="jenis" id="jenis"class="seperempat-width">
+								<option value="BARANG">BARANG</option>
+								<option value="PULSA">PULSA</option>
+							</select>
 						</span>
 					</p>
 				</div>

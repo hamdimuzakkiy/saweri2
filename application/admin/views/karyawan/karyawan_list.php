@@ -26,8 +26,8 @@
 		}
 		
 		function laporan(title, w, h){
-		//var periode_awal=document.getElementById('tanggal_awal').value;
-		//var periode_akhir=document.getElementById('tanggal_akhir').value;
+			//var periode_awal=document.getElementById('tanggal_awal').value;
+			//var periode_akhir=document.getElementById('tanggal_akhir').value;
 			
 			var left = (screen.width/2)-(w/2);
 			var top = (screen.height/2)-(h/2);
@@ -68,16 +68,15 @@
 				<ul class="controls-buttons">
 					<?php echo $this->pagination->create_links(); ?>
 					<li class="sep"></li>
-					<li><?
+					<li>
+						<?
 							if ($can_insert == TRUE){
 								echo anchor('karyawan/insert', 'Tambah Data');
 							}
-						?></li>
-						
-					<li><?
-								//echo anchor('karyawan/prepare_report_excel', 'Export To Excel');	
 						?>
-						<a href="javascript:laporan('name',1000,800);"><img src="<?=base_url()?>asset/admin/images/icons/fugue/tick-circle.png" width="16" height="16">&nbsp;&nbsp;Print Preview</a> 
+					</li>
+					<li>
+						<a href="javascript:laporan('name',1000,800);"><img src="<?=base_url()?>asset/admin/images/icons/fugue/tick-circle.png" width="16" height="16">&nbsp;&nbsp;Print Preview</a>
 					</li>
 				</ul>
 				
@@ -87,7 +86,7 @@
 			
 				<thead>
 					<tr>
-						<!--<th align="left" valign="top" scope="col">&nbsp;</th>-->
+						<th align="left" valign="top" scope="col">&nbsp;</th>
 						<th align="left" valign="top" scope="col">Cabang</th>
 						<th align="left" valign="top" scope="col">Kode Karyawan</th>
 						<th align="left" valign="top" scope="col">Nama</th>
@@ -103,9 +102,9 @@
 				
 				<tbody>
 					
-					<?php foreach($results->result() as $row) {?>
+					<?php foreach($results->result() as $row){?>
 					<tr>
-						<!--<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_karyawan?>" type="checkbox" /></td>-->
+						<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_karyawan?>" type="checkbox" /></td>
 						<td align="left" valign="top"><?=$row->nama_cabang?> </td>
 						<td align="left" valign="top"><?=$row->kode_karyawan?> </td>
 						<td align="left" valign="top"><?=$row->nama?> </td>
@@ -128,7 +127,9 @@
 							?>
 						</td>
 					</tr>
-					<?php } ?>
+
+					<?php
+				} ?>
 					
 				</tbody>
 			
@@ -147,9 +148,9 @@
 				<?=anchor('karyawan/insert', 'Tambah Data', array('class'=>'button'))?>
 				<span class="sep"></span>
 				<select name="table-action" id="table-action" class="small">
-					<option value="">Action for selected...</option>
-					<option value="validate">Validate</option>
-					<option value="delete">Delete</option>
+					<option value="">Aksi</option>
+					<option value="validate">Validasi</option>
+					<option value="delete">Hapus</option>
 				</select>
 				<button type="submit" class="small">Ok</button>
 			</div>

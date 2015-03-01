@@ -109,48 +109,7 @@
 						</span>
 					</p>
 				</div>
-				<div class="columns">
-					<p class="colx2-left">
-					<label for="complex-en-url">Telepon 2 :</label>
-						<label for="complex-en-url"> </label>
-						<span class="relative">
-							<input type="text" name="telp2" id="telp2" value="<?=set_value('telp2')?>" class="duapertiga-width">
-						</span>
-					</p>
-				</div>
-				<div class="columns">
-					<p class="colx2-left">
-					<label for="complex-en-url">Telepon 3 :</label>
-						<label for="complex-en-url"> </label>
-						<span class="relative">
-							<input type="text" name="telp3" id="telp3" value="<?=set_value('telp3')?>" class="duapertiga-width">
-						</span>
-					</p>
-				</div>
-				<div class="columns">
-					<p class="colx2-left">
-					<label for="complex-en-url">Telepon 4 :</label>
-						<label for="complex-en-url"> </label>
-						<span class="relative">
-							<input type="text" name="telp4" id="telp4" value="<?=set_value('telp4')?>" class="duapertiga-width">
-						</span>
-					</p>
-				</div>
-				<div class="columns">
-					<p class="colx2-left">
-					<label for="complex-en-url">Telepon 5 :</label>
-						<label for="complex-en-url"> </label>
-						<span class="relative">
-							<input type="text" name="telp5" id="telp5" value="<?=set_value('telp5')?>" class="duapertiga-width">
-						</span>
-					</p>
-				</div>
-				<div class="columns">
-					
-				</div>	
-				<div class="columns">
-					
-				</div>
+
 			</fieldset>
 			
 			<fieldset class="grey-bg margin">

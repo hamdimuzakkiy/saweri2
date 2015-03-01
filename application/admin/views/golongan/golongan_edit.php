@@ -28,7 +28,6 @@
 			
 			<fieldset>
 				
-				
 				<div class="columns">
 					<p class="colx2-left">
 						<label for="complex-en-url">Golongan (*) :</label>
@@ -43,6 +42,18 @@
 									echo '<input type="text" name="golongan" id="golongan" value="'.$golongan.'" >';
 								}
 							?>
+						</span>
+					</p>
+				</div>
+
+				<div class="columns">
+					<p class="colx2-left">
+						<label for="complex-en-url">Jenis Barang :</label>
+						<span class="relative">
+							<select name="jenis" id="jenis"class="seperempat-width">
+								<option value="BARANG">BARANG</option>
+								<option value="PULSA">PULSA</option>
+							</select>
 						</span>
 					</p>
 				</div>
