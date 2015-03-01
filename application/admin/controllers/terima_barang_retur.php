@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class retur_pembelian extends My_Controller
+class terima_barang_retur extends My_Controller
 {
 	
 	function __construct()
 	{
 		parent::__construct();
 		
-		$this->load->model('mdl_retur_pembelian', 'retur_pembelian');
+		$this->load->model('mdl_terima_barang_retur', 'terima_barang_retur');
 		
 	}
 	
@@ -22,7 +22,7 @@ class retur_pembelian extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/retur_pembelian/index/';
-		$config['total_rows'] = sizeof($this->retur_pembelian->count()->result());
+		$config['total_rows'] = $this->db->count_all('retur_pembelian');
 		$config['per_page'] = '50';
 		$config['num_links'] = '10';
 		$config['uri_segment'] = '3';
@@ -56,10 +56,11 @@ class retur_pembelian extends My_Controller
 		
 		
 		
-		$data['results'] = $this->retur_pembelian->getItem($config['per_page'], $this->uri->segment(3));
+		$data['results'] = $this->terima_barang_retur->getItem($config['per_page'], $this->uri->segment(3));
 		
+
 		
-		$this->load->view('retur_pembelian/retur_pembelian_list', $data);
+		$this->load->view('terima_barang_retur/terima_barang_retur_list', $data);
 		
 		$this->close();
 	}
@@ -90,7 +91,7 @@ class retur_pembelian extends My_Controller
 		
 		if ($this->form_validation->run() == FALSE){
 			
-			$this->load->view('retur_pembelian/retur_pembelian_add',$data);
+			$this->load->view('terima_barang_retur/terima_barang_retur_add',$data);
 			
 		}else{
 			
