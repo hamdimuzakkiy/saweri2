@@ -22,7 +22,7 @@ class pembelian extends My_Controller
 		$this->open();
 
 		$config['base_url'] = base_url().'index.php/pembelian/index/';
-		$config['total_rows'] = $this->db->count_all('pembelian');
+		$config['total_rows'] = sizeof($this->pembelian->count()->result());
 		$config['per_page'] = '50';
 		$config['num_links'] = '10';
 		$config['uri_segment'] = '3';
@@ -70,7 +70,7 @@ class pembelian extends My_Controller
 		}
 		
 		$this->open();		
-		$data['id_pembelian'] = $this->input->post('id_pembelian');
+	 	$data['id_pembelian'] = $this->input->post('id_pembelian');
 		$data['po_no'] = $this->input->post('po_no');
 		$data['id_supplier'] = $this->input->post('id_supplier');
 		$data['id_cabang'] = $this->input->post('id_cabang');
@@ -98,16 +98,16 @@ class pembelian extends My_Controller
 		$data['total_kas'] = $this->pembelian->get_total_kas();			
 		$this->load->view('pembelian/pembelian_add',$data);		
 		}else{			
-			$pembelian['id_pembelian'] 	= $data['id_pembelian'];			
-			$pembelian['po_no'] 		= $data['po_no'];			
-			$pembelian['id_supplier'] 	= $data['id_supplier'];
-			$pembelian['id_cabang'] 	= $data['id_cabang'];
-			$pembelian['tanggal'] 		= $data['tanggal'];
-			$pembelian['diskon'] 		= $data['diskon'];
-			$pembelian['id_coa'] 		= $data['id_coa'];
-			$pembelian['userid'] 		= $data['userid'];			
-			$pembelian['cara_bayar'] 	= $data['cara_bayar'];						
-			$cara_bayar=$data['cara_bayar'];
+			print $pembelian['id_pembelian'] 	= $data['id_pembelian'];			
+			print $pembelian['po_no'] 		= $data['po_no'];			
+			print $pembelian['id_supplier'] 	= $data['id_supplier'];
+		 	print $pembelian['id_cabang'] 	= $data['id_cabang'];
+		 	print $pembelian['tanggal'] 		= $data['tanggal'];
+		 	print $pembelian['diskon'] 		= $data['diskon'];
+			print $pembelian['id_coa'] 		= $data['id_coa'];
+		 	print $pembelian['userid'] 		= $data['userid'];			
+		 	print $pembelian['cara_bayar'] 	= $data['cara_bayar'];						
+			print $cara_bayar=$data['cara_bayar'];
 			
 			
 			$detail			= $this->input->post('detail');

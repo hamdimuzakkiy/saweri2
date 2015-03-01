@@ -23,7 +23,7 @@ class request_order extends My_Controller
 		
 		$config['base_url'] = base_url().'index.php/request_order/index/';
 		$config['total_rows'] = $this->db->count_all('request_order');
-		$config['per_page'] = '5';
+		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		
@@ -97,28 +97,35 @@ class request_order extends My_Controller
 			
 			# insert ke table request_order
 			$request_order['id_request'] 	= $data['id_request_order'];
-			$request_order['id_cabang'] 	= $data['id_cabang'];
-			$request_order['tanggal'] 		= $data['tanggal'];
-			$request_order['userid'] 		= $data['userid'];
 			
+		 	$request_order['id_cabang'] 	= $data['id_cabang'];
+		 	
+			$request_order['tanggal'] 		= $data['tanggal'];
+			
+		 	$request_order['userid'] 		= $data['userid'];		 	
+			
+			
+
 			$this->request_order->insert($request_order);
 			
+
 			# insert ke table detail request_order
-			$detail			= $this->input->post('detail');
+			$detail	= $this->input->post('detail');
 			
-			$count_detail = count($detail);
+			$count_detail = count($detail);			
 			$i=0;
 			
 			for($i=0; $i<$count_detail; $i++)
 			{
 				$data_['id_request'] 		= $request_order['id_request'];
-				$data_['id_barang'] 		= $detail[$i]['id_barang'];
-				$data_['qty'] 				= $detail[$i]['qty'];
 				
+				$data_['id_barang'] 		= $detail[$i]['id_barang'];
+				
+				$data_['qty'] 				= $detail[$i]['qty'];
+								
 				$this->request_order->insert_detail($data_);
 			}
-			
-			
+										
 			$this->session->set_flashdata('message', 'Data Berhasil disimpan.');
 			redirect('request_order/index');
 		}
@@ -236,6 +243,14 @@ class request_order extends My_Controller
 	{
 		$data['result'] = $this->request_order->get_barang();
 		$this->load->view('request_order/list_barang.php', $data);
-	}		function send_order(){		$this->open();			$data['id_request']=$this->uri->segment(3);				$data['result_trans']=$this->kode_trans->get_kd_awal('penjualan');		$data['kode_transaksi']=$data['result_trans']->row()->kd_trans;				$data['result'] = $this->request_order->getItemById($data['id_request']);				$this->load->view('penjualan/penjualan_send_ro', $data);				$this->close();	}
+	}		
+	function send_order(){		
+		$this->open();			
+		$data['id_request']=$this->uri->segment(3);				
+	$data['result_trans']=$this->kode_trans->get_kd_awal('penjualan');		
+	$data['kode_transaksi']=$data['result_trans']->row()->kd_trans;				
+	$data['result'] = $this->request_order->getItemById($data['id_request']);				
+	$this->load->view('penjualan/penjualan_send_ro', $data);				
+	$this->close();	}
 	
 }

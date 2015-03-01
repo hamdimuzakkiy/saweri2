@@ -132,21 +132,29 @@ class penjualan extends My_Controller
 			
 		}else{	
 									
-			$penjualan['id_penjualan'] 			= $data['id_penjualan'];
-			$penjualan['so_no'] 				= $data['so_no'];
+ 			print $penjualan['id_penjualan'] 			= $data['id_penjualan'];
+
+ 			print '<br>';
+			print $penjualan['so_no'] 				= $data['so_no'];
+ 			print '<br>';
+			print $penjualan['id_cabang'] 			= $data['id_cabang'];
+			print '<br>';
+			print $penjualan['id_jpenjualan'] 		= $data['id_jenis_penjualan'];
+			print '<br>';
+			print $penjualan['tanggal'] 				= $data['tanggal'];
+			print '<br>';
+			print $penjualan['jatuh_tempo'] 			= $data['jatuh_tempo'];
+			print '<br>';
+			print $penjualan['diskon'] 				= $data['diskon'];
+			print '<br>';
+			print $penjualan['id_coa'] 				= $data['id_coa'];
+			print '<br>';
+			print $penjualan['userid'] 				= $data['userid'];
+			print '<br>';
+			print $penjualan['cara_bayar'] 			= $data['cara_bayar'];
 			
-			$penjualan['id_cabang'] 			= $data['id_cabang'];
-			$penjualan['id_jpenjualan'] 		= $data['id_jenis_penjualan'];
-			$penjualan['tanggal'] 				= $data['tanggal'];
-			$penjualan['jatuh_tempo'] 			= $data['jatuh_tempo'];
-			$penjualan['diskon'] 				= $data['diskon'];
-			$penjualan['id_coa'] 				= $data['id_coa'];
-			$penjualan['userid'] 				= $data['userid'];
-			$penjualan['cara_bayar'] 			= $data['cara_bayar'];
-			
-			
-			
-			
+					
+			break;
 			
 			$detail	= $this->input->post('detail');
 			

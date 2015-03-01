@@ -98,7 +98,7 @@
 					<p class="colx3-center">
 						<label for="complex-en-url">Cabang (*) :</label>
 						<span class="relative">
-							<?
+							<?php
 								$this->db->flush_cache();
 								$this->db->where('id_cabang', $this->session->userdata('idcabang'));
 								$qq = $this->db->get('cabang');

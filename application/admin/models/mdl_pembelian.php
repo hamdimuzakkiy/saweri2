@@ -18,6 +18,17 @@ class mdl_pembelian extends CI_Model{
 		$this->db->limit($num, $offset);
 		return $this->db->get();
 	}
+
+	function count()
+	{
+		$this->db->flush_cache();
+		$this->db->select('pembelian.id_pembelian, pembelian.po_no, supplier.kode_supplier, supplier.nama AS nama_supplier, cabang.nama_cabang, pembelian.tanggal');
+		$this->db->from('pembelian');
+		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');
+		$this->db->join('cabang', 'cabang.id_cabang = pembelian.id_cabang');		
+		$this->db->where('cabang.id_cabang', $this->session->userdata('idcabang'));		$this->db->where('pembelian.posting', '0');		
+		return $this->db->get();
+	}
 	
 	function getItemById($id)
 	{
