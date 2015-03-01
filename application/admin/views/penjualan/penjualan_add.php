@@ -23,7 +23,7 @@
 			$.ajax({
 				type:'POST', 
 				url: '<?php echo base_url().'index.php/penjualan/check_saldo_piutang';?>', 
-				data:$('#form1').serialize(), 
+				data:$('#form1').serialize(),
 				success: function(response) {
 				/*$('#form1').find('.form_result').html(response);*/
 					if (response=='berhasil'){

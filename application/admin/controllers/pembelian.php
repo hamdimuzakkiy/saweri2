@@ -98,63 +98,65 @@ class pembelian extends My_Controller
 		$data['total_kas'] = $this->pembelian->get_total_kas();			
 		$this->load->view('pembelian/pembelian_add',$data);		
 		}else{			
-			print $pembelian['id_pembelian'] 	= $data['id_pembelian'];			
-			print $pembelian['po_no'] 		= $data['po_no'];			
-			print $pembelian['id_supplier'] 	= $data['id_supplier'];
-		 	print $pembelian['id_cabang'] 	= $data['id_cabang'];
-		 	print $pembelian['tanggal'] 		= $data['tanggal'];
-		 	print $pembelian['diskon'] 		= $data['diskon'];
-			print $pembelian['id_coa'] 		= $data['id_coa'];
-		 	print $pembelian['userid'] 		= $data['userid'];			
-		 	print $pembelian['cara_bayar'] 	= $data['cara_bayar'];						
-			print $cara_bayar=$data['cara_bayar'];
+			$pembelian['id_pembelian'] 	= $data['id_pembelian'];			
+			$pembelian['po_no'] 		= $data['po_no'];			
+			$pembelian['id_supplier'] 	= $data['id_supplier'];
+			$pembelian['id_cabang'] 	= $data['id_cabang'];
+			$pembelian['tanggal'] 		= $data['tanggal'];
+			$pembelian['diskon'] 		= $data['diskon'];
+			$pembelian['id_coa'] 		= $data['id_coa'];
+			$pembelian['userid'] 		= $data['userid'];			
+			$pembelian['cara_bayar'] 	= $data['cara_bayar'];						
+			$cara_bayar=$data['cara_bayar'];
 			
 			
 			$detail			= $this->input->post('detail');
-			
+					
 			$count_detail = count($detail);
 			$i=0;
 						$total_penjumlahan = 0;
 			for($i=0; $i<$count_detail; $i++)			
 			{				$a = $detail[$i]['id_barang'];				
-			$query = "SELECT id_kategori FROM barang where id_barang = '". $a ."'";				
-			$result = mysql_query($query);				
-			$hasil = mysql_fetch_array($result);												
-			if ((($hasil['id_kategori'] == '3')or ($hasil['id_kategori'] == '4') or ($hasil['id_kategori'] == '5') or ($hasil['id_kategori'] == '6') or ($hasil['id_kategori'] == '7'))&& ($detail[$i]['sn']=='')) 				
-			{ 					
-			$this->session->set_flashdata('message', 'Field Serial Number harus diisi!'); 					
-			redirect('pembelian/insert');				
-			}				
-			else if (($data['cara_bayar'] == '2')&&($detail[$i]['jatuh_tempo']==''))				{ 					
-			$this->session->set_flashdata('message', 'Field Jatuh Tempo harus diisi!'); 					
-			redirect('pembelian/insert');				
-			} 				
-			else				
-			{					
-			$qty_pembelian = $detail[$i]['qty'];											
-			for ($j=0;$j<$qty_pembelian;$j++){							
-			$data_['id_pembelian'] 		= $pembelian['id_pembelian'];							
-			$data_['id_barang'] 		= $detail[$i]['id_barang'];							
-			$data_['harga'] 			= $detail[$i]['harga'];							
-			/*$data_['qty'] 				= $detail[$i]['qty']; */							
-			$data_['qty'] 				= 1; 							
-			$data_['sn'] 				= $detail[$i]['sn'];							
-			$data_['jatuh_tempo'] 		= $detail[$i]['jatuh_tempo'];							
-			$data_['total'] 			= $detail[$i]['total'];							
-			$data_['posisi_pusat'] 		= 1;																					
-			$total_penjumlahan			= $total_penjumlahan + $detail[$i]['total'];														
-			$this->pembelian->insert_detail($data_);														
-			$this->db->flush_cache();						
-			}					
-				
-				$data_update = 	array(
-									'harga_toko' => $detail[$i]['harga_toko'],
-									'harga_partai' => $detail[$i]['harga_partai'],
-									'harga_cabang' => $detail[$i]['harga_cabang']
-								);
-				$this->db->where('id_barang', $detail[$i]['id_barang']);				
-				$this->db->update('barang', $data_update);				
-				}
+				$query = "SELECT id_kategori FROM barang where id_barang = '". $a ."'";				
+				$result = mysql_query($query);				
+				$hasil = mysql_fetch_array($result);												
+				if ((($hasil['id_kategori'] == '3')or ($hasil['id_kategori'] == '4') or ($hasil['id_kategori'] == '5') or ($hasil['id_kategori'] == '6') or ($hasil['id_kategori'] == '7'))&& ($detail[$i]['sn']=='')) 				
+				{ 					
+					$this->session->set_flashdata('message', 'Field Serial Number harus diisi!'); 					
+					redirect('pembelian/insert');				
+				}				
+				else if (($data['cara_bayar'] == '2')&&($detail[$i]['jatuh_tempo']==''))				
+				{ 					
+					$this->session->set_flashdata('message', 'Field Jatuh Tempo harus diisi!'); 					
+					redirect('pembelian/insert');				
+				} 				
+				else				
+				{					
+					$qty_pembelian = $detail[$i]['qty'];											
+					for ($j=0;$j<$qty_pembelian;$j++)
+					{							
+						$data_['id_pembelian'] 		= $pembelian['id_pembelian'];							
+						$data_['id_barang'] 		= $detail[$i]['id_barang'];							
+						$data_['harga'] 			= $detail[$i]['harga'];							
+						/*$data_['qty'] 				= $detail[$i]['qty']; */							
+						$data_['qty'] 				= 1; 							
+						$data_['sn'] 				= $detail[$i]['sn'];							
+						$data_['jatuh_tempo'] 		= $detail[$i]['jatuh_tempo'];							
+						$data_['total'] 			= $detail[$i]['total'];							
+						$data_['posisi_pusat'] 		= 1;																					
+						$total_penjumlahan			= $total_penjumlahan + $detail[$i]['total'];														
+						$this->pembelian->insert_detail($data_);														
+						$this->db->flush_cache();						
+					}					
+					
+					$data_update = 	array(
+										'harga_toko' => $detail[$i]['harga_toko'],
+										'harga_partai' => $detail[$i]['harga_partai'],
+										'harga_cabang' => $detail[$i]['harga_cabang']
+									);
+					$this->db->where('id_barang', $detail[$i]['id_barang']);				
+					$this->db->update('barang', $data_update);				
+					}
 			}									
 			$hutang['KOUNIT'] 		= $data['id_cabang'];			
 			$hutang['TANGGAL'] 		= $data['tanggal'];			

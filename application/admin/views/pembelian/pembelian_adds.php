@@ -28,41 +28,42 @@
 		$("#getbarang").fancybox();
 	});
 	function set_detail(){		
-
+		
 			var cara_bayar = document.getElementById("cara_bayar").value;		
 			var detail_qty = document.getElementById("detail_qty").value;		
-			var detail_idjenis = document.getElementById("detail_idjenis").value;		
-			var sn = document.getElementById("sn").checked;			
+			var detail_idjenis = document.getElementById("detail_idjenis").value;	
+			var sn = document.getElementById("sn").checked;	
 
-			
-			
+
 			if(document.getElementById('detail_namabarang').value == ''){
 				alert('Isi nama barang terlebih dahulu.');	
-			}else if((cara_bayar=='2') && (document.getElementById('detail_jatuh_tempo').value == ''))
-			{			alert('Jatuh Tempo Tidak Boleh Kosong.');					}
-			else if (detail_idjenis=='4'){			$.ajax({				type: 'POST',				url: '<?php echo base_url().'asset/admin/js/ajax_pembelian.php?command=add_sn'?>',				data: $('#get_serialize :input').serialize(),				success: function(data) {					$('#detail').html(data);					/*$.fancybox(data);*/				}			});					}
-			else if (sn) {
-				$.ajax({
-					type: 'POST',
+			}else if((cara_bayar=='2') && (document.getElementById('detail_jatuh_tempo').value == '')){			alert('Jatuh Tempo Tidak Boleh Kosong.');					}else if (detail_idjenis=='4'){			$.ajax({				type: 'POST',				url: '<?php echo base_url().'asset/admin/js/ajax_pembelian.php?command=add_sn'?>',				data: $('#get_serialize :input').serialize(),				success: function(data) {					$('#detail').html(data);					/*$.fancybox(data);*/				}			});					}
+			else if (sn)
+				{
+					var jum = document.getElementById("detail_qty").value;					
+
+					$.ajax({
+					type: 'POST',					
 					url: '<?=base_url().'asset/admin/js/ajax_pembelian.php?command=add_3'?>',
 					data: $('#form1').serialize(),
 					success: function(data) {
-						$('#detail').html(data);
-
+						$('.detail').html(data);							
+						
+						
 					}
-				});
-				document.getElementById('detail_idbarang').value = '';				document.getElementById('detail_namabarang').value = '';			document.getElementById('detail_harga').value = '';			document.getElementById('detail_harga_toko').value = '';			document.getElementById('detail_harga_partai').value = '';			document.getElementById('detail_harga_cabang').value = '';			document.getElementById('detail_qty').value = '';			document.getElementById('detail_jatuh_tempo').value = '';						document.getElementById('detail_idjenis').value = '';
-							counter_list = counter_list + parseInt(detail_qty);
-			}
-			else{
+				});		
+						
+
 				
+				
+				}
+			else{
 				$.ajax({
 					type: 'POST',
 					url: '<?=base_url().'asset/admin/js/ajax_pembelian.php?command=add_1'?>',
 					data: $('#form1').serialize(),
 					success: function(data) {
 						$('#detail').html(data);
-
 					}
 				});
 				document.getElementById('detail_idbarang').value = '';				document.getElementById('detail_namabarang').value = '';			document.getElementById('detail_harga').value = '';			document.getElementById('detail_harga_toko').value = '';			document.getElementById('detail_harga_partai').value = '';			document.getElementById('detail_harga_cabang').value = '';			document.getElementById('detail_qty').value = '';			document.getElementById('detail_jatuh_tempo').value = '';						document.getElementById('detail_idjenis').value = '';
@@ -215,7 +216,6 @@
 								<input type="checkbox" id = 'sn' name="sn" value="bersn">Barang Mempunyai Serial Number<br>
 						</span>
 					</p>
-					
 				</div>
 				<div class="columns">
 					<p class="colx3-left">
@@ -279,7 +279,7 @@
 								
 								<tbody id="detail">
 									
-								</tbody>								
+								</tbody>
 							</table>
 							<br/>						
 				
