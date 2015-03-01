@@ -53,7 +53,7 @@
 	function get_po(po){
 		$.ajax({
 			type: 'GET',
-			url: '<?=base_url().'index.php/retur_pembelian/get_barang_by_po/'?>' + po, //url: $(this).attr('action'),
+			url: '<?=base_url().'index.php/terima_barang_retur/get_barang_id_retur/'?>' + po, //url: $(this).attr('action'),
 			//data: $('#form1').serialize(),
 			success: function(data) {
 				$('#detail').html(data);
@@ -103,7 +103,7 @@
 									{
 										foreach($query->result() as $row)
 										{
-											echo '<option value="'.$row->po_no.'">'.$row->po_no.'</option>';
+											echo '<option value="'.$row->id_retur_penerimaan.'">'.$row->po_no.'</option>';
 										}
 									}
 								?>
