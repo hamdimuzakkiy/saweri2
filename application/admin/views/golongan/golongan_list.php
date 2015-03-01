@@ -37,11 +37,13 @@
 				<ul class="controls-buttons">
 					<?php echo $this->pagination->create_links(); ?>
 					<li class="sep"></li>
-					<li><?
+					<li>
+						<?
 							if ($can_insert == TRUE){
 								echo anchor('golongan/insert', 'Tambah Data');
 							}
-						?></li>
+						?>
+					</li>
 				</ul>
 				
 			</div>

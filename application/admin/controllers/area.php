@@ -23,7 +23,7 @@ class area extends My_Controller
 		
 		$config['base_url'] = base_url().'index.php/area/index/';
 		$config['total_rows'] = $this->area->getallItem('area');
-		$config['per_page'] = '5';
+		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		
@@ -53,8 +53,6 @@ class area extends My_Controller
 		$config['first_tag_close'] = '</li>';
 		
 		$this->pagination->initialize($config);	
-		
-		
 		
 		$data['results'] = $this->area->getItem($config['per_page'], $this->uri->segment(3));
 		

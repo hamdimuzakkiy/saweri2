@@ -73,30 +73,15 @@ class setting_laporan extends My_Controller
 			redirect('auth/failed');
 
 		}
-
-		
-
 		$this->open();
-
-		
-
-		$data['result'] 		= $this->setting_laporan->getItemById($id);
-
-		
-
+		$data['result'] = $this->setting_laporan->getItemById($id);
 		$data['id'] = $data['result']->row()->id;
-
 		$data['footer_pembelian'] = $data['result']->row()->footer_pembelian;
 		$data['footer_penjualan'] = $data['result']->row()->footer_penjualan;
 		$data['footer_service'] = $data['result']->row()->footer_service;
 		$data['footer_tukar_tambah'] = $data['result']->row()->footer_tukar_tambah;
-
 		$this->load->view('setting_laporan/setting_laporan_edit', $data);
-
-		
-
 		$this->close();
-
 	}
 	
 	function process_update()
@@ -107,14 +92,9 @@ class setting_laporan extends My_Controller
 			redirect('auth/failed');
 
 		}
-
-		
+	
 
 		$this->open();
-
-		
-
-		
 
 		$data['id'] = $this->input->post('id');
 

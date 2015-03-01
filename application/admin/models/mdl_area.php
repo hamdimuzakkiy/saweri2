@@ -33,8 +33,7 @@ class mdl_area extends CI_Model{
 		$this->db->from('area');		
 		$this->db->join('pelanggan', 'pelanggan.id_area = area.id_area','left');		
 		$this->db->join('kecamatan', 'area.id_kecamatan = kecamatan.id_kecamatan');
-		$this->db->join('kabupaten', 'area.id_kabupaten = kabupaten.id_kabupaten');				
-		$this->db->group_by('area.id_area');				
+		$this->db->join('kabupaten', 'area.id_kabupaten = kabupaten.id_kabupaten');								
 		return $this->db->count_all_results();		
 	}
 	

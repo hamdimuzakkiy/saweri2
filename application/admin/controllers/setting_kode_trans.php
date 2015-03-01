@@ -39,19 +39,52 @@ class setting_kode_trans extends My_Controller{
 		$this->close();	
 	}
 	
-	function update($id)	{
-		if ($this->can_update() == FALSE){
+	function insert()
+	{
+		if ($this->can_insert() == FALSE){
+			redirect('auth/failed');
+		}
+		
+		$this->open();
+		$data['kd_trans'] = $this->input->post('kd_trans');
+		$data['transaksi'] = $this->input->post('transaksi');		
+		
+		$this->form_validation->set_rules('kd_trans', 'kd_trans', 'required');
+		$this->form_validation->set_rules('transaksi', 'transaksi', 'required');
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$this->form_validation->set_message('required', 'Field harus diisi!');
+		
+		
+		if ($this->form_validation->run() == FALSE){
+			
+			$this->load->view('setting_kode_trans/setting_kode_trans_add',$data);
+			
+		}else{	
+			$this->setting_kode_trans->insert($data);
+			
+			$this->session->set_flashdata('message', 'Data kode transaksi Berhasil disimpan.');
+			redirect('setting_kode_trans');
+		}
+		$this->close();
+	}
+
+	function update($id)
+	{
+		if ($this->can_update() == FALSE)
+		{
 			redirect('auth/failed');
 		}
 		$this->open();
-		$data['result'] 		= $this->setting_kode_trans->getItemById($id);
+		$data['result'] = $this->setting_kode_trans->getItemById($id);
 		$data['id'] = $data['result']->row()->id;
 		$data['kd_trans'] = $data['result']->row()->kd_trans;
 		$data['transaksi'] = $data['result']->row()->transaksi;
 		$this->load->view('setting_kode_trans/setting_kode_trans_edit', $data);
 		$this->close();	
 	}
-	function process_update()	{
+
+	function process_update()
+	{
 		if ($this->can_update() == FALSE){
 			redirect('auth/failed');
 		}
@@ -64,13 +97,16 @@ class setting_kode_trans extends My_Controller{
 		$this->form_validation->set_rules('transaksi', 'transaksi', 'required');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		$this->form_validation->set_message('required', 'Field %s harus diisi!');
-		$this->form_validation->set_message('numeric', 'Field %s harus diisi hanya dengan angka!');
-		if ($this->form_validation->run() == FALSE){
+		if ($this->form_validation->run() == FALSE)
+		{
 			$this->load->view('setting_kode_trans/seting_kode_trans_edit',$data);
-		}else{
-		$this->setting_kode_trans->update($data['id'], $data);
-		$this->session->set_flashdata('message', 'Kode Transaksi Berhasil diupdate.');
-		redirect('setting_kode_trans');		}
+		}
+		else
+		{
+			$this->setting_kode_trans->update($data['id'], $data);
+			$this->session->set_flashdata('message', 'Kode Transaksi Berhasil diupdate.');
+			redirect('setting_kode_trans');		
+		}
 		$this->close();
 	}
 	
