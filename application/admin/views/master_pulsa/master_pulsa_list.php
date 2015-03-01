@@ -50,10 +50,10 @@
 			
 				<thead>
 					<tr>
-						<!--<th align="left" valign="top" scope="col">&nbsp;</th>-->						<th align="left" valign="top" scope="col">Kode Pulsa</th>						
+						<th align="left" valign="top" scope="col">&nbsp;</th>
+						<th align="left" valign="top" scope="col">Kode Pulsa</th>						
 						<th align="left" valign="top" scope="col">Nama Pulsa</th>
 						<th align="left" valign="top" scope="col">Kategori</th>
-						
 						<th align="left" valign="top" scope="col">Aksi</th>
 					</tr>
 				</thead>
@@ -62,10 +62,10 @@
 					
 					<?php foreach($results->result() as $row) {?>
 					<tr>
-						<!--<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_pulsa?>" type="checkbox" /></td>-->						<td align="left" valign="top"><?=$row->kode_pulsa?> </td>						
+						<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_pulsa?>" type="checkbox" /></td>
+						<td align="left" valign="top"><?=$row->kode_pulsa?> </td>						
 						<td align="left" valign="top"><?=$row->nama_pulsa?> </td>
 						<td align="left" valign="top"><?=$row->nama_kategori?> </td>
-		
 						<td align="left" valign="top" class="table-actions">
 							<?php
 								if ($can_update == TRUE){
@@ -98,9 +98,9 @@
 				<?=anchor('master_pulsa/insert', 'Tambah Data', array('class'=>'button'))?>
 				<span class="sep"></span>
 				<select name="table-action" id="table-action" class="small">
-					<option value="">Action for selected...</option>
-					<option value="validate">Validate</option>
-					<option value="delete">Delete</option>
+					<option value="">Aksi</option>
+					<option value="validate">Validasi</option>
+					<option value="delete">Hapus</option>
 				</select>
 				<button type="submit" class="small">Ok</button>
 			</div>

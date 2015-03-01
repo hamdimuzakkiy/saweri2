@@ -20,11 +20,10 @@ class barang_point extends My_Controller
 		
 		$this->open();
 		
-		
 		$config['base_url'] = base_url().'index.php/barang_point/index/';
-		$config['total_rows'] = $this->db->count_all('barang_point');
-		$config['per_page'] = '10';
-		$config['num_links'] = '10';
+		$config['total_rows'] = $this->barang_point->getallItem('barang_point');
+		$config['per_page'] = '3';
+		$config['num_links'] = '3';
 		$config['uri_segment'] = '3';
 		
 		$config['full_tag_open'] = '';
@@ -55,7 +54,7 @@ class barang_point extends My_Controller
 		$this->pagination->initialize($config);	
 		
 		
-		
+
 		$data['results'] = $this->barang_point->getItem($config['per_page'], $this->uri->segment(3));
 		
 		

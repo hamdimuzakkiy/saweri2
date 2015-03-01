@@ -47,7 +47,7 @@
 			
 				<thead>
 					<tr>
-						<!--<th align="left" valign="top" scope="col">&nbsp;</th>-->
+						<th align="left" valign="top" scope="col">&nbsp;</th>
 						<th align="left" valign="top" scope="col">Id Barang</th>
 						<th align="left" valign="top" scope="col">Nama Barang</th>
 						<th align="left" valign="top" scope="col">Jenis</th>
@@ -62,7 +62,7 @@
 					{?>
 
 					<tr>
-						<!--<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_barang?>" type="checkbox" /></td>-->
+						<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_barang?>" type="checkbox" /></td>
 						<td align="left" valign="top"><?=$row->id_barang?> </td>
 						<td align="left" valign="top"><?=$row->nama_barang?> </td>
 						<td align="left" valign="top"><?=$row->nama_jenis?> </td>

@@ -162,71 +162,8 @@
 						</span>
 					</p>
 				</div>
-				<div class="columns">
-					<p class="colx3-left">
-						<label for="complex-en-url"> Telepon 2 </label>
-						<span class="relative">
-							<?php 
-								if (form_error('telp2') != null)
-								{
-									echo '<input type="text" name="telp2" id="telp2" value="'.set_value('telp2').'" class="duapertiga-width">';
-								}else
-								{
-									echo '<input type="text" name="telp2" id="telp2" value="'.$telp2.'" class="duapertiga-width">';
-								}
-							?>
-						</span>
-					</p>
-				</div>
-				<div class="columns">
-					<p class="colx3-left">
-						<label for="complex-en-url"> Telepon 3 </label>
-						<span class="relative">
-							<?php 
-								if (form_error('telp3') != null)
-								{
-									echo '<input type="text" name="telp3" id="telp3" value="'.set_value('telp3').'" class="duapertiga-width">';
-								}else
-								{
-									echo '<input type="text" name="telp3" id="telp3" value="'.$telp3.'" class="duapertiga-width">';
-								}
-							?>
-						</span>
-					</p>
-				</div>
-				<div class="columns">
-					<p class="colx3-left">
-						<label for="complex-en-url"> Telepon 4 </label>
-						<span class="relative">
-							<?php 
-								if (form_error('telp4') != null)
-								{
-									echo '<input type="text" name="telp4" id="telp4" value="'.set_value('telp4').'" class="duapertiga-width">';
-								}else
-								{
-									echo '<input type="text" name="telp4" id="telp4" value="'.$telp4.'" class="duapertiga-width">';
-								}
-							?>
-						</span>
-					</p>
-				</div>
-				<div class="columns">
-					<p class="colx3-left">
-						<label for="complex-en-url"> Telepon 5 </label>
-						<span class="relative">
-							<?php 
-								if (form_error('telp5') != null)
-								{
-									echo '<input type="text" name="telp5" id="telp5" value="'.set_value('telp5').'" class="duapertiga-width">';
-								}else
-								{
-									echo '<input type="text" name="telp5" id="telp5" value="'.$telp5.'" class="duapertiga-width">';
-								}
-							?>
-						</span>
-					</p>
-				</div>
 			</fieldset>
+			
 			<fieldset class="grey-bg margin">
 				<div class="columns" >
 							<p class="colx3-left">

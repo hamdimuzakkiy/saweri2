@@ -1,4 +1,4 @@
-<?php ini_set("memory_limit","16M"); ?>
+<?php ini_set("memory_limit","32M"); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
 <style>
 #div_laporan{

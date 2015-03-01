@@ -10,8 +10,20 @@ class mdl_kategori extends CI_Model{
 	function getItem($num=0, $offset=0)
 	{
 		$this->db->flush_cache();
-		$this->db->order_by("kategori", "asc");
-		return $this->db->get('kategori', $num, $offset);
+		$this->db->select('kategori.id_kategori, kategori.kategori, kategori.jenis');
+		$this->db->from('kategori');
+		$this->db->order_by("kategori.kategori", "asc");
+		$this->db->limit($num, $offset);
+		return $this->db->get();
+	}
+
+	function getallItem()
+	{
+		$this->db->flush_cache();
+		$this->db->select('kategori.id_kategori, kategori.kategori, kategori.jenis');
+		$this->db->from('kategori');
+		$this->db->order_by("kategori.kategori", "asc");
+		return $this->db->count_all_results();
 	}
 	
 	function getItemById($id)

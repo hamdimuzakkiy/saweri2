@@ -51,10 +51,11 @@
 			
 				<thead>
 					<tr>
-						<!--<th align="left" valign="top" scope="col">&nbsp;</th>-->
+						<th align="left" valign="top" scope="col">&nbsp;</th>
 						<th align="left" valign="top" scope="col">Kabupaten</th>
 						<th align="left" valign="top" scope="col">Kecamatan </th>
-						<th align="left" valign="top" scope="col">Area </th>												<th align="left" valign="top" scope="col">Total Pelanggan </th>
+						<th align="left" valign="top" scope="col">Kode </th>
+						<th align="left" valign="top" scope="col">Jumlah Pelanggan </th>
 						<th align="left" valign="top" scope="col">Aksi</th>
 					</tr>
 				</thead>
@@ -64,7 +65,7 @@
 					<?php foreach($results->result() as $row) {?>
 					<tr>
 						
-						
+						<td align="left" valign="top"><input name="id[]" id="id" value="<?=$row->id_area?>" type="checkbox" /></td>
 						<td align="left" valign="top"><?=$row->kabupaten?> </td>
 						<td align="left" valign="top"><?=$row->kecamatan?> </td>												
 						<td align="left" valign="top"><?=$row->area?> </td>
@@ -103,9 +104,9 @@
 				<?=anchor('area/insert', 'Tambah Data', array('class'=>'button'))?>
 				<span class="sep"></span>
 				<select name="table-action" id="table-action" class="small">
-					<option value="">Action for selected...</option>
-					<option value="validate">Validate</option>
-					<option value="delete">Delete</option>
+					<option value="">Aksi</option>
+					<option value="validate">Validasi</option>
+					<option value="delete">Hapus</option>
 				</select>
 				<button type="submit" class="small">Ok</button>
 				

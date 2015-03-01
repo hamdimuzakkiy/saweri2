@@ -70,99 +70,115 @@ class mutasi_kas extends My_Controller
 		$this->load->view('mutasi_kas/mutasi_kas_list', $data);
 		
 		$this->close();
-	}		function insert()	{		
+	}		
+
+
+	function insert()	{		
 		/*		if ($this->can_insert() == FALSE){		
 		redirect('auth/failed');		}	
-		*/				$this->open();	
-					
-	$kd_kas_debet= $this->input->post('kd_kas');	
-	$jumlah_debet			= $this->input->post('jumlah_debet');	
-			
-	$this->form_validation->set_rules('jumlah_debet', 'jumlah_debet', 'required');
-	$this->form_validation->set_rules("kd_kas", "kode kas", 'required');	
-	/*		*/		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');		
+		*/
+		$this->open();	
+
+		$kd_kas_debet = $this->input->post('kd_kas');	
+		$jumlah_debet = $this->input->post('jumlah_debet');	
+
+		$this->form_validation->set_rules('jumlah_debet', 'jumlah_debet', 'required');
+		$this->form_validation->set_rules("kd_kas", "kode kas", 'required');	
+		/*		*/
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');		
 		
-	$this->form_validation->set_message('required', 'Field %s harus diisi!');	
-	$this->form_validation->set_message('numeric', 'Field %s harus diisi hanya dengan angka!');	
-	if ($this->form_validation->run() == FALSE){			
-	/*$data['results']=$this->mutasi_kas->get_total_tiap_akun();	*/
-	$this->load->view('mutasi_kas/mutasi_kas_add');				
-	}else{				$detail			= $this->input->post('detail');		
-	$gen_glid=$this->mutasi_kas->get_glid();		
-	$count_detail = count($detail);			$i=0;		
-	$jml=0;			for($j=0; $j<$count_detail; $j++){		
-	$jml		= $jml +  $detail[$j]['jumlah'];				
-	}							if ($jml<=$jumlah_debet){		
-	$data_origin['cuid'] = get_userid();					
-	$data_origin['cdate'] = date('Y-m-d');					
-	$data_origin['glid'] =$this->mutasi_kas->get_glid();		
-	$data_origin['akunid'] = $kd_kas_debet;								
-	$data_origin['debet'] = $jml;					
-	$data_origin['tanggal']  = date('Y-m-d');					
-	$this->mutasi_kas->insert_detail($data_origin);												
-	$data_origin_J['GLID']= $this->mutasi_kas->get_glid_jurnal(); 
-	/*$this->fungsi->gen_glid_counter('/',$gen_glid,$i);*/
-	$data_origin_J['CUID'] = get_userid();						
-	$data_origin_J['CDATE'] = date('Y-m-d');						
-	/*$data_origin['glid'] =$this->mutasi_kas->get_glid();*/			
-	$data_origin_J['AKUNID'] = $kd_kas_debet;											
-	$data_origin_J['DEBET'] = $jml;						
-	$this->mutasi_kas->insert_detail_J($data_origin_J);												
-	$data_['cuid'] = get_userid();												
-	$data_['cdate'] = date('Y-m-d');						
-	$data_['glid'] =$this->mutasi_kas->get_glid();												
-	$data_J['CUID'] = get_userid();												
-	$data_J['CDATE'] = date('Y-m-d');						
-	$data_J['GLID'] =$this->mutasi_kas->get_glid_jurnal(); 
-	/*$this->fungsi->gen_glid_counter('/',$gen_glid,$i);*/										
-	$data_detail_J['CUID'] = get_userid();												
-	$data_detail_J['CDATE'] = date('Y-m-d');						
-	$data_detail_J['GLID'] =$this->mutasi_kas->get_glid_jurnal();						
-	$total_penjumlahan = 0;						
-	$data_['tanggal']  = date('Y-m-d');						
-	for($i=0; $i<$count_detail; $i++)												
-	{							
-	$data_['akunid'] 		= $detail[$i]['akunid'];							
-	$data_['kredit'] 		= $detail[$i]['jumlah'];														
-	$data_detail_J['akunid'] 		= $detail[$i]['akunid'];							
-	$data_detail_J['kredit'] 		= $detail[$i]['jumlah'];							
-	$total_penjumlahan		= $total_penjumlahan + $detail[$i]['jumlah'];														
-	/*$total_penjumlahan = 2;*/					
-	$this->mutasi_kas->insert_detail($data_);							
-	$this->mutasi_kas->insert_detail_J($data_detail_J);						
-	}																					
-	$this->db->flush_cache();							
-	$data['cuid'] = get_userid();							
-	$data['cdate'] = date('Y-m-d');							
-	$data['tanggal'] = date('Y-m-d');							
-	$data['glid']=$data_['glid'];							
-	$data['jumlah']=$total_penjumlahan;														
-	$data_J['CUID'] = get_userid();							
-	$data_J['CDATE'] = date('Y-m-d');							
-	$data_J['TANGGAL'] = date('Y-m-d');							
-	$data_J['GLID_PARENT']=$data_['glid'];							
-	$data_J['GLID']=$this->mutasi_kas->get_glid_jurnal(); 
-	/*$this->fungsi->gen_glid_counter('/',$gen_glid,$i);;*/																
-	$this->mutasi_kas->insert($data);						
-	$this->mutasi_kas->insert_J($data_J);												
-	$this->session->set_flashdata('message', 'Data Mutasi Kas Berhasil Disimpan.');						
-	redirect('mutasi_kas/index');				
-	}else{					
-	$this->session->set_flashdata('message', 'Kas tidak mencukupi');					
-	$this->load->view('mutasi_kas/mutasi_kas_add');				
-	}					
+		$this->form_validation->set_message('required', 'Field %s harus diisi!');	
+		$this->form_validation->set_message('numeric', 'Field %s harus diisi hanya dengan angka!');	
+		if ($this->form_validation->run() == FALSE){			
+			/*$data['results']=$this->mutasi_kas->get_total_tiap_akun();	*/
+
+		
+		$this->load->view('mutasi_kas/mutasi_kas_add');				
+		}
+		else
+		{
+			$detail= $this->input->post('detail');		
+			$gen_glid=$this->mutasi_kas->get_glid();		
+			$count_detail = count($detail);			
+			$i=0;		
+			$jml=0;			
+			for($j=0; $j<$count_detail; $j++){		
+			$jml		= $jml +  $detail[$j]['jumlah'];				
+		}							if ($jml<=$jumlah_debet){		
+			$data_origin['cuid'] = get_userid();					
+			$data_origin['cdate'] = date('Y-m-d');					
+			$data_origin['glid'] =$this->mutasi_kas->get_glid();		
+			$data_origin['akunid'] = $kd_kas_debet;								
+			$data_origin['debet'] = $jml;					
+			$data_origin['tanggal']  = date('Y-m-d');					
+			$this->mutasi_kas->insert_detail($data_origin);												
+			$data_origin_J['GLID']= $this->mutasi_kas->get_glid_jurnal(); 
+			/*$this->fungsi->gen_glid_counter('/',$gen_glid,$i);*/
+			$data_origin_J['CUID'] = get_userid();						
+			$data_origin_J['CDATE'] = date('Y-m-d');						
+			/*$data_origin['glid'] =$this->mutasi_kas->get_glid();*/			
+			$data_origin_J['AKUNID'] = $kd_kas_debet;											
+			$data_origin_J['DEBET'] = $jml;						
+			$this->mutasi_kas->insert_detail_J($data_origin_J);												
+			$data_['cuid'] = get_userid();												
+			$data_['cdate'] = date('Y-m-d');						
+			$data_['glid'] =$this->mutasi_kas->get_glid();												
+			$data_J['CUID'] = get_userid();												
+			$data_J['CDATE'] = date('Y-m-d');						
+			$data_J['GLID'] =$this->mutasi_kas->get_glid_jurnal(); 
+			/*$this->fungsi->gen_glid_counter('/',$gen_glid,$i);*/										
+			$data_detail_J['CUID'] = get_userid();												
+			$data_detail_J['CDATE'] = date('Y-m-d');						
+			$data_detail_J['GLID'] =$this->mutasi_kas->get_glid_jurnal();						
+			$total_penjumlahan = 0;						
+			$data_['tanggal']  = date('Y-m-d');						
+			for($i=0; $i<$count_detail; $i++)												
+			{							
+				$data_['akunid'] 		= $detail[$i]['akunid'];							
+				$data_['kredit'] 		= $detail[$i]['jumlah'];														
+				$data_detail_J['akunid'] 		= $detail[$i]['akunid'];							
+				$data_detail_J['kredit'] 		= $detail[$i]['jumlah'];							
+				$total_penjumlahan		= $total_penjumlahan + $detail[$i]['jumlah'];														
+				/*$total_penjumlahan = 2;*/					
+				$this->mutasi_kas->insert_detail($data_);							
+				$this->mutasi_kas->insert_detail_J($data_detail_J);						
+			}																					
+			$this->db->flush_cache();							
+			$data['cuid'] = get_userid();							
+			$data['cdate'] = date('Y-m-d');							
+			$data['tanggal'] = date('Y-m-d');							
+			$data['glid']=$data_['glid'];							
+			$data['jumlah']=$total_penjumlahan;														
+			$data_J['CUID'] = get_userid();							
+			$data_J['CDATE'] = date('Y-m-d');							
+			$data_J['TANGGAL'] = date('Y-m-d');							
+			$data_J['GLID_PARENT']=$data_['glid'];							
+			$data_J['GLID']=$this->mutasi_kas->get_glid_jurnal(); 
+			/*$this->fungsi->gen_glid_counter('/',$gen_glid,$i);;*/																
+			$this->mutasi_kas->insert($data);						
+			$this->mutasi_kas->insert_J($data_J);												
+			$this->session->set_flashdata('message', 'Data Mutasi Kas Berhasil Disimpan.');						
+			redirect('mutasi_kas/index');				
+		}else{					
+			$this->session->set_flashdata('message', 'Kas tidak mencukupi');					
+			$this->load->view('mutasi_kas/mutasi_kas_add');				
+		}					
 	}				$this->close();	}		function get_form_data(){				
-	$data['txtBookName'] = $this->input->post('txtBookName');		
-	$data['authorName'] = $this->input->post('authorName');		
-	echo $data['txtBookName'].'<br/><br/>';		$i=0;		
+		$data['txtBookName'] = $this->input->post('txtBookName');		
+		$data['authorName'] = $this->input->post('authorName');		
+		echo $data['txtBookName'].'<br/><br/>';		$i=0;		
 		foreach ($data['authorName'] as $rows_author){			
-		echo $i . '-' .$rows_author . '<br/>';			$i++;		
+			echo $i . '-' .$rows_author . '<br/>';			$i++;		
 		}	
-	}		
+	}
+
+
 	function show_akun(){		
-	$data['result'] = $this->mutasi_kas->get_master_akun();		
-	$this->load->view('mutasi_kas/list_akun.php', $data);	
+		$data['result'] = $this->mutasi_kas->get_master_akun();		
+		$this->load->view('mutasi_kas/list_akun.php', $data);	
 	}		
+
+
 	function get_kas(){			
 		$akunid=$this->uri->segment(3); 		
 		$data_kas = $this->mutasi_kas->get_total_tiap_akun($akunid,false);		

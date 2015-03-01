@@ -22,8 +22,8 @@ class golongan extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/golongan/index/';
-		$config['total_rows'] = $this->db->count_all('golongan');
-		$config['per_page'] = '20';
+		$config['total_rows'] = $this->golongan->getallItem('golongan');
+		$config['per_page'] = '10';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';
 		
@@ -74,9 +74,7 @@ class golongan extends My_Controller
 		$this->open();
 		
 		$data['id_golongan'] = $this->input->post('id_golongan');
-		$data['golongan'] = $this->input->post('golongan');
-		$data['userid'] = get_userid();
-		
+		$data['golongan'] = $this->input->post('golongan');		
 		
 		
 		$this->form_validation->set_rules('golongan', 'golongan', 'callback_cek_nama|required');
@@ -131,11 +129,10 @@ class golongan extends My_Controller
 		
 		$this->open();
 		
-		$data['result'] 		= $this->golongan->getItemById($id);
-		
+		$data['result'] = $this->golongan->getItemById($id);
 		$data['id_golongan'] = $id;
 		$data['golongan'] = $data['result']->row()->golongan;
-		
+		$data['jenis'] = $data['result']->row()->jenis;
 		
 		$this->load->view('golongan/golongan_edit', $data);
 		
@@ -152,12 +149,10 @@ class golongan extends My_Controller
 		
 		
 		$data['id_golongan'] = $this->input->post('id_golongan');
-		$data['golongan'] = $this->input->post('golongan');
-		$data['userid'] = get_userid();
+		$data['golongan'] = $this->input->post('golongan');	
+		$data['jenis'] = $this->input->post('jenis');	
 		
-		
-		
-		$this->form_validation->set_rules('golongan', 'golongan', 'callback_cek_nama|required');
+		$this->form_validation->set_rules('golongan', 'golongan', 'required');
 		
 		
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');

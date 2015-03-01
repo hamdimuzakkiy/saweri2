@@ -18,6 +18,16 @@ class mdl_karyawan extends CI_Model{
 		$this->db->limit($num, $offset);
 		return $this->db->get();
 	}
+
+	function countallItem()
+	{
+		$this->db->flush_cache();
+		$this->db->select('karyawan.*, cabang.nama_cabang, users.username, users.password, users.level_id');
+		$this->db->from('karyawan');
+		$this->db->join('cabang', 'cabang.id_cabang = karyawan.id_cabang');
+		$this->db->join('users','users.userid = karyawan.userid');
+		return $this->db->count_all_results();
+	}
 	
 	function getItemById($id)
 	{
