@@ -180,7 +180,7 @@
 						<span class="relative">
 								<input type="text" size="35" name="detail_namabarang" id="detail_namabarang" />
 								<a id="getbarang" href="<?=base_url().'index.php/pembelian/show_barang'?>"><img src="<?=base_url()?>asset/admin/images/icons/fugue/application-export.png" width="16" height="16"></a>
-								<input type="hidden" name="detail_idbarang" id="detail_idbarang" />
+								<input type="hidden" name="detail_idbarang" id="detail_idbarang" /> <input type="hidden" name="detail_idjenis" id="detail_idjenis" />
 						</span>
 					</p>
 					<p class="colx3-center">
@@ -253,13 +253,17 @@
 								<tbody id="detail">
 									<?php
 										$this->db->flush_cache();
-										$this->db->select('detail_pembelian.*, barang.*,sum(detail_pembelian.qty) as qty');
+										//$this->db->select('detail_pembelian.*, barang.*,sum(detail_pembelian.qty) as qty');
+										$this->db->select('detail_pembelian.*, barang.*,detail_pembelian.sn as sn');
 										$this->db->from('detail_pembelian');
 										$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
-										$this->db->where('id_pembelian', $id_pembelian);																				$this->db->group_by('barang.id_barang');
-										$this->db->order_by('id_detail_pembelian', 'ASC');
+										$this->db->where('id_pembelian', $id_pembelian);																				
+										//$this->db->group_by('barang.id_barang');
+										$this->db->order_by('id_detail_pembelian', 'ASC');										
 										$q = $this->db->get();
 										
+										//print $this->db->last_query();
+
 										$i=0;
 										foreach($q->result() as $row){
 											echo '
@@ -269,6 +273,7 @@
 															'.$row->nama_barang.'
 															<input type="hidden" name="detail['.$i.'][nama_barang]" value="'.$row->nama_barang.'" />
 															<input type="hidden" name="detail['.$i.'][id_barang]" value="'.$row->id_barang.'" />
+															<input type="hidden" name="detail['.$i.'][id_jenis]" value="'.$row->id_jenis.'" />
 														</td>
 														<td>
 															'.convert_rupiah($row->harga).'
@@ -289,6 +294,7 @@
 														</td>
 														<td>
 															<input class="tblInput" type="text" name="detail['.$i.'][sn]" value="'.$row->sn.'" />
+
 														</td>
 														<td>
 															'.$row->qty.'
@@ -302,6 +308,7 @@
 															<a href="Javascript:remove_detail('.$i.')">Batal</a>
 														</td>
 													</tr>';
+													
 											$i++;
 										}
 										

@@ -121,7 +121,9 @@
 	{
 		$data['detail_idbarang'] 		= $_POST['detail_idbarang'];
 		$data['detail_namabarang'] 		= $_POST['detail_namabarang'];
-		$data['detail_harga']	 		= $_POST['detail_harga'];				$data['detail_idjenis']	 		= $_POST['detail_idjenis'];
+		$data['detail_harga']	 		= $_POST['detail_harga'];				
+		$data['detail_idjenis']	 		= $_POST['detail_idjenis'];
+
 		$data['detail_harga_toko'] 		= $_POST['detail_harga_toko'];
 		$data['detail_harga_partai'] 	= $_POST['detail_harga_partai'];
 		$data['detail_harga_cabang'] 	= $_POST['detail_harga_cabang'];
@@ -146,7 +148,8 @@
 							<td>
 								'.$detail[$i]['nama_barang'].'
 								<input type="hidden" name="detail['.$i.'][nama_barang]" value="'.$detail[$i]['nama_barang'].'" />
-								<input type="hidden" name="detail['.$i.'][id_barang]" id="detail_idbarang'.$i.'" value="'.$detail[$i]['id_barang'].'" />								<input type="hidden" name="detail['.$i.'][id_jenis]" id="detail_idjenis'.$i.'" value="'.$detail[$i]['id_jenis'].'" />
+								<input type="hidden" name="detail['.$i.'][id_barang]" id="detail_idbarang'.$i.'" value="'.$detail[$i]['id_barang'].'" />								
+								<input type="hidden" name="detail['.$i.'][id_jenis]" id="detail_idjenis'.$i.'" value="'.$detail[$i]['id_jenis'].'" />
 							</td>
 							<td>
 								'.convert_rupiah($detail[$i]['harga']).'

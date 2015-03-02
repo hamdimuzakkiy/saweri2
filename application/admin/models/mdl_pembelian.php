@@ -69,7 +69,7 @@ class mdl_pembelian extends CI_Model{
 	function get_detail($id_request)
 	{
 		$this->db->flush_cache();
-		$this->db->select('detail_pembelian.*, barang.*');
+		$this->db->select('detail_pembelian.*, barang.*,detail_pembelian.sn as sn');
 		$this->db->from('detail_pembelian');
 		$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
 		$this->db->where('id_pembelian', $id_request);
