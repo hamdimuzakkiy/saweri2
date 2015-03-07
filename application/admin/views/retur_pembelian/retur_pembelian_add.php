@@ -92,7 +92,7 @@
 									{
 										foreach($query->result() as $row)
 										{
-											echo '<option value="'.$row->po_no.'">'.$row->po_no.'</option>';
+											echo '<option value="'.$row->id_pembelian.'">'.$row->po_no.'</option>';
 										}
 									}
 								?>

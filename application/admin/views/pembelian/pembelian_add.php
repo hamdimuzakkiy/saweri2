@@ -119,7 +119,7 @@
 					<p class="colx3-left">
 						<label for="complex-en-url">PO No :</label>
 						<span class="relative">							
-							<input type="text" name="po_no" id="po_no" value="<?=$this->pembelian->get_po($kode_transaksi)?>">
+							<input type="text" name="po_no" id="po_no" value="<?=$this->pembelian->get_po($kode_transaksi)?>">							
 						</span>
 					</p>
 					<p class="colx3-center">

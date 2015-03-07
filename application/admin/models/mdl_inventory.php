@@ -9,7 +9,23 @@ class mdl_inventory extends CI_Model{
 	
 	function getItem($num=0, $offset=0)
 	{
+
 		$query = 'SELECT sum(detail_pembelian.qty) AS qty, barang.nama_barang, barang.id_barang, jenis.jenis, kategori.kategori, supplier.nama FROM (`pembelian`) 
+					JOIN `supplier` ON `supplier`.`id_supplier` = `pembelian`.`id_supplier` 
+					JOIN `detail_pembelian` ON `detail_pembelian`.`id_pembelian` = `pembelian`.`id_pembelian` 
+					JOIN `barang` ON `barang`.`id_barang` = `detail_pembelian`.`id_barang` 
+					JOIN `jenis` ON `jenis`.`id_jenis` = `barang`.`id_jenis` 
+					JOIN `kategori` ON `kategori`.`id_kategori` = `barang`.`id_kategori` 
+					group by barang.id_barang, barang.nama_barang, jenis.jenis, kategori.kategori, supplier.nama limit '.$num.' ';
+	
+		$this->db->flush_cache();
+		return $this->db->query($query);		
+	}
+
+	function count_getItem()
+	{
+
+		$query = 'SELECT sum(detail_pembelian.qty) AS qty, barang.nama_barang, barang.id_barang, jenis.jenis, kategori.kategori, supplier.nama FROM (`pembelian`)
 					JOIN `supplier` ON `supplier`.`id_supplier` = `pembelian`.`id_supplier` 
 					JOIN `detail_pembelian` ON `detail_pembelian`.`id_pembelian` = `pembelian`.`id_pembelian` 
 					JOIN `barang` ON `barang`.`id_barang` = `detail_pembelian`.`id_barang` 
@@ -18,10 +34,27 @@ class mdl_inventory extends CI_Model{
 					group by barang.id_barang, barang.nama_barang, jenis.jenis, kategori.kategori, supplier.nama ';
 	
 		$this->db->flush_cache();
-		return $this->db->query($query);
+		return sizeof($this->db->query($query)->result());		
 	}
 	
 	function getItem_cabang($num=0, $offset=0)
+	{
+		$query = 'SELECT sum(detail_pembelian.qty) AS qty, barang.nama_barang, barang.id_barang, jenis.jenis, kategori.kategori, cabang.nama_cabang, supplier.nama FROM (`pembelian`) 
+					JOIN `supplier` ON `supplier`.`id_supplier` = `pembelian`.`id_supplier` 
+					JOIN `detail_pembelian` ON `detail_pembelian`.`id_pembelian` = `pembelian`.`id_pembelian` 
+					JOIN `barang` ON `barang`.`id_barang` = `detail_pembelian`.`id_barang` 
+					JOIN `jenis` ON `jenis`.`id_jenis` = `barang`.`id_jenis` 
+					JOIN `cabang` ON `cabang`.`id_cabang` = `pembelian`.`id_cabang` 
+					JOIN `kategori` ON `kategori`.`id_kategori` = `barang`.`id_kategori` 
+					where pembelian.id_cabang =  '.get_idcabang().'
+					group by barang.id_barang, barang.nama_barang, jenis.jenis, kategori.kategori, supplier.nama, cabang.nama_cabang limit '.$num.' ';
+	
+		
+		$this->db->flush_cache();
+		return $this->db->query($query);
+	}
+
+	function count_getItem_cabang($num=0, $offset=0)
 	{
 		$query = 'SELECT sum(detail_pembelian.qty) AS qty, barang.nama_barang, barang.id_barang, jenis.jenis, kategori.kategori, cabang.nama_cabang, supplier.nama FROM (`pembelian`) 
 					JOIN `supplier` ON `supplier`.`id_supplier` = `pembelian`.`id_supplier` 
@@ -35,7 +68,7 @@ class mdl_inventory extends CI_Model{
 	
 		
 		$this->db->flush_cache();
-		return $this->db->query($query);
+		return sizeof($this->db->query($query)->result());		
 	}
 	
 	function getItempenjualan($id_barang)

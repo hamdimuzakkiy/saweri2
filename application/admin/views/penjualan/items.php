@@ -34,7 +34,7 @@
 			$harga = $row->harga_partai;
 		}
 		
-		echo 	'
+		echo 	/*'
 					<tr class="penjualantemp">
 						<td>'.($i + 1).'</td>
 							<input name="items['.$i.'][id_barang]" value="'.$row->id_barang.'" type="hidden"  />
@@ -42,10 +42,27 @@
 							<input name="items['.$i.'][sn]" value="'.$row->sn.'" type="hidden"  />														
 						<td><input name="items['.$i.'][id_detail_pembelian]" value="'.$row->id_detail_pembelian.'" type="checkbox" /></td>
 						<td>'.$row->nama_barang.'</td>
-						<td><input name="items['.$i.'][harga]" value="'.$harga.'" type="text" '.$readonly.' /></td>												<td>'.$row->qty.'</td>												<td><input name="items['.$i.'][qty]" value="'.$row->qty.'" type="text" /></td>
+						<td><input name="items['.$i.'][harga]" value="'.$harga.'" type="text" '.$readonly.' /></td>												
+						<td>'.$row->qty.'</td>
+						<td><input name="items['.$i.'][qty]" value="'.$row->qty.'" type="text" /></td>
 						<td>'.$row->sn.'</td>
 					</tr>
-				';
+				'*/
+				'
+					<tr class="penjualantemp">
+						<td>'.($i + 1).'</td>
+							<input name="items['.$i.'][id_barang]" value="'.$row->id_barang.'" type="hidden"  />
+							<input name="items['.$i.'][nama_barang]" value="'.$row->nama_barang.'" type="hidden"  />
+							<input name="items['.$i.'][sn]" value="'.$row->sn.'" type="hidden"  />														
+						<td><input name="items['.$i.'][id_detail_pembelian]" value="'.$row->id_detail_pembelian.'" type="checkbox" /></td>
+						<td>'.$row->nama_barang.'</td>
+						<td><input style = "width:100%;" name="items['.$i.'][harga]" value="'.$harga.'" type="text" '.$readonly.' /></td>												
+						<td>1</td>
+						<td><input style = "width:100%;" readonly name="items['.$i.'][qty]" value="1" type="text" /></td>
+						<td>'.$row->sn.'</td>
+					</tr>
+				'
+				;
 		$i++;
 	}
 	

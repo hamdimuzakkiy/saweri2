@@ -26,7 +26,7 @@ class inventory_pusat extends My_Controller
 		
 		
 		$config['base_url'] = base_url().'index.php/inventory_pusat/index/';
-		$config['total_rows'] = $this->db->count_all('barang');
+		$config['total_rows'] = $this->inventory->count_getItem();
 		$config['per_page'] = '20';
 		$config['num_links'] = '5';
 		$config['uri_segment'] = '3';

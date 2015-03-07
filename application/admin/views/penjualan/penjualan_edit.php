@@ -110,7 +110,7 @@
 				</div>
 				<div class="columns">
 					<p class="colx2-left">
-						<label for="complex-en-url">Pelanggan :</label>
+						<label for="complex-en-url">Pelanggan : <?php print $result->row()->id_pelanggan;?> </label>
 						<span class="relative">
 							<select name="id_pelanggan" id="id_pelanggan" >
 								<?php

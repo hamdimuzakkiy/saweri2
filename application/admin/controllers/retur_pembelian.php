@@ -97,7 +97,7 @@ class retur_pembelian extends My_Controller
 			# insert return pembelian
 			$detail = $data['detail'];
 			$count_detail = count($detail);
-		
+			
 			for($i=0; $i<$count_detail; $i++)
 			{
 				if(isset($detail[$i]['id_barang'])){
@@ -199,10 +199,12 @@ class retur_pembelian extends My_Controller
 	function get_barang_by_po($po){
 		# ambil id pembelian berdasarkan no po di tabel pembelian
 		$this->db->flush_cache();
-		$this->db->from('pembelian');
-		$this->db->where('po_no', $po);
+		$this->db->from('pembelian');		
+		$this->db->where('id_pembelian', $po);
 		$que1 = $this->db->get();
-		
+
+
+
 		if($que1->num_rows() > 0){
 			$id_pembelian = $que1->row()->id_pembelian;
 			
@@ -215,12 +217,41 @@ class retur_pembelian extends My_Controller
 			// $que2 = $this->db->get();
 			
 			$this->db->flush_cache();
-			$this->db->select('*, supplier.nama AS nama_supplier');
+			$this->db->select('id_retur_pembelian');
+			$this->db->from('terima_barang_retur');
+			$no1 = $this->db->get();
+			$arr1 = array();
+			$jum = 0;
+			if($no1->num_rows() > 0){
+				foreach ($no1->result() as $no11) {
+					$arr1[$jum] = $no11->id_retur_pembelian;
+					$jum++;
+				}
+			}
+
+			$this->db->flush_cache();
+			$this->db->select('id_detail_pembelian');
+			$this->db->from('retur_pembelian');
+			$this->db->where_not_in('id_retur_pembelian', $arr1);
+			$no1 = $this->db->get();
+			$arr2 = array();
+			$jum = 0;
+			if($no1->num_rows() > 0){
+				foreach ($no1->result() as $no11) {
+					$arr2[$jum] = $no11->id_detail_pembelian;
+					$jum++;
+				}
+			}			
+
+			$this->db->flush_cache();
+			$this->db->select('*, supplier.nama AS nama_supplier,detail_pembelian.sn as sn');
 			$this->db->from('pembelian');
 			$this->db->join('detail_pembelian', 'detail_pembelian.id_pembelian = pembelian.id_pembelian');
 			$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
 			$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');
-			$this->db->where('pembelian.id_pembelian', $id_pembelian);			
+			$this->db->where('pembelian.id_pembelian', $id_pembelian);
+			$this->db->where_not_in('detail_pembelian.id_detail_pembelian', $arr2);
+			//$this->db->join_left('pembelian.id_pembelian', $id_pembelian);
 			$que2 = $this->db->get();
 			
 			if($que2->num_rows() > 0){

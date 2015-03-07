@@ -16,6 +16,9 @@ class mdl_pembelian extends CI_Model{
 		$this->db->join('cabang', 'cabang.id_cabang = pembelian.id_cabang');		
 		$this->db->where('cabang.id_cabang', $this->session->userdata('idcabang'));		$this->db->where('pembelian.posting', '0');
 		$this->db->limit($num, $offset);
+
+		//print $this->db->last_query();
+
 		return $this->db->get();
 	}
 
@@ -95,15 +98,19 @@ class mdl_pembelian extends CI_Model{
 		
 		$this->db->flush_cache();
 		$this->db->from('pembelian');
-		$this->db->like('po_no', $kd_awal . '-'.$kode_cabang.$code_user.$tanggal, 'after');
+		//$this->db->like('po_no', $kd_awal . '-'.$kode_cabang.$code_user.$tanggal, 'after');
+		$this->db->like('po_no', $kd_awal . '-'.$kode_cabang.$tanggal, 'after');
 		$query = $this->db->get();
 		
+		//print $this->db->last_query();
+
 		$no_po = $query->num_rows();
 		$no_po = (int) $no_po + 1;
 		$no_po = str_pad($no_po, 4, '0', STR_PAD_LEFT);
 		
 		/*return $kd_awal . '-'.$kode_cabang.$code_user.$tanggal.$no_po; */
 		return $kd_awal . '-'.$kode_cabang.$tanggal.$no_po; 
+		//return $no_po; 
 		
 		
 	}

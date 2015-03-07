@@ -101,7 +101,7 @@
 		var result_checked;
 		if (document.getElementById('cabang').checked==true){
 			result_checked =  'http://localhost/saweri/index.php/penjualan/get_cabang/cabang';
-		}else{
+		}else{						
 			result_checked =  'http://localhost/saweri/index.php/penjualan/get_cabang/pelanggan';
 		}
 		//alert(result_checked);
@@ -258,12 +258,11 @@
 				</div>
 				<div class="columns">
 					<p class="colx2-left">	
-						<label for="complex-en-url">Jenis Pembeli :</label>
-						<input type="radio" name="pil_penjualan" value="cabang" id="cabang" onchange='handleChange(this)';>Cabang &nbsp; &nbsp; &nbsp; 
+						<!--label for="complex-en-url">Jenis Pembeli :</label-->
+						<input type="radio" name="pil_penjualan" value="cabang" id="cabang" onchange='handleChange(this)';>Cabang &nbsp; &nbsp; &nbsp;
 						<input type="radio" name="pil_penjualan" value="pelanggan" id="pelanggan" onchange='handleChange(this)'; >Pelanggan<br/><br/>						
-						<span class="relative">
-						
-							<select name="id_pelanggan" id="id_pelanggan">
+						<span class="relative" id="id_pelanggan">
+							<!--select name="id_pelanggan" >
 								
 								<?php
 									
@@ -271,7 +270,7 @@
 				
 								
 								?>
-							</select>
+							</select-->
 							<?=form_error('id_pelanggan')?>
 						</span>
 					</p>	
