@@ -415,16 +415,16 @@
 							<thead>
 								<tr>
 									<th scope="col"></th>
-									<th scope="col" width="18px"></th>
-									<th scope="col">Nama Barang</th>
-									<th scope="col">Harga</th>
+									<th scope="col">NAMA BARANG</th>
+									<th scope="col">SATUAN</th>
 									<th scope="col">Qty</th>
-									<th scope="col">Jumlah</th>
+									<th scope="col">HARGA JUAL</th>
+									<th scope="col">DISKON</th>
+									<th scope="col">RUPIAH</th>
 									<th scope="col">SN</th>
 								</tr>
 							</thead>
 							<tbody id="items" >
-								
 							</tbody>
 						</table>
 						<br>
@@ -435,23 +435,21 @@
 						</div>
 						
 						<table class="table" border="1" cellspacing="0" width="100%">
-						
 							<thead>
 								<tr>
-									<th scope="col">No</th>
-									<th scope="col">Nama Barang</th>
-									<th scope="col">Harga</th>
+									<th scope="col"></th>
+									<th scope="col">NAMA BARANG</th>
+									<th scope="col">SATUAN</th>
 									<th scope="col">Qty</th>
-									<th scope="col">SN</th>
-									<th scope="col">Total</th>								
-									<th scope="col">Batal</th>								
+									<th scope="col">HARGA JUAL</th>
+									<th scope="col">DISKON</th>
+									<th scope="col">RUPIAH</th>
+									<th scope="col">SN</th>							
 								</tr>
 							</thead>
-							
-							<tbody id="detail">
-								
+
+							<tbody id="detail">						
 							</tbody>
-							
 						</table>
 						<br/>
 			</fieldset>
