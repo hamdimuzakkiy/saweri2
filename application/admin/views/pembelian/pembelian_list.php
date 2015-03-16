@@ -4,8 +4,27 @@
 	$(document).ready(function() {
 		$(".view").fancybox();
 	});
+
+
+
+	function laporan(id){
+			
+			var w = 1000;
+			
+			var h = 800;
+			var title = 'name';
+			var left = (screen.width/2)-(w/2);
+			var top = (screen.height/2)-(h/2);
+
+			window.open ('<?=site_url();?>/pembelian/view_lap_pembelian/'+id, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+		}
 	
 </script>
+<style type="text/css">
+	#mouse{
+		cursor: pointer;
+	}
+</style>
 
 <section class="grid_12">
 	<div class="block-border">
@@ -50,6 +69,13 @@
 						<td align="left" valign="top"><?=$row->tanggal?> </td>
 						<td align="left" valign="top" class="table-actions">
 							<?php
+
+								if ($can_view == TRUE){
+									//echo anchor('request_order/view/'.$row->id_pembelian, '<img src="'.base_url().'asset/admin/images/icons/fugue/application-blog.png" width="16" height="16">', array('class'=>'with-tip view'));
+									echo '<span id = "mouse"><img  onclick="laporan('.$row->id_pembelian.')" src="'.base_url().'asset/admin/images/icons/fugue/application-blog.png" width="16" height="16"></span>';
+									
+								}
+
 								if ($can_update == TRUE){
 									echo anchor('pembelian/update/'.$row->id_pembelian, '<img src="'.base_url().'asset/admin/images/icons/fugue/pencil.png" width="16" height="16">', array('class'=>'with-tip', 'title'=>'Edit'));
 								}
@@ -89,3 +115,4 @@
 		</form>
 	</div>
 </section>
+

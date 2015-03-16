@@ -10,6 +10,8 @@ class pembelian extends My_Controller
 		$this->load->model('mdl_pembelian', 'pembelian');				
 		$this->load->model('mdl_kode_trans', 'kode_trans');				
 		$this->load->model('mdl_hutang', 'hutang');		
+		$this->load->library('fungsi');
+		$this->load->library('pdf');
 	}
 	
 	function index()
@@ -78,12 +80,29 @@ class pembelian extends My_Controller
 		$data['tanggal'] = $this->input->post('tanggal');				
 		$data['cara_bayar'] = $this->input->post('cara_bayar');		
 		$data['glid'] = $this->input->post('glid');		
+
+		$sums = $this->input->post('sum');		
 		$data['result_trans']=$this->kode_trans->get_kd_awal('pembelian');		
 		$data['kode_transaksi']=$data['result_trans']->row()->kd_trans;
 
+
 		$data['id_coa'] = '5';
 		$data['userid'] = get_userid();		$data['glid'] 	= $this->hutang->get_glid();
+		$data['kas'] = $this->input->post('kas');
 		
+
+		$data['jatuh_tempo'] = $this->input->post('pembelian_jatuh_tempo');
+		$data['nama_atm'] = $this->input->post('nama_atm');
+		$data['nomor_atm'] = $this->input->post('nomor_atm');
+
+
+		if ($data['cara_bayar'] == 2 && $data['jatuh_tempo'] == '')
+		{
+			$this->session->set_flashdata('message', 'Field Jatuh Tempo harus diisi!'); 					
+			redirect('pembelian/insert');				
+		}
+		
+
 		
 
 		$this->form_validation->set_rules('po_no', 'po_no', 'required');
@@ -93,11 +112,31 @@ class pembelian extends My_Controller
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		
 		$this->form_validation->set_message('required', 'Field %s harus diisi!');
-		
+			
+
+
 		if ($this->form_validation->run() == FALSE){			
-		$data['total_kas'] = $this->pembelian->get_total_kas();			
+		$data['total_kas'] = $this->pembelian->get_total_kas();
 		$this->load->view('pembelian/pembelian_add',$data);		
-		}else{			
+		}
+		//else if ()
+		else{			
+
+			$get_kas_v2 = $this->pembelian->get_total_kas_v2($data['kas']);
+
+			foreach ($get_kas_v2->result() as $row) {
+				$cur_saldo =  $row->saldo;
+
+			}
+				
+
+			if ($cur_saldo < $sums*(100-$data['diskon'])/100)
+			{
+				
+				$this->session->set_flashdata('message', 'Saldo Tidak Mencukupi!');
+					redirect('pembelian/insert');				
+			}
+
 			$pembelian['id_pembelian'] 	= $data['id_pembelian'];			
 			$pembelian['po_no'] 		= $data['po_no'];			
 			$pembelian['id_supplier'] 	= $data['id_supplier'];
@@ -106,17 +145,22 @@ class pembelian extends My_Controller
 			$pembelian['diskon'] 		= $data['diskon'];
 			$pembelian['id_coa'] 		= $data['id_coa'];
 			$pembelian['userid'] 		= $data['userid'];			
-			$pembelian['cara_bayar'] 	= $data['cara_bayar'];						
+			$pembelian['cara_bayar'] 	= $data['cara_bayar'];
+			$pembelian['kode_kas'] 	= $data['kas'];								
+			$pembelian['jatuh_tempo'] 	= $data['jatuh_tempo'];								
+			$pembelian['nama_atm'] 	= $data['nama_atm'];								
+			$pembelian['nomor_atm'] 	= $data['nomor_atm'];								
 			$cara_bayar=$data['cara_bayar'];
 			
 			
 			$detail			= $this->input->post('detail');
-					
+			
 			$count_detail = count($detail);
 			$i=0;
 						$total_penjumlahan = 0;
 			for($i=0; $i<$count_detail; $i++)			
-			{				$a = $detail[$i]['id_barang'];				
+			{
+							$a = $detail[$i]['id_barang'];				
 				$query = "SELECT id_kategori FROM barang where id_barang = '". $a ."'";				
 				$result = mysql_query($query);				
 				$hasil = mysql_fetch_array($result);												
@@ -125,11 +169,11 @@ class pembelian extends My_Controller
 					$this->session->set_flashdata('message', 'Field Serial Number harus diisi!'); 					
 					redirect('pembelian/insert');				
 				}				
-				else if (($data['cara_bayar'] == '2')&&($detail[$i]['jatuh_tempo']==''))				
+				/*else if (($data['cara_bayar'] == '2')&&($detail[$i]['jatuh_tempo']==''))				
 				{ 					
 					$this->session->set_flashdata('message', 'Field Jatuh Tempo harus diisi!'); 					
 					redirect('pembelian/insert');				
-				} 				
+				}*/			
 				else				
 				{					
 					$qty_pembelian = $detail[$i]['qty'];											
@@ -139,7 +183,7 @@ class pembelian extends My_Controller
 						$data_['id_barang'] 		= $detail[$i]['id_barang'];							
 						$data_['harga'] 			= $detail[$i]['harga'];							
 						/*$data_['qty'] 				= $detail[$i]['qty']; */							
-						$data_['qty'] 				= 1; 							
+						$data_['qty'] 				= 1;
 						$data_['sn'] 				= $detail[$i]['sn'];							
 						$data_['jatuh_tempo'] 		= $detail[$i]['jatuh_tempo'];							
 						$data_['total'] 			= $detail[$i]['total'];							
@@ -169,15 +213,23 @@ class pembelian extends My_Controller
 			$hutang['CDATE'] 		= date('Y-m-d'); 			
 			$hutang['MUID'] 		= '';			
 			$hutang['MDATE'] 		= '';						
-			$pembelian['total'] 		= $total_penjumlahan;						
-			$data['total_kas'] = $this->pembelian->get_total_kas();			
+			$pembelian['total'] 		= $total_penjumlahan*(100-$data['diskon'])/100;
+			$data['total_kas'] = $this->pembelian->get_total_kas();
+
 			foreach($data['total_kas']->result() as $row)			
 			{				
-			if (($total_penjumlahan > $row->total_kas)&&($cara_bayar=='1'))				{
-			$this->session->set_flashdata('message', 'Uang di kas tidak mencukupi!!'); 						
-			redirect('pembelian/insert');				}			}			 						
-			$this->pembelian->insert($pembelian);			if ($cara_bayar=='2'){				
-			$this->hutang->insert($hutang);			
+			/*if (($total_penjumlahan > $row->total_kas)&&($cara_bayar=='1'))				
+			{
+				$this->session->set_flashdata('message', 'Uang di kas tidak mencukupi!!'); 						
+				redirect('pembelian/insert');				
+			}			*/
+		}			 		
+
+				$u_kas['saldo']	= $cur_saldo - $sums;
+				$this->pembelian->insert($pembelian);
+				$this->pembelian->update_kas($data['kas'],$u_kas);
+				if ($cara_bayar=='2'){
+				$this->hutang->insert($hutang);			
 			}									
 			if(get_kodecabang() == '001'){		
 				$x=0;
@@ -377,7 +429,7 @@ class pembelian extends My_Controller
 				$data_['sn'] 				= $detail[$i]['sn'];
 				$data_['jatuh_tempo'] 		= $detail[$i]['jatuh_tempo'];
 				$data_['total'] 			= $detail[$i]['total'];
-				$data['total_kas'] = $this->pembelian->get_total_kas();   				
+				$data['total_kas'] = $this->pembelian->get_total_kas(); 
 				foreach($data['total_kas']->result() as $row)				{ 				
 				$b = $pembelian['id_pembelian'];				
 				$query2 = "SELECT cara_bayar FROM pembelian where id_pembelian = '". $b ."'";				
@@ -432,5 +484,21 @@ class pembelian extends My_Controller
 		$this->load->view('pembelian/list_barang.php', $data);
 	}
 	
+	function view_lap_pembelian()
+	{
+		$id = $this->uri->segment('3');
+		$data['results'] = $this->pembelian->getItemById($id);
+		$data['results2'] = $this->pembelian->get_detail($id);
+		$this->load->view('pembelian/view_lap_pembelian', $data);
+	}
+
+	function report_pdf()
+	{
+		$id = $this->uri->segment('3');
+		$data['results'] = $this->pembelian->getItemById($id);
+		$data['results2'] = $this->pembelian->get_detail($id);
+		$html = $html=$this->load->view('pembelian/pdf_laporan_pembelian', $data, true);
+		$this->pdf->pdf_create($html, 'laporan_biaya','letter','landscape');
+	}
 	
 }

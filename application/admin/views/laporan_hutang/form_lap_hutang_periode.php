@@ -12,6 +12,7 @@
 	});
 
 	function laporan(pageURL, title,w,h){
+		
 		var periode_awal=document.getElementById('tanggal_awal').value;
 		var periode_akhir=document.getElementById('tanggal_akhir').value;
 		if ((periode_awal=='')||(periode_akhir=='')){

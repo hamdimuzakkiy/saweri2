@@ -3,7 +3,7 @@
 	include('convert_rupiah.php');
 	
 	# memasukan detail barang ke list detail di form add barang
-	function add_detail_3($jum) // pas add
+	function add_detail_3($jum,$diskon) // pas add
 	{
 		
 		$data['detail_idbarang'] 		= $_POST['detail_idbarang'];
@@ -17,16 +17,18 @@
 		$data['detail_total'] 			= $data['detail_harga']; //* $data['detail_qty'];
 		
 		$i=0;
-		
+		$sum = 0;
 		//print_r($detail);
 				
 		if (isset($_POST['detail']))
 		{
 			$detail = $_POST['detail'];
 			$count_detail = count($detail);
-		
+			$sum  = 0;
 			for($i=0; $i<$count_detail; $i++)
 			{
+
+				$sum = $sum + ($detail[$i]['harga'] * $detail[$i]['qty']);
 				echo '
 						<tr>
 							<td>'.($i + 1).'</td>
@@ -53,7 +55,12 @@
 								<input type="hidden" name="detail['.$i.'][harga_cabang]" value="'.$detail[$i]['harga_cabang'].'" />
 							</td>
 							<td>
-								<input class="tblInput" id="detail_sn'.$i.'" type="text" name="detail['.$i.'][sn]" value="'.$detail[$i]['sn'].'" />
+								'; if ($detail[$i]['issn'] == '0'){ echo'
+								<input hidden class="tblInput" id="detail_sn'.$i.'" type="text" name="detail['.$i.'][sn]" value="'.$detail[$i]['sn'].'" />
+								'; } if ($detail[$i]['issn'] == '1') {echo '
+								<input style = "width:100%;" required  class="tblInput" id="detail_sn'.$i.'" type="text" name="detail['.$i.'][sn]" value="'.$detail[$i]['sn'].'" />
+								';} print '
+								<input hidden class="tblInput" id="detail_issn'.$i.'" type="text" name="detail['.$i.'][issn]" value="'.$detail[$i]['issn'].'" />
 							</td>
 							<td>
 																' . $detail[$i]['qty'] . '
@@ -68,10 +75,12 @@
 							</td>
 						</tr>';
 			}
+			
 		}
 		
 		$xx=0;
 		for($xx=0; $xx < $jum; $xx++){ 
+			$sum = $sum + ($data['detail_harga'] * $data['detail_qty']);
 			echo '
 						<tr>
 							<td>'.($i + 1).'</td>
@@ -98,7 +107,8 @@
 								<input type="hidden" name="detail['.$i.'][harga_cabang]" value="'.$data['detail_harga_cabang'].'" />
 							</td>
 							<td>
-								<input type="text"  name="detail['.$i.'][sn]" id="detail_sn'.$i.'" value=""  />
+								<input style = "width:100%;" required type="text"  name="detail['.$i.'][sn]" id="detail_sn'.$i.'" value=""  />
+								<input type="hidden"  name="detail['.$i.'][issn]" id="detail_issn'.$i.'" value="1"  />
 							</td>
 							<td>
 								'.$data['detail_qty'].'
@@ -114,11 +124,54 @@
 						</tr>';
 			$i++;
 		} 
+		print "
+					<tr>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td>Total</td>
+						<td>".convert_rupiah($sum)."						
+						</td>
+						
+					</tr>
+
+					<tr>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td>Diskon</td>
+						<td id = 'harga_diskon'>".convert_rupiah($sum*$diskon/100)."
+						</td>
+						
+					</tr>
+					<tr>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td>Harga Akhir</td>
+						<td id = 'finall'>".convert_rupiah(($sum*(100-$diskon)/100))."
+						
+						</td>
+						<input type='hidden' id = 'sum' name='sum' value='".$sum."' />
+					</tr>";
 	}
 
 
-	function add_detail_1() // pas add
+	function add_detail_1($diskon) // pas add
 	{
+
 		$data['detail_idbarang'] 		= $_POST['detail_idbarang'];
 		$data['detail_namabarang'] 		= $_POST['detail_namabarang'];
 		$data['detail_harga']	 		= $_POST['detail_harga'];				
@@ -134,15 +187,18 @@
 		$i=0;
 		
 		//print_r($detail);
-				
+		$sum = 0;
 		if (isset($_POST['detail']))
 		{
 			$detail = $_POST['detail'];
 			$count_detail = count($detail);
-		
+			
 			for($i=0; $i<$count_detail; $i++)
-			{
+			{	
+				
+				$sum = $sum + ($detail[$i]['harga'] * $detail[$i]['qty']);
 				echo '
+
 						<tr>
 							<td>'.($i + 1).'</td>
 							<td>
@@ -169,7 +225,14 @@
 								<input type="hidden" name="detail['.$i.'][harga_cabang]" value="'.$detail[$i]['harga_cabang'].'" />
 							</td>
 							<td>
-								<input class="tblInput" id="detail_sn'.$i.'" type="text" name="detail['.$i.'][sn]" value="'.$detail[$i]['sn'].'" />
+								'
+									; if ($detail[$i]['issn'] == 0){ echo'
+									<input hidden class="tblInput" id="detail_sn'.$i.'" type="text" name="detail['.$i.'][sn]" value="'.$detail[$i]['sn'].'" />
+									'; } if ($detail[$i]['issn'] == 1) {echo '
+									<input style = "width:100%;" required class="tblInput" id="detail_sn'.$i.'" type="text" name="detail['.$i.'][sn]" value="'.$detail[$i]['sn'].'" />
+									';} print
+								'
+								<input hidden class="tblInput" id="detail_issn'.$i.'" type="text" name="detail['.$i.'][issn]" value="'.$detail[$i]['issn'].'" />
 							</td>
 							<td>
 																' . $detail[$i]['qty'] . '
@@ -184,10 +247,13 @@
 							</td>
 						</tr>';
 			}
+			//echo '<input type="text" name = "jumlah" id="jumlah">';
+
 		}
 		
 		$xx=0;
 		/*for($xx=0; $xx < $data['detail_qty']; $xx++){ */
+			$sum = $sum + ($data['detail_harga'] * $data['detail_qty']);
 			echo '
 						<tr>
 							<td>'.($i + 1).'</td>
@@ -214,7 +280,8 @@
 								<input type="hidden" name="detail['.$i.'][harga_cabang]" value="'.$data['detail_harga_cabang'].'" />
 							</td>
 							<td>
-								<input type="text"  name="detail['.$i.'][sn]" id="detail_sn'.$i.'" value=""  />
+								<input hidden type="text"  name="detail['.$i.'][sn]" id="detail_sn'.$i.'" value=""  />
+								<input type="hidden"  name="detail['.$i.'][issn]" id="detail_sn'.$i.'" value="0"  />
 							</td>
 							<td>
 								'.$data['detail_qty'].'
@@ -229,6 +296,49 @@
 							</td>
 						</tr>';
 			$i++;
+			print "
+					<tr>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td>Jumlah</td>
+						<td>".convert_rupiah($sum)."						
+						</td>
+						
+					</tr>
+
+					<tr>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td>Diskon</td>
+						<td id = 'harga_diskon'>".convert_rupiah($sum*$diskon/100)."
+						</td>
+						
+					</tr>
+					<tr>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> </td>
+						<td>Harga Akhir</td>
+						<td id = 'finall'>".convert_rupiah(($sum*(100-$diskon)/100))."
+						
+						</td>
+						<input type='hidden' id = 'sum' name='sum' value='".$sum."' />
+					</tr>
+					";
 		/*} */
 	}
 
@@ -264,7 +374,7 @@
 								<input type="hidden" name="detail['.$i.'][harga]" value="'.$detail[$i]['harga'].'" />
 							</td>
 							<td>
-								<input type="text" name="detail['.$i.'][sn]" id="detail_sn'.$i.'" value="'.$detail[$i]['sn'].'" />
+								<input style = "width:100%;"  type="text" name="detail['.$i.'][sn]" id="detail_sn'.$i.'" value="'.$detail[$i]['sn'].'" />
 							</td>
 							<td>
 								'.$detail[$i]['sn'].'
@@ -492,7 +602,7 @@
 	$command = $_GET['command'];	
 	if($command == 'add_1')
 	{
-		add_detail_1();
+		add_detail_1($_POST['diskon']);
 	
 	}else if($command == 'add_2')
 	{
@@ -509,7 +619,11 @@
 	}		else if($command == 'add_sn')	{		add_detail_sn();	}
 	else if($command == 'add_3')
 	{
-		add_detail_3($_POST['detail_qty']);
+		add_detail_3($_POST['detail_qty'],$_POST['diskon']);
 	}
-
+	else if ($command = 'convert')
+	{
+		//print convert_rupiah($_GET['sum']);
+		print convert_rupiah($_POST['sum']);
+	}
 ?>

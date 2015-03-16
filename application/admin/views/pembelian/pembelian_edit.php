@@ -29,8 +29,25 @@
 </script>
 
 <script type="text/javascript">
+	function hutang()
+	{
+		var cek = document.getElementById('cara_bayar').value;
+		if (cek =='2')	
+			document.getElementById('pembelian_jatuh_tempo').style.display = 'block';				
+		else 
+			document.getElementById('pembelian_jatuh_tempo').style.display = 'none';
+	}
 	
-	
+	function ATM()
+	{	
+		var cek = document.getElementById('cek_atm').checked;
+			
+		if (cek == true)
+			document.getElementById('atm').style.display = 'block';
+		else 
+			document.getElementById('atm').style.display = 'none';
+	}
+
 	$(document).ready(function() {
 		$("#getbarang").fancybox();
 	});
@@ -170,7 +187,65 @@
 							<input type="text" name="diskon" id="diskon" value="<?=$result->row()->diskon?>" />
 						</span>
 					</p>
+					<p class="colx3-center">
+						<label for="complex-en-url">ATM :</label>
+						<span class="relative">
+							<input type="checkbox" onclick="javascript:ATM();" id = "cek_atm"><br>
+						</span>
+					</p>
 				</div>
+				<div class="columns">												
+					<p class="colx3-left">						
+						<label for="complex-en-url">Cara Bayar :</label>						
+						<span class="relative">
+							<select name="cara_bayar" id="cara_bayar" onchange = "javascript:hutang();">								
+							<option value="1">Tunai</option>								
+							<option value="2">Hutang</option>							
+						</select>						
+					</span>			
+					<span style = "display:none;" id="pembelian_jatuh_tempo">
+					<label for="complex-en-url" >Jatuh Tempo :</label>
+						<span class="relative">							
+							<input type="text" name="pembelian_jatuh_tempo" value="<?=$result->row()->jatuh_tempo?>" /> 
+						</span>
+					</span>		
+				</p>				
+
+				<p class="colx3-center">						
+						<label for="complex-en-url">Kas :</label>						
+						<span class="relative">
+							<select name="kas" required>							
+							<?php
+
+								$this->db->flush_cache();
+								$query = $this->db->get('kas');
+								
+								foreach($query->result() as $row)
+								{
+
+									if ($row->kode == $result->row()->kode_kas)
+									echo '<option selected readonly value="'.$row->kode.'">'.$row->nama.'<span class="colx3-right">-</span>'.convert_rupiah($row->saldo).'</option>';
+										//else
+									//echo '<option value="'.$row->kode.'">'.$row->nama.'<span class="colx3-right">-</span>'.convert_rupiah($row->saldo).'</option>';
+
+								}
+
+							?>							
+						</select>						
+					</span>					
+				</p>																				
+					<p class="colx3-right" style = "display:none;" id = "atm">						
+						<label for="complex-en-url">Nama Pengguna</label>						
+						<span class="relative">							
+							<input type = "text" name = "nama_atm" value="<?=$result->row()->nama_atm?>">							
+						</span>					
+						<label for="complex-en-url">Nomor ATM</label>						
+						<span class="relative">							
+							<input type = "text" name = "nomor_atm" value="<?=$result->row()->nomor_atm?>"	>							
+						</span>					
+				</p>
+			</div>
+
 			</fieldset>
 			
 			<fieldset>

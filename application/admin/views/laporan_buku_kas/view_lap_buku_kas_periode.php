@@ -3,6 +3,7 @@
 
 <script type="text/javascript">
 	function report_pdf(){		      
+		
             var site = "<?php echo site_url()?>";
            /* $.ajax({
                 url: site+"/laporan_pembelian/index",

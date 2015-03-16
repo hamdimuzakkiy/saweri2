@@ -36,10 +36,11 @@ class mdl_pembelian extends CI_Model{
 	function getItemById($id)
 	{
 		$this->db->flush_cache();
-		$this->db->select('pembelian.*, supplier.id_supplier, supplier.kode_supplier, supplier.nama AS nama_supplier, cabang.id_cabang, cabang.nama_cabang');
+		$this->db->select('pembelian.*, supplier.id_supplier, supplier.kode_supplier, supplier.nama AS nama_supplier, cabang.id_cabang, cabang.nama_cabang,kas.nama as nama_kas');
 		$this->db->from('pembelian');
-		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');
+		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');		
 		$this->db->join('cabang', 'cabang.id_cabang = pembelian.id_cabang');
+		$this->db->join('kas', 'kas.kode = pembelian.kode_kas');
 		$this->db->where('pembelian.id_pembelian', $id);
 		return $this->db->get();
 	}
@@ -124,6 +125,23 @@ class mdl_pembelian extends CI_Model{
 		$this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori');
 		$this->db->where('barang.id_jenis <>', '3');
 		return $this->db->get();
-	}		function get_total_kas()	{		$this->db->flush_cache();		$this->db->select('Sum(detail_jurnal.DEBET)-Sum(detail_jurnal.KREDIT) as total_kas');		$this->db->from('detail_jurnal'); 		$this->db->like('akunid','1','after');		return $this->db->get();	}
-	
+	}		
+	function get_total_kas()	
+	{		$this->db->flush_cache();		
+		$this->db->select('Sum(detail_jurnal.DEBET)-Sum(detail_jurnal.KREDIT) as total_kas');		
+		$this->db->from('detail_jurnal'); 		$this->db->like('akunid','1','after');		return $this->db->get();	
+	}
+	function get_total_kas_v2($data)
+	{
+		
+		$this->db->where('kode', $data);
+		return $this->db->get('kas');
+	}
+
+	function update_kas($id, $data)
+	{
+		$this->db->flush_cache();
+		$this->db->where('kode', $id);
+		$this->db->update('kas', $data);
+	}
 }
