@@ -75,123 +75,101 @@ class penjualan extends My_Controller
 	
 	function insert()
 	{
-		if ($this->can_insert() == FALSE){
+		if ($this->can_insert() == FALSE)
+		{
 			redirect('auth/failed');
 		}
 		
 		$this->open();
-		
-		
+				
 		$data['id_penjualan'] = $this->input->post('id_penjualan');
 		$data['so_no'] = $this->input->post('so_no');
 		$data['id_pelanggan'] = $this->input->post('id_pelanggan');
 		$data['id_cabang'] = $this->input->post('id_cabang');
 		$data['id_jenis_penjualan'] = $this->input->post('id_jenis_penjualan');
 		$data['tanggal'] = $this->input->post('tanggal');
+		$data['alamat'] = $this->input->post('alamat');
+		$data['kas'] = $this->input->post('kas');
 		$data['cara_bayar'] = $this->input->post('cara_bayar');
 		$data['pil_penjualan'] = $this->input->post('pil_penjualan');
-		
-		$cara_bayar = $data['cara_bayar'];
-		
-		$data['result_trans']=$this->kode_trans->get_kd_awal('penjualan');
-		$data['kode_transaksi']=$data['result_trans']->row()->kd_trans;
-		
-		/*
-		$date = date_create($data['tanggal']);
-		date_add($date, date_interval_create_from_date_string($this->input->post('jatuh_tempo').' days'));
-		$data['jatuh_tempo'] = date_format($date, 'Y-m-d');
-		*/
 		$data['jatuh_tempo'] = $this->input->post('jatuh_tempo');
-		
-		$data['diskon'] = $this->input->post('diskon');
+
+		$cara_bayar = $data['cara_bayar'];
+		$data['result_trans'] = $this->kode_trans->get_kd_awal('penjualan');//?
+		$data['kode_transaksi'] = $data['result_trans']->row()->kd_trans;//?
+		//$data['diskon'] = $this->input->post('diskon');
+
 		$data['id_coa'] = '5';
 		$data['userid'] = get_userid();
 		$data['glid'] 	= $this->piutang->get_glid();
-		
-		
-		
+				
 		$this->form_validation->set_rules('so_no', 'so_no', 'required');
-		//$this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'required');
-		
-		/*$this->form_validation->set_rules('id_cabang', 'id_cabang', 'required'); */
-		
 		$this->form_validation->set_rules('tanggal', 'tanggal', 'required');
-		
-		/*$this->form_validation->set_rules('jatuh_tempo', 'jatuh_tempo', 'required');
-		$this->form_validation->set_rules('diskon', 'diskon', 'required');*/
-		
-		
-		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		
-		
-		$this->form_validation->set_message('required', 'Field harus diisi!');
-		
-		
-		if ($this->form_validation->run() == FALSE){			
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');			
+		$this->form_validation->set_message('required', 'Field harus diisi!');				
+		if ($this->form_validation->run() == FALSE)
+		{			
 			$this->load->view('penjualan/penjualan_add',$data);
 			
-		}else{	
+		}
+		else
+		{	
 									
- 			 $penjualan['id_penjualan'] 		= $data['id_penjualan']; 			 
-			 $penjualan['so_no'] 				= $data['so_no']; 			 
-			 $penjualan['id_cabang'] 			= $data['id_cabang'];
-			 $penjualan['id_jpenjualan'] 		= $data['id_jenis_penjualan'];			 
-			 $penjualan['tanggal'] 			= $data['tanggal'];			 
-			 $penjualan['jatuh_tempo'] 		= $data['jatuh_tempo'];			 
-			 $penjualan['diskon'] 				= $data['diskon'];
-			
-			$penjualan['id_coa'] 				= $data['id_coa'];
-			
-			$penjualan['userid'] 				= $data['userid'];
-			
-			$penjualan['cara_bayar'] 			= $data['cara_bayar'];
-			
+ 			$penjualan['id_penjualan'] 		= $data['id_penjualan']; 			 
+			$penjualan['so_no'] 			= $data['so_no'];
+			$penjualan['id_pelanggan'] 		= $data['id_pelanggan'];
+			$penjualan['id_cabang'] 		= $data['id_cabang'];
+			$penjualan['id_jpenjualan'] 	= $data['id_jenis_penjualan'];			 
+			$penjualan['tanggal'] 			= $data['tanggal'];
+			$penjualan['alamat']		 	= $data['alamat'];
+			$penjualan['kode_kas']			= $data['kas'];
+			$penjualan['cara_bayar'] 		= $data['cara_bayar'];
+			$penjualan['jatuh_tempo'] 		= $data['jatuh_tempo'];			 
+			//$penjualan['diskon'] 			= $data['diskon'];
+			$penjualan['id_coa'] 			= $data['id_coa'];
+			$penjualan['userid'] 			= $data['userid'];
 			
 			
 			$detail	= $this->input->post('detail');
-			
 			$count_detail = count($detail);
-
 			$i=0;
 			$total_penjumlahan = 0;
 			$total_penjumlahan2 = 0;
 			$saldo_sum_total = 0;
 			
-		if ($data['pil_penjualan']=='pelanggan'){		
-					for($i=0; $i<$count_detail; $i++)
-					{
-						$data__['total'] 				= $detail[$i]['total'];
-						$total_penjumlahan2				= $total_penjumlahan2 + $detail[$i]['total'];
-					}	
-				
-				
-				$data['result_sum_total']=$this->penjualan->get_total_penjualan_by_pelanggan($data['id_pelanggan']);
-				$data['result_pelanggan']=$this->pelanggan->getItemById($data['id_pelanggan']);
-				
-				foreach ($data['result_sum_total']->result() as $rows){
-					$saldo_sum_total=$rows->sum_total;
-				}
-				
-				/*$saldo_sum_total=$data['result_sum_total']->row()->sum_total;*/
-				$saldo_piutang=$data['result_pelanggan']->row()->saldo_piutang;
-				
-				$saldo_piutang_pelanggan = $saldo_sum_total + $total_penjumlahan2;
-				/*echo $saldo_piutang_pelanggan . '---' . $saldo_piutang;*/
-				
-				if ($saldo_piutang_pelanggan > $saldo_piutang){
-					$data['message'] = 'Pelanggan Melebihi Saldo Piutang';
-					$this->load->view('penjualan/penjualan_add',$data);
-
-				}else{							
+		if ($data['pil_penjualan']=='pelanggan')
+		{		
+			for($i=0; $i<$count_detail; $i++)
+			{
+				$data__['total']	 		= $detail[$i]['total'];
+				$total_penjumlahan2			= $total_penjumlahan2 + $detail[$i]['total'];
+			}	
 							
-							for($i=0; $i<$count_detail; $i++)
-							{
-								$qty_penjualan=$detail[$i]['qty'];
-								for ($j=0;$j<$qty_penjualan;$j++){
-									 
-									 $data_['id_penjualan'] 			= $penjualan['id_penjualan'];									 
-									
-									 $data_['id_barang'] 			= $detail[$i]['id_barang'];
+			$data['result_sum_total']=$this->penjualan->get_total_penjualan_by_pelanggan($data['id_pelanggan']);
+			$data['result_pelanggan']=$this->pelanggan->getItemById($data['id_pelanggan']);
+				
+			foreach ($data['result_sum_total']->result() as $rows)
+			{
+				$saldo_sum_total=$rows->sum_total;
+			}
+				
+			$saldo_piutang=$data['result_pelanggan']->row()->saldo_piutang;
+			$saldo_piutang_pelanggan = $saldo_sum_total + $total_penjumlahan2;
+							
+			if ($saldo_piutang_pelanggan > $saldo_piutang)
+			{
+				$data['message'] = 'Pelanggan Melebihi Saldo Piutang';
+				$this->load->view('penjualan/penjualan_add',$data);
+			}
+			else
+			{							
+				for($i=0; $i<$count_detail; $i++)
+				{
+					$qty_penjualan=$detail[$i]['qty'];
+					for ($j=0;$j<$qty_penjualan;$j++)
+					{
+						$data_['id_penjualan'] 			= $penjualan['id_penjualan'];									 	
+						$data_['id_barang'] 			= $detail[$i]['id_barang'];
 									
 									 $data_['id_detail_pembelian'] 	= (int)$detail[$i]['id_detail_pembelian']+$j;
 									

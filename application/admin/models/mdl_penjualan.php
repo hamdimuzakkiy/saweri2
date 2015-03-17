@@ -43,8 +43,24 @@ class mdl_penjualan extends CI_Model{
 		return $this->db->get('penjualan');
 	}		
 	
-	function get_kd_awal()	{		$this->db->flush_cache();		$this->db->select('kd_trans');		$this->db->from('setting_kode_trans');		$this->db->where('transaksi', 'penjualan');		return $this->db->get();	}
-		function get_total_penjualan_by_pelanggan($id_pelanggan){		$this->db->select('sum(total) as sum_total');		$this->db->from('penjualan');		$this->db->where('id_pelanggan', $id_pelanggan);		$this->db->group_by('id_pelanggan');		return $this->db->get();	}
+	function get_kd_awal()
+	{		
+		$this->db->flush_cache();		
+		$this->db->select('kd_trans');		
+		$this->db->from('setting_kode_trans');		
+		$this->db->where('transaksi', 'penjualan');		
+		return $this->db->get();	
+	}
+	
+	function get_total_penjualan_by_pelanggan($id_pelanggan)
+	{		
+		$this->db->select('sum(total) as sum_total');		
+		$this->db->from('penjualan');		
+		$this->db->where('id_pelanggan', $id_pelanggan);		
+		$this->db->group_by('id_pelanggan');		
+		return $this->db->get();	
+	}
+	
 	function insert($data)
 	{
 		$this->db->flush_cache();

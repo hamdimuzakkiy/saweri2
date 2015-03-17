@@ -85,7 +85,8 @@
 		
 	}
 	
-	function klick_tanggal(){
+	function klick_tanggal()
+	{
 		var tanggal = document.getElementById("tanggal");
 		tanggal.focus();
 	}
@@ -97,7 +98,8 @@
 		});
 	}
 
-	function handleChange(cb){
+	function handleChange(cb)
+	{
 		var result_checked;
 		if (document.getElementById('cabang').checked==true){
 			result_checked =  'http://localhost/saweri/index.php/penjualan/get_cabang/cabang';
@@ -129,9 +131,6 @@
 			
 				
 	}
-	
-
-	
 </script>
 
 <script type="text/javascript">
@@ -150,9 +149,7 @@
 		
 		
 	});
-	
-
-	
+		
 	function set_jenispenjualan(id){		
 		url = '<?=base_url().'index.php/penjualan/show_barang/'?>' + id;		
 		document.getElementById('getbarang').href = url;
@@ -186,7 +183,7 @@
 		if ($('.penjualantemp').length > 0) {
 			var cara_bayar = document.getElementById("cara_bayar").value;
 			 if((cara_bayar=='2') && (document.getElementById('jatuh_tempo').value == '')){
-				alert('Jatuh Tempo harus diisi dikarenakan anda memilih piutang.');
+				alert('Jatuh Tempo harus diisi jika memilih piutang.');
 			}
 			else{
 				$.ajax({
@@ -234,7 +231,8 @@
 			echo form_open('penjualan/insert', $attributes);
 		?>
 			<h1>Penjualan > Tambah Data Penjualan</h1>
-				<br/> <?php  if ( (isset($message)) && ($message !== '') ) { echo $message;  } ?>
+				<br/>
+				<?php  if ( (isset($message)) && ($message !== '') ) { echo $message;  } ?>
 			<fieldset >
 				
 				
@@ -342,6 +340,7 @@
 						</select>						
 					</span>					
 				</p>
+				
 				</div>
 
 				<div class="columns">
