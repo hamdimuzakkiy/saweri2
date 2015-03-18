@@ -393,30 +393,46 @@
 							<input type="text" name="jatuh_tempo" id="jatuh_tempo" value="<?=set_value('jatuh_tempo')?>" class="duapertiga-width"> Hari
 						</span>
 					</p>
+					<p class="colx2-right">
+						<label for="complex-en-url">NAMA REKENING</label>
+						<span class="relative">
+							<input type="text" name="nama_rekening" id="nama_rekening" value="" class="duapertiga-width"> 
+						</span>
+					</p>
+				</div>
+
+				<div class="columns">
+					<p class="colx2-right">
+						<label for="complex-en-url">NO REKENING :</label>
+						<span class="relative">
+							<input type="text" name="nomor_atm" id="nomor_atm" value="<?=set_value('nomor_atm')?>" class="duapertiga-width">
+						</span>
+					</p>
 				</div>
 			</fieldset>
 			
 			<fieldset>
 						<div class="columns">
 							<p class="colx3-left">
-							
-									<a id="getbarang" href="<?=base_url().'index.php/penjualan/show_barang/1'?>"><img src="<?=base_url()?>asset/admin/images/icons/fugue/application-export.png" width="16" height="16"></a>
+								<a id="getbarang" href="<?=base_url().'index.php/penjualan/show_barang/1'?>"><img src="<?=base_url()?>asset/admin/images/icons/fugue/application-export.png" width="16" height="16"></a>
 							</p>
 						</div>
+						
 						Tabel Cart<br/>
 						<table class="table" border="1" cellspacing="0" width="100%">
 							<thead>
 								<tr>
+									<th scope="col">NO</th>
 									<th scope="col"></th>
 									<th scope="col">NAMA BARANG</th>
+									<th scope="col">HARGA JUAL</th>
 									<th scope="col">SATUAN</th>
 									<th scope="col">Qty</th>
-									<th scope="col">HARGA JUAL</th>
 									<th scope="col">DISKON</th>
 									<th scope="col">RUPIAH</th>
-									<th scope="col">SN</th>
 								</tr>
 							</thead>
+
 							<tbody id="items" >
 							</tbody>
 						</table>
@@ -432,12 +448,11 @@
 								<tr>
 									<th scope="col"></th>
 									<th scope="col">NAMA BARANG</th>
+									<th scope="col">HARGA JUAL</th>
 									<th scope="col">SATUAN</th>
 									<th scope="col">Qty</th>
-									<th scope="col">HARGA JUAL</th>
 									<th scope="col">DISKON</th>
-									<th scope="col">RUPIAH</th>
-									<th scope="col">SN</th>							
+									<th scope="col">RUPIAH</th>					
 								</tr>
 							</thead>
 

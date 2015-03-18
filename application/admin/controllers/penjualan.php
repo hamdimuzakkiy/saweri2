@@ -75,9 +75,11 @@ class penjualan extends My_Controller
 		$data['alamat'] = $this->input->post('alamat');
 		$data['kas'] = $this->input->post('kas');
 		$data['nama_atm'] = $this->input->post('atm');
+		$data['nama_rekening'] = $this->input->post('nama_rekening');
 		$data['cara_bayar'] = $this->input->post('cara_bayar');
 		$data['pil_penjualan'] = $this->input->post('pil_penjualan');
 		$data['jatuh_tempo'] = $this->input->post('jatuh_tempo');
+		$data['nomor_atm'] = $this->input->post('nomor_atm');
 
 		$cara_bayar = $data['cara_bayar'];
 		$data['result_trans'] = $this->kode_trans->get_kd_awal('penjualan');//?
@@ -111,6 +113,8 @@ class penjualan extends My_Controller
 			$penjualan['nama_atm']			= $data['nama_atm'];
 			$penjualan['kode_kas']			= $data['kas'];
 			$penjualan['cara_bayar'] 		= $data['cara_bayar'];
+			$penjualan['nomor_atm']			= $data['nomor_atm'];
+			$penjualan['nama_rekening']		= $data['nama_rekening'];
 			$penjualan['jatuh_tempo'] 		= $data['jatuh_tempo'];			 
 			//$penjualan['diskon'] 			= $data['diskon'];
 			$penjualan['id_coa'] 			= $data['id_coa'];
@@ -204,7 +208,7 @@ class penjualan extends My_Controller
 							$piutang['so_no'] 		= $data['so_no'];			
 							$piutang['GLID'] 		= $data['glid'];
 							$piutang['AKUN'] 		= '';
-							$piutang['KODE_PARTNER'] = $data['id_pelanggan'];			
+							$piutang['KODE_PARTNER']= $data['id_pelanggan'];			
 							$piutang['JUMLAH'] 		= $total_penjumlahan;
 							$piutang['CUID'] 		= $data['userid']; /* userid */
 							$piutang['CDATE'] 		= date('Y-m-d'); /* tanggal sistem */
@@ -638,15 +642,18 @@ class penjualan extends My_Controller
 	
 	/* menampilkan items berdasarkan id pembelian dan barang */
 	
-	function set_items($jenis,$id_jenis, $id_pembelian, $id_barang){
+	function set_items($jenis,$id_jenis, $id_pembelian, $id_barang)
+	{
 		$get_posisi = get_idcabang();
-		
 		if ($get_posisi==1)
 		{
 			
-			if ($id_jenis=='4'){
+			if ($id_jenis=='4')
+			{
 				$data['query'] = $this->penjualan->get_items_hp($id_pembelian, $id_barang, 'posisi_pusat','1');
-			}else{
+			}
+			else
+			{
 				//$data['query'] = $this->penjualan->get_items($id_pembelian, $id_barang, 'posisi_pusat','1');
 				//hamdi 
 				$data['query'] = $this->penjualan->h_get_items($id_pembelian, $id_barang, 'posisi_pusat','1');
@@ -655,9 +662,12 @@ class penjualan extends My_Controller
 		else
 		{
 			
-			if ($id_jenis=='4'){
+			if ($id_jenis=='4')
+			{
 				$data['query'] = $this->penjualan->get_items_hp($id_pembelian, $id_barang, 'posisi_cabang',$get_posisi);
-			}else{
+			}
+			else
+			{
 				//$data['query'] = $this->penjualan->get_items($id_pembelian, $id_barang, 'posisi_cabang',$get_posisi);
 				//hamdi
 				$data['query'] = $this->penjualan->h_get_items($id_pembelian, $id_barang, 'posisi_cabang',$get_posisi);

@@ -221,10 +221,11 @@ class mdl_penjualan extends CI_Model{
 		$this->db->update('detail_pembelian', array('soldout'=> $nilai));
 	} */			
 	function updateBarangPembelian($id_detailpembelian, $idcabang, $posisibarang, $nilaiposisi)
-	{		$this->db->flush_cache();		
+	{		
+		$this->db->flush_cache();		
 		/*$this->db->where('id_detail_pembelian', $id_detailpembelian);		$this->db->update('detail_pembelian', array('soldout'=> $nilai)); */
-						$this->db->where('id_detail_pembelian', $id_detailpembelian);		
-						$this->db->update('detail_pembelian', array($idcabang=> '0', $posisibarang=>$nilaiposisi));						
+		$this->db->where('id_detail_pembelian', $id_detailpembelian);		
+		$this->db->update('detail_pembelian', array($idcabang=> '0', $posisibarang=>$nilaiposisi));						
 
 	}		
 
