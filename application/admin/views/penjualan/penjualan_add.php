@@ -85,7 +85,8 @@
 		
 	}
 	
-	function klick_tanggal(){
+	function klick_tanggal()
+	{
 		var tanggal = document.getElementById("tanggal");
 		tanggal.focus();
 	}
@@ -97,7 +98,8 @@
 		});
 	}
 
-	function handleChange(cb){
+	function handleChange(cb)
+	{
 		var result_checked;
 		if (document.getElementById('cabang').checked==true){
 			result_checked =  'http://localhost/saweri/index.php/penjualan/get_cabang/cabang';
@@ -129,9 +131,6 @@
 			
 				
 	}
-	
-
-	
 </script>
 
 <script type="text/javascript">
@@ -150,9 +149,7 @@
 		
 		
 	});
-	
-
-	
+		
 	function set_jenispenjualan(id){		
 		url = '<?=base_url().'index.php/penjualan/show_barang/'?>' + id;		
 		document.getElementById('getbarang').href = url;
@@ -186,7 +183,7 @@
 		if ($('.penjualantemp').length > 0) {
 			var cara_bayar = document.getElementById("cara_bayar").value;
 			 if((cara_bayar=='2') && (document.getElementById('jatuh_tempo').value == '')){
-				alert('Jatuh Tempo harus diisi dikarenakan anda memilih piutang.');
+				alert('Jatuh Tempo harus diisi jika memilih piutang.');
 			}
 			else{
 				$.ajax({
@@ -234,20 +231,21 @@
 			echo form_open('penjualan/insert', $attributes);
 		?>
 			<h1>Penjualan > Tambah Data Penjualan</h1>
-				<br/> <?php  if ( (isset($message)) && ($message !== '') ) { echo $message;  } ?>
+				<br/>
+				<?php  if ( (isset($message)) && ($message !== '') ) { echo $message;  } ?>
 			<fieldset >
 				
 				
 				<div class="columns">
 					<input type="hidden" name="id_penjualan" value="<?=date('Ymdhis')?>" >
 					<p class="colx2-left">
-						<label for="complex-en-url">SO No :</label>
+						<label for="complex-en-url">REF NO :</label>
 						<span class="relative">	
 							<input type="text" name="so_no" id="so_no" value="<?=$this->penjualan->get_so($kode_transaksi)?>" class="satu-width">
 						</span>
 					</p>
 					<p class="colx2-right">
-						<label for="complex-en-url">Tanggal :</label>
+						<label for="complex-en-url">TANGGAL :</label>
 						<span class="relative">
 							<span class="input-type-text margin-right relative">
 								<input type="text" name="tanggal" id="tanggal" class="datepicker" value="<?=date('Y-m-d')?>">
@@ -259,8 +257,8 @@
 				<div class="columns">
 					<p class="colx2-left">	
 						<!--label for="complex-en-url">Jenis Pembeli :</label-->
-						<input type="radio" name="pil_penjualan" value="cabang" id="cabang" onchange='handleChange(this)';>Cabang &nbsp; &nbsp; &nbsp;
-						<input type="radio" name="pil_penjualan" value="pelanggan" id="pelanggan" onchange='handleChange(this)'; >Pelanggan<br/><br/>						
+						<input type="radio" name="pil_penjualan" value="cabang" id="cabang" onchange='handleChange(this)';>CABANG &nbsp; &nbsp; &nbsp;
+						<input type="radio" name="pil_penjualan" value="pelanggan" id="pelanggan" onchange='handleChange(this)'; >PELANGGAN<br/><br/>						
 						<span class="relative" id="id_pelanggan">
 							<!--select name="id_pelanggan" >
 								
@@ -273,13 +271,8 @@
 							</select-->
 							<?=form_error('id_pelanggan')?>
 						</span>
-					</p>	
-					<p class="colx2-right">
-						<label for="complex-en-url">Jatuh Tempo :</label>
-						<span class="relative">
-							<input type="text" name="jatuh_tempo" id="jatuh_tempo" value="<?=set_value('jatuh_tempo')?>" class="duapertiga-width"> Hari
-						</span>
-					</p>					
+					</p>			
+											
 				</div>
 				
 				<div class="columns">
@@ -311,16 +304,48 @@
 							<?=form_error('id_cabang')?>
 						</span>
 					</p-->
-					<p class="colx2-right">
-						<label for="complex-en-url">Diskon (%) :</label>
+		
+					<!--<p class="colx2-right">
+						<label for="complex-en-url">DISKON (%) :</label>
 						<span class="relative">
 							<input type="text" name="diskon" id="diskon" value="<?=set_value('diskon')?>" class="duapertiga-width">
 						</span>
-					</p>
+					</p>-->
 				</div>
+
 				<div class="columns">
-					<p class="colx2-left">
-						<label for="complex-en-url">Jenis Penjualan :</label>
+
+				<p class="colx2-left">
+					<label for="complex-en-url">ALAMAT</label>
+					<span class="relative">
+						<input type="text" name="alamat" id="alamat" value="<?=set_value('alamat')?>" class="duapertiga-width">
+					</span>
+				</p>	
+
+				<p class="colx2-right">						
+					<label for="complex-en-url">KODE KAS :</label>						
+					<span class="relative">
+						<select name="kas" required>							
+							<?php
+
+								$this->db->flush_cache();
+								$query = $this->db->get('kas');
+								
+								foreach($query->result() as $row)
+								{
+									echo '<option value="'.$row->kode.'">'.$row->nama.'<span class="colx3-right">-</span>'.convert_rupiah($row->saldo).'</option>';
+								}
+
+							?>							
+						</select>						
+					</span>					
+				</p>
+				
+				</div>
+
+				<div class="columns">
+					<!--<p class="colx2-left">
+						<label for="complex-en-url">JENIS PENJUALAN :</label>
 						<span class="relative">
 							<select name="id_jenis_penjualan" id="id_jenis_penjualan" onChange="javascript:set_jenispenjualan(this.value)">
 								<?php
@@ -335,16 +360,44 @@
 								?>
 							</select>
 						</span>
-					</p>
-					<p class="colx2-right">
-						<label for="complex-en-url">Cara Bayar :</label>
+					</p>-->
+					<p class="colx2-left">
+						<label for="complex-en-url">PEMBAYARAN :</label>
 						<span class="relative">
 							<select name="cara_bayar" id="cara_bayar" >
 								<option value="1">Tunai</option>
 								<option value="2">Piutang</option>
 							</select>
 						</span>
+					</p>
 
+					<p class="colx2-right">						
+					<label for="complex-en-url">M CARD :</label>						
+					<span class="relative">
+						<select name="kas" required>							
+							<?php
+
+								$this->db->flush_cache();
+								$query = $this->db->get('kas');
+								
+								foreach($query->result() as $row)
+								{
+									echo '<option value="'.$row->kode.'">'.$row->nama.'<span class="colx3-right">-</span>'.convert_rupiah($row->saldo).'</option>';
+								}
+
+							?>							
+						</select>						
+					</span>					
+				</p>	
+	
+				</div>
+
+				<div class="columns">
+					<p class="colx2-left">
+						<label for="complex-en-url">JATUH TEMPO :</label>
+						<span class="relative">
+							<input type="text" name="jatuh_tempo" id="jatuh_tempo" value="<?=set_value('jatuh_tempo')?>" class="duapertiga-width"> Hari
+						</span>
 					</p>
 				</div>
 			</fieldset>
@@ -361,16 +414,16 @@
 							<thead>
 								<tr>
 									<th scope="col"></th>
-									<th scope="col" width="18px"></th>
-									<th scope="col">Nama Barang</th>
-									<th scope="col">Harga</th>
+									<th scope="col">NAMA BARANG</th>
+									<th scope="col">SATUAN</th>
 									<th scope="col">Qty</th>
-									<th scope="col">Jumlah</th>
+									<th scope="col">HARGA JUAL</th>
+									<th scope="col">DISKON</th>
+									<th scope="col">RUPIAH</th>
 									<th scope="col">SN</th>
 								</tr>
 							</thead>
 							<tbody id="items" >
-								
 							</tbody>
 						</table>
 						<br>
@@ -381,23 +434,21 @@
 						</div>
 						
 						<table class="table" border="1" cellspacing="0" width="100%">
-						
 							<thead>
 								<tr>
-									<th scope="col">No</th>
-									<th scope="col">Nama Barang</th>
-									<th scope="col">Harga</th>
+									<th scope="col"></th>
+									<th scope="col">NAMA BARANG</th>
+									<th scope="col">SATUAN</th>
 									<th scope="col">Qty</th>
-									<th scope="col">SN</th>
-									<th scope="col">Total</th>								
-									<th scope="col">Batal</th>								
+									<th scope="col">HARGA JUAL</th>
+									<th scope="col">DISKON</th>
+									<th scope="col">RUPIAH</th>
+									<th scope="col">SN</th>							
 								</tr>
 							</thead>
-							
-							<tbody id="detail">
-								
+
+							<tbody id="detail">						
 							</tbody>
-							
 						</table>
 						<br/>
 			</fieldset>
