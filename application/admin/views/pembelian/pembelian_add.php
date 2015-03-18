@@ -249,7 +249,7 @@
 						</span>
 					</p>
 					<p class="colx3-center">
-						<label for="complex-en-url">ATM :</label>
+						<label for="complex-en-url">M Card :</label>
 						<span class="relative">
 							<input type="checkbox" onclick="javascript:ATM();" id = "cek_atm"><br>
 						</span>
