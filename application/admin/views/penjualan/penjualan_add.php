@@ -374,21 +374,15 @@
 					<p class="colx2-right">						
 					<label for="complex-en-url">M CARD :</label>						
 					<span class="relative">
-						<select name="kas" required>							
-							<?php
-
-								$this->db->flush_cache();
-								$query = $this->db->get('kas');
-								
-								foreach($query->result() as $row)
-								{
-									echo '<option value="'.$row->kode.'">'.$row->nama.'<span class="colx3-right">-</span>'.convert_rupiah($row->saldo).'</option>';
-								}
-
-							?>							
+						<select name="atm" required>							
+								<option value="UANG PAS">UANG PAS</option>
+								<option value="VISA">VISA</option>					
+								<option value="MASTER">MASTER</option>
+								<option value="BNI CARD">BNI CARD</option>
+								<option value="BCA CARD">BCA CARD</option>
 						</select>						
 					</span>					
-				</p>	
+					</p>	
 	
 				</div>
 

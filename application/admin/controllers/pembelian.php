@@ -146,9 +146,9 @@ class pembelian extends My_Controller
 			$pembelian['id_coa'] 		= $data['id_coa'];
 			$pembelian['userid'] 		= $data['userid'];			
 			$pembelian['cara_bayar'] 	= $data['cara_bayar'];
-			$pembelian['kode_kas'] 	= $data['kas'];								
+			$pembelian['kode_kas'] 		= $data['kas'];								
 			$pembelian['jatuh_tempo'] 	= $data['jatuh_tempo'];								
-			$pembelian['nama_atm'] 	= $data['nama_atm'];								
+			$pembelian['nama_atm'] 		= $data['nama_atm'];								
 			$pembelian['nomor_atm'] 	= $data['nomor_atm'];								
 			$cara_bayar=$data['cara_bayar'];
 			
@@ -157,7 +157,7 @@ class pembelian extends My_Controller
 			
 			$count_detail = count($detail);
 			$i=0;
-						$total_penjumlahan = 0;
+			$total_penjumlahan = 0;
 			for($i=0; $i<$count_detail; $i++)			
 			{
 							$a = $detail[$i]['id_barang'];				

@@ -1,7 +1,8 @@
 <script type="text/javascript">
 	
 	
-	$(document).ready(function() {
+	$(document).ready(function() 
+	{
 		$(".view").fancybox();
 	});
 	
@@ -17,11 +18,14 @@
 				<ul class="controls-buttons">
 					<?php echo $this->pagination->create_links(); ?>
 					<li class="sep"></li>
-					<li><?
-							if ($can_insert == TRUE){
+					<li>
+						<?
+							if ($can_insert == TRUE)
+							{
 								echo anchor('penjualan/insert', 'Tambah Data');
 							}
-						?></li>
+						?>
+					</li>
 				</ul>
 				
 			</div>
@@ -37,13 +41,11 @@
 						<th align="left" valign="top" scope="col">Tanggal</th>
 						<th align="left" valign="top" scope="col">Jatuh Tempo</th>
 						<th align="left" valign="top" scope="col">Diskon (%)</th>
-		
 						<th align="left" valign="top" scope="col">Aksi</th>
 					</tr>
 				</thead>
 				
-				<tbody>
-					
+				<tbody>					
 					<?php foreach($results->result() as $row) {?>
 					<tr>
 						<td align="left" valign="top"><?=anchor('penjualan/view/'.$row->id_penjualan, $row->so_no, array('class'=>'with-tip view'))?> </td>
@@ -84,9 +86,9 @@
 				<?=anchor('penjualan/insert', 'Tambah Data', array('class'=>'button'))?>
 				<span class="sep"></span>
 				<select name="table-action" id="table-action" class="small">
-					<option value="">Action for selected...</option>
-					<option value="validate">Validate</option>
-					<option value="delete">Delete</option>
+					<option value="">Aksi</option>
+					<option value="validate">Validasi</option>
+					<option value="delete">Hapus</option>
 				</select>
 				<button type="submit" class="small">Ok</button>
 			</div>

@@ -11,7 +11,7 @@ class penjualan extends My_Controller
 		$this->load->model('mdl_piutang', 'piutang');
 		$this->load->model('mdl_kode_trans', 'kode_trans');
 		$this->load->model('mdl_pelanggan', 'pelanggan');
-		
+		$this->load->model('mdl_cabang', 'cabang');
 	}
 	
 	function index()
@@ -27,51 +27,35 @@ class penjualan extends My_Controller
 		
 		$config['base_url'] = base_url().'index.php/penjualan/index/';
 		$totals =  $this->penjualan->counts();
-	
 		$config['total_rows'] = sizeof($totals->result());
+		//$config['total_rows'] = $this->penjualan->getItem('penjualan');
+
 		$config['per_page'] = '50';
 		$config['num_links'] = '10';
 		$config['uri_segment'] = '3';
-		
 		$config['full_tag_open'] = '';
 		$config['full_tag_close'] = '';
-		
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
-		
 		$config['cur_tag_open'] = '<li><a href="javascript:void(0)" class="current">';
 		$config['cur_tag_close'] = '</a></li>';
-		
 		$config['prev_link'] = 'Prev';
 		$config['prev_tag_open'] = '<li>';
 		$config['prev_tag_close'] = '</li>';
-		
 		$config['next_link'] = 'Next';
 		$config['next_tag_open'] = '<li>';
 		$config['next_tag_close'] = '</li>';
-		
 		$config['last_link'] = 'Last';
 		$config['last_tag_open'] = '<li>';
 		$config['last_tag_close'] = '</li>';
-		
 		$config['first_link'] = 'First';
 		$config['first_tag_open'] = '<li>';
 		$config['first_tag_close'] = '</li>';
-		
-		$this->pagination->initialize($config);	
-		/* end config pagination */
-		
-		/* get data */
-		
-		$data['results'] = $this->penjualan->getItem($config['per_page'], $this->uri->segment(3));
-		
-		
-		
+		$this->pagination->initialize($config);
+		$data['results'] = $this->penjualan->getItem($config['per_page'], $this->uri->segment(3));	
 		$this->load->view('penjualan/penjualan_list', $data);
-		
 		$this->close();
 	}
-	
 	
 	function insert()
 	{
@@ -82,7 +66,7 @@ class penjualan extends My_Controller
 		
 		$this->open();
 				
-		$data['id_penjualan'] = $this->input->post('id_penjualan');
+		$data['id_penjualan'] = $this->input->post('id_penjualan');//simpan ke $data
 		$data['so_no'] = $this->input->post('so_no');
 		$data['id_pelanggan'] = $this->input->post('id_pelanggan');
 		$data['id_cabang'] = $this->input->post('id_cabang');
@@ -90,6 +74,7 @@ class penjualan extends My_Controller
 		$data['tanggal'] = $this->input->post('tanggal');
 		$data['alamat'] = $this->input->post('alamat');
 		$data['kas'] = $this->input->post('kas');
+		$data['nama_atm'] = $this->input->post('atm');
 		$data['cara_bayar'] = $this->input->post('cara_bayar');
 		$data['pil_penjualan'] = $this->input->post('pil_penjualan');
 		$data['jatuh_tempo'] = $this->input->post('jatuh_tempo');
@@ -106,7 +91,8 @@ class penjualan extends My_Controller
 		$this->form_validation->set_rules('so_no', 'so_no', 'required');
 		$this->form_validation->set_rules('tanggal', 'tanggal', 'required');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');			
-		$this->form_validation->set_message('required', 'Field harus diisi!');				
+		$this->form_validation->set_message('required', 'Field harus diisi!');
+
 		if ($this->form_validation->run() == FALSE)
 		{			
 			$this->load->view('penjualan/penjualan_add',$data);
@@ -122,6 +108,7 @@ class penjualan extends My_Controller
 			$penjualan['id_jpenjualan'] 	= $data['id_jenis_penjualan'];			 
 			$penjualan['tanggal'] 			= $data['tanggal'];
 			$penjualan['alamat']		 	= $data['alamat'];
+			$penjualan['nama_atm']			= $data['nama_atm'];
 			$penjualan['kode_kas']			= $data['kas'];
 			$penjualan['cara_bayar'] 		= $data['cara_bayar'];
 			$penjualan['jatuh_tempo'] 		= $data['jatuh_tempo'];			 
@@ -141,7 +128,7 @@ class penjualan extends My_Controller
 		{		
 			for($i=0; $i<$count_detail; $i++)
 			{
-				$data__['total']	 		= $detail[$i]['total'];
+				$data['total']	 			= $detail[$i]['total'];
 				$total_penjumlahan2			= $total_penjumlahan2 + $detail[$i]['total'];
 			}	
 							
@@ -153,7 +140,7 @@ class penjualan extends My_Controller
 				$saldo_sum_total=$rows->sum_total;
 			}
 				
-			$saldo_piutang=$data['result_pelanggan']->row()->saldo_piutang;
+			$saldo_piutang = $data['result_pelanggan']->row()->saldo_piutang;
 			$saldo_piutang_pelanggan = $saldo_sum_total + $total_penjumlahan2;
 							
 			if ($saldo_piutang_pelanggan > $saldo_piutang)
@@ -171,20 +158,20 @@ class penjualan extends My_Controller
 						$data_['id_penjualan'] 			= $penjualan['id_penjualan'];									 	
 						$data_['id_barang'] 			= $detail[$i]['id_barang'];
 									
-									 $data_['id_detail_pembelian'] 	= (int)$detail[$i]['id_detail_pembelian']+$j;
+						$data_['id_detail_pembelian'] 	= (int)$detail[$i]['id_detail_pembelian']+$j;
 									
-									 $data_['harga'] 				= $detail[$i]['harga'];
+						$data_['harga'] 				= $detail[$i]['harga'];
 									
-									/*$data_['qty'] 					= $detail[$i]['qty'];*/
-									 $data_['qty'] 					= 1;
+						/*$data_['qty'] 					= $detail[$i]['qty'];*/
+						 $data_['qty'] 					= 1;
 									
-									 $data_['sn'] 					= $detail[$i]['sn'];
+						 $data_['sn'] 					= $detail[$i]['sn'];
+						
+						 $data_['total'] 				= $detail[$i]['total'];
+							
+						 $total_penjumlahan				= $total_penjumlahan + $detail[$i]['total'];
 									
-									 $data_['total'] 				= $detail[$i]['total'];
-									
-									 $total_penjumlahan				= $total_penjumlahan + $detail[$i]['total'];
-									
-									$this->penjualan->insert_detail($data_);
+						$this->penjualan->insert_detail($data_);
 									
 									
 									/*
@@ -196,9 +183,12 @@ class penjualan extends My_Controller
 									*/
 									
 									$idcabang = get_idcabang();
-									if ($idcabang==1){
+									if ($idcabang==1)
+									{
 										$this->penjualan->updateBarangPembelian($data_['id_detail_pembelian'], 'posisi_pusat', 'posisi_pelanggan', $data['id_pelanggan']);
-									}else{
+									}
+									else
+									{
 										$this->penjualan->updateBarangPembelian($data_['id_detail_pembelian'], 'posisi_cabang', 'posisi_pelanggan', $data['id_pelanggan']);
 									}
 									
@@ -214,75 +204,66 @@ class penjualan extends My_Controller
 							$piutang['so_no'] 		= $data['so_no'];			
 							$piutang['GLID'] 		= $data['glid'];
 							$piutang['AKUN'] 		= '';
-									
 							$piutang['KODE_PARTNER'] = $data['id_pelanggan'];			
-							
 							$piutang['JUMLAH'] 		= $total_penjumlahan;
-							
 							$piutang['CUID'] 		= $data['userid']; /* userid */
-							
 							$piutang['CDATE'] 		= date('Y-m-d'); /* tanggal sistem */
-							
 							$piutang['MUID'] 		= '';/*$data['MUID']; edit perubahan oleh user siapa */
-							
 							$piutang['MDATE'] 		= '';/*$data['MDATE']; tanggal perubahan terakhir */
-							
 
-							$penjualan['total'] 		= $total_penjumlahan;
 							
-							$penjualan['id_pelanggan'] 			= 'plg-' . $data['id_pelanggan'];
-							$penjualan['id_cabang'] = get_idcabang();
+							$penjualan['total'] 		= $total_penjumlahan;
+							$penjualan['id_pelanggan'] 	= 'plg-' . $data['id_pelanggan'];
+							$penjualan['id_cabang'] 	= get_idcabang();
 							$this->penjualan->insert($penjualan);
 
 								
-								if ($cara_bayar=='2'){
+					if ($cara_bayar=='2')
+					{
+						$this->piutang->insert($piutang);
+					}
 									
-										$this->piutang->insert($piutang);
-								}
+											
+					/* ambil point barang dri tabel kmudian kaluklasikan dgn qty */					
+					$this->db->flush_cache();
+					$this->db->from('barang');
+					$this->db->where('id_barang', $data_['id_barang']);
+					$tb_barang = $this->db->get();
+						
+					$point_member=(int) $tb_barang->row()->point_member;
+					$point_karyawan=(int) $tb_barang->row()->point_karyawan;
+							
+					$this->db->flush_cache();
+					$this->db->from('pelanggan');
+					$this->db->where('id_pelanggan', $data['id_pelanggan']);
+					$tb_pelanggan = $this->db->get();
+											
+					$point_awal=(int) $tb_pelanggan->row()->point;
+																						
+					$this->db->flush_cache();
+					$this->db->from('karyawan');
+					$this->db->where('userid', $data['userid']);
+					$tb_karyawan = $this->db->get();
+					$point_awal_karyawan=(int) $tb_karyawan->row()->point;
+					/* ambil point karyawan/pelanggan */
+					/* dan kurangi dengan total point barang yg sudah di ambil*/
+								
+								
+					$this->db->flush_cache();
+					$this->db->where('id_pelanggan', $data['id_pelanggan']);
+					$this->db->update('pelanggan', array('point' => ($point_awal + $point_member)));
 									
-											
-											/* ambil point barang dri tabel kmudian kaluklasikan dgn qty */
-											
-											$this->db->flush_cache();
-											$this->db->from('barang');
-											$this->db->where('id_barang', $data_['id_barang']);
-											$tb_barang = $this->db->get();
-											
-											$point_member=(int) $tb_barang->row()->point_member;
-											$point_karyawan=(int) $tb_barang->row()->point_karyawan;
-											
-											$this->db->flush_cache();
-											$this->db->from('pelanggan');
-											$this->db->where('id_pelanggan', $data['id_pelanggan']);
-											$tb_pelanggan = $this->db->get();
-											
-											$point_awal=(int) $tb_pelanggan->row()->point;
-											
-											
-											$this->db->flush_cache();
-											$this->db->from('karyawan');
-											$this->db->where('userid', $data['userid']);
-											$tb_karyawan = $this->db->get();
-											
-											$point_awal_karyawan=(int) $tb_karyawan->row()->point;
-								/* ambil point karyawan/pelanggan */
-								/* dan kurangi dengan total point barang yg sudah di ambil*/
+					$this->db->flush_cache();
+					$this->db->where('userid', $data['userid']);
+					$this->db->update('karyawan', array('point' => ($point_awal_karyawan + $point_karyawan)));				
 								
-								
-									$this->db->flush_cache();
-									$this->db->where('id_pelanggan', $data['id_pelanggan']);
-									$this->db->update('pelanggan', array('point' => ($point_awal + $point_member)));
-									
-									$this->db->flush_cache();
-									$this->db->where('userid', $data['userid']);
-									$this->db->update('karyawan', array('point' => ($point_awal_karyawan + $point_karyawan)));
-								
-								
-								
-								$this->session->set_flashdata('message', 'Data Berhasil disimpan.');
-								redirect('penjualan');
+					$this->session->set_flashdata('message', 'Data Berhasil disimpan.');
+					redirect('penjualan');
 				}
-			}else{					
+			}
+
+			else
+			{					
 					
 							for($i=0; $i<$count_detail; $i++)
 							{
@@ -413,9 +394,6 @@ class penjualan extends My_Controller
 	}
 	
 		
-	
-	
-	
 	function process_update()
 	{
 		if ($this->can_update() == FALSE){
@@ -444,9 +422,6 @@ class penjualan extends My_Controller
 		$data['id_coa'] = '5';
 		$data['userid'] = get_userid();
 		
-		
-		
-		
 		$this->form_validation->set_rules('so_no', 'so_no', 'required');
 		$this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'required');
 		$this->form_validation->set_rules('id_cabang', 'id_cabang', 'required');
@@ -457,8 +432,6 @@ class penjualan extends My_Controller
 		
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		
-		
-		
 		$this->form_validation->set_message('required', 'Field harus diisi!');
 		
 		
@@ -466,10 +439,9 @@ class penjualan extends My_Controller
 			
 			$this->load->view('penjualan/penjualan_add',$data);
 			
-		}else{	
-			
-			
-			
+		}
+		else
+		{				
 			$penjualan['id_penjualan'] 			= $data['id_penjualan'];
 			$penjualan['so_no'] 				= $data['so_no'];
 			$penjualan['id_pelanggan'] 			= $data['id_pelanggan'];
@@ -552,7 +524,8 @@ class penjualan extends My_Controller
 		$this->close();
 	}
 	
-	function check_saldo_piutang(){
+	function check_saldo_piutang()
+	{
 		/*$output_string = "nilai";
 		
 		echo json_encode($output_string);*/
@@ -591,9 +564,11 @@ class penjualan extends My_Controller
 		echo $result_check_saldo;
 	}
 
-	function get_cabang($result_checked){		
+	function get_cabang($result_checked)
+	{		
 		//$result_checked=$this->uri->segment(3);		
-		if ($result_checked=='cabang'){
+		if ($result_checked=='cabang')
+		{
 			$query = $this->db->get('cabang');
 			if($query->num_rows() > 0)
 			{
@@ -605,7 +580,9 @@ class penjualan extends My_Controller
 				}
 				echo '</select>';
 			}
-		}else{						
+		}
+		else
+		{						
 			$query = $this->db->get('pelanggan');			
 			echo '<select name="id_pelanggan">';
 			if($query->num_rows() > 0)
@@ -623,7 +600,8 @@ class penjualan extends My_Controller
 
 	function delete($id)
 	{
-		if ($this->can_delete() == FALSE){
+		if ($this->can_delete() == FALSE)
+		{
 			redirect('auth/failed');
 		}
 		
@@ -645,12 +623,14 @@ class penjualan extends My_Controller
 		
 		$get_posisi = get_idcabang();
 
-		if ($get_posisi==1){
+		if ($get_posisi==1)
+		{
 			$data['result'] = $this->penjualan->get_barang('posisi_pusat','1');
-		}else{
+		}
+		else
+		{
 			$data['result'] = $this->penjualan->get_barang('posisi_cabang',$get_posisi);
 		}
-		
 		
 		$data['jenis'] = $jenis;
 		$this->load->view('penjualan/list_barang.php', $data);
@@ -661,7 +641,8 @@ class penjualan extends My_Controller
 	function set_items($jenis,$id_jenis, $id_pembelian, $id_barang){
 		$get_posisi = get_idcabang();
 		
-		if ($get_posisi==1){
+		if ($get_posisi==1)
+		{
 			
 			if ($id_jenis=='4'){
 				$data['query'] = $this->penjualan->get_items_hp($id_pembelian, $id_barang, 'posisi_pusat','1');
@@ -670,7 +651,9 @@ class penjualan extends My_Controller
 				//hamdi 
 				$data['query'] = $this->penjualan->h_get_items($id_pembelian, $id_barang, 'posisi_pusat','1');
 			}
-		}else{
+		}
+		else
+		{
 			
 			if ($id_jenis=='4'){
 				$data['query'] = $this->penjualan->get_items_hp($id_pembelian, $id_barang, 'posisi_cabang',$get_posisi);
@@ -680,9 +663,6 @@ class penjualan extends My_Controller
 				$data['query'] = $this->penjualan->h_get_items($id_pembelian, $id_barang, 'posisi_cabang',$get_posisi);
 			}
 		}
-		
-
-		
 		$data['jenis'] = $jenis;
 		$this->load->view('penjualan/items.php', $data);
 	}
