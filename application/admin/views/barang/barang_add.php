@@ -137,12 +137,18 @@
 						</span>
 					</p>
 
-						<p class="colx2-right">
+						<!--p class="colx2-right">
 						<label for="complex-en-url">Serial Number :</label>
 						<span class="relative">
 							<input type="text" name="sn" id="sn" value="<?=set_value('sn')?>" class="duapertiga-width">
 						</span>
-					</p>		
+					</p-->		
+					<p class="colx2-right">
+						<label for="complex-en-url">Serial Number :</label>
+						<span class="relative">
+							<input type="checkbox" name="sn" id="sn" value = '1' class="duapertiga-width">
+						</span>
+					</p>
 				</div>
 
 				<div class="columns">					

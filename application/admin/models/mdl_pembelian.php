@@ -36,9 +36,10 @@ class mdl_pembelian extends CI_Model{
 	function getItemById($id)
 	{
 		$this->db->flush_cache();
-		$this->db->select('pembelian.*, supplier.id_supplier, supplier.kode_supplier, supplier.nama AS nama_supplier, cabang.id_cabang, cabang.nama_cabang,kas.nama as nama_kas');
+		$this->db->select('pembelian.*, supplier.id_supplier,supplier.alamat, supplier.kode_supplier, supplier.nama AS nama_supplier, cabang.id_cabang, cabang.nama_cabang,kas.nama as nama_kas');
 		$this->db->from('pembelian');
-		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');		
+		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');
+
 		$this->db->join('cabang', 'cabang.id_cabang = pembelian.id_cabang');
 		$this->db->join('kas', 'kas.kode = pembelian.kode_kas');
 		$this->db->where('pembelian.id_pembelian', $id);
@@ -73,9 +74,10 @@ class mdl_pembelian extends CI_Model{
 	function get_detail($id_request)
 	{
 		$this->db->flush_cache();
-		$this->db->select('detail_pembelian.*, barang.*,detail_pembelian.sn as sn');
+		$this->db->select('detail_pembelian.*,satuan.satuan, barang.*,detail_pembelian.sn as sn');
 		$this->db->from('detail_pembelian');
 		$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
+		$this->db->join('satuan', 'satuan.id_satuan = barang.id_satuan');
 		$this->db->where('id_pembelian', $id_request);
 		$this->db->order_by('detail_pembelian.id_detail_pembelian', 'ASC');
 		return $this->db->get();

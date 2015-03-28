@@ -34,17 +34,28 @@
 	echo form_open('laporan_hutang/report_excel', $attributes);
 ?>	-->
 <div id="div_laporan">	<input name="rekap_tabel1" id="rekap_tabel1" type="hidden" value="rekap_tabel1" />	
-
+<?php foreach($results->result() as $row) {?>
 <table class="laporan" width="90%" border="1">		
-	<tr><td colspan="10"><b>SAWERI GADING CELL</b></td></tr>		
-	<tr><td colspan="10"><b>JL. S PARMAN 18 BANYUWANGI</b></td></tr>		
+	<tr>
+		<td colspan="5"><b>SAWERI GADING CELL</b>
+		</td>
+		<td colspan="5"><b>Dari :</b>
+		</td>
+	</tr>
+	<tr><td colspan="5"><b><?php echo $row->nama_cabang;?></b></td> <td colspan="5"><b><?php echo $row->nama_supplier;?></b></td> </tr>		
+	<tr><td colspan="5"><b>JL. S PARMAN 18 BANYUWANGI</b></td> <td colspan="5"><b><?php echo $row->alamat;?></b></td> </tr>		
 	<tr><td colspan="10"><b>TELP (0333)-411345</b></td></tr>		
 	<tr><td colspan="10"><b></b><br/></td></tr>		
 	<tr><td colspan="10" div align="center"><b>LAPORAN PEMBELIAN</b></td></tr>		
 	<!--tr><td colspan="10"><b>PERIODE : <?php echo $this->fungsi->dateindo3('-',$periode_awal) . ' S/D ' .  $this->fungsi->dateindo3('-',$periode_akhir); ?></b></td></tr-->		
-	<?php foreach($results->result() as $row) {?>
+	
 	<input type = "hidden" id = "id_pembelian" value = "<?php print $row->id_pembelian; ?>">  
-	<tr><td colspan="10"><b>TANGGAL CETAK : <?php echo $this->fungsi->dateindo3('-',date('Y-m-d')) ?></b></td></tr>			
+	<tr>
+			<td colspan="7"><b>Nomor Faktur : <?php echo $row->po_no?></b></td>	
+			<td colspan="3"><b>Tanggal : <?php echo $this->fungsi->dateindo3('-',$row->tanggal)?></b></td>	
+
+	</tr>
+	<!--tr><td colspan="10"><b>TANGGAL CETAK : <?php echo $this->fungsi->dateindo3('-',date('Y-m-d')) ?></b></td></tr>			
 	<tr>
 			<td colspan="10"><b>Nomor PO : <?php echo $row->po_no?></b></td>	
 
@@ -77,36 +88,62 @@
 				}
 
 			?></b></td>				
-	</tr>
+	</tr-->
 	<tr><td colspan="10">&nbsp;</td></tr>
-	<?php } ?>
+	
 	<tr>			
-		<th scope="col">NO</th>			
+		<!--th scope="col">NO</th>			
 		<th scope="col">Nama Barang</th>			
 		<th scope="col">SN</th>						
 		<th scope="col">QTY</th>			
 		<th scope="col">Harga Barang</th>
 		<th scope="col">Harga Toko</th>			
 		<th scope="col">Harga Partai</th>			
-		<th scope="col">Harga Cabang</th>					
+		<th scope="col">Harga Cabang</th-->					
+
+		<th scope="col">NO</th>			
+		<th scope="col">KODE</th>						
+		<th colspan="3" scope="col">NAMA</th>			
+		<th scope="col">SATUAN</th>						
+		<th scope="col">QTY</th>			
+		<th scope="col">Harga</th>
+		<th colspan="2" scope="col">Rupiah</th>					
 	</tr>			  
 	<?php
 			$i=1;
 			$total_bayar=0;
-			foreach($results2->result() as $row){
+			foreach($results2->result() as $rows){
 	?>
 	<tr>
 		<td scope="col"><?=$i++?></td>
-		<td scope="col"><?=$row->nama_barang?></td>
-		<td scope="col"><?=$row->sn?></td>
-		<td scope="col"><?=$row->qty?></td>
-		<td scope="col"><?=$row->harga?></td>
-		<td scope="col"><?=$row->harga_toko?></td>
-		<td scope="col"><?=$row->harga_partai?></td>
-		<td scope="col"><?=$row->harga_cabang?></td>		
+		<td scope="col"><?=$rows->id_barang?></td>
+		<td colspan="3" scope="col"><?=$rows->nama_barang?></td>	
+		<td scope="col"><?=$rows->satuan?></td>	
+		<td scope="col"><?=$rows->qty?></td>
+		<td scope="col"><?=convert_rupiah($rows->harga)?></td>				
+		<td colspan="2" scope="col"><?=convert_rupiah($rows->harga*$rows->qty)?></td>		
 	</tr>				
+
+
 	<?php
 				//$total_bayar = $total_bayar + $row->total;
 			}
 	?>
+	<tr>
+		<td colspan="7"></td>
+		<td colspan="1">Disc [%]</td>
+		<td colspan="2"><?=$row->diskon?> % </td>
+	</tr>
+	<tr>
+		<td colspan="7"></td>
+		<td colspan="1">Tax [%]</td>
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<td colspan="7"></td>
+		<td colspan="1">Total [Rp]</td>
+		<td colspan="2"><?=convert_rupiah($row->total)?></td>
+	</tr>
+
 </form>
+<?php } ?>

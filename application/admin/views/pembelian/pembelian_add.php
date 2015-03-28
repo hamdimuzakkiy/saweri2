@@ -1,6 +1,7 @@
 <script type="text/javascript">
 	var counter_list=0;
 	function batal(){
+		
 		document.location.href = '<?php echo base_url().'index.php/pembelian'?>';
 	}
 	
@@ -129,7 +130,8 @@
 	$.ajax({				type: 'POST',				url: '<?=base_url().'asset/admin/js/ajax_pembelian.php?command=add_1'?>',				
 		data: $('#get_detail_sn').serialize(),				success: function(data) {					$('#detail').html(data);				}			});			}
 	
-	function remove_detail(id){			
+	function remove_detail(id){		
+	//alert(id)	;
 		$.ajax({
 			type: 'POST',
 			url: '<?=base_url().'asset/admin/js/ajax_pembelian.php?command=remove&id='?>'+id,
@@ -382,7 +384,7 @@
 										<th colspan="3" scope="col">Harga Jual</th>
 										<th rowspan="2" scope="col">SN</th>
 										<th rowspan="2" scope="col">QTY</th>
-										<th rowspan="2" scope="col">Jatuh Tempo</th>
+										<th rowspan="2" scope="col">Sub Total</th>
 									</tr>
 									<tr>
 										<th>Toko</th>
