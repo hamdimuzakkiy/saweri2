@@ -1,5 +1,15 @@
 <?php ini_set("memory_limit","32M"); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15"><style>#div_laporan{	margin:0 auto;}table.laporan {	  border-spacing: 0;	  margin:0 auto;	   font-size: 0.8em;	     font-family: sans-serif;}tr.border,th.th_border,td.use_border {  border:0.5px solid #ccc;  padding:2pt;}</style><div id="div_laporan" align="center">	<table class="laporan" >
+
+<?php
+
+			$query = $this->db->get('setting_laporan');
+
+			foreach($query->result() as $row)
+			{
+				$footer = $row->footer_pembelian;
+			}
+		?>
 <?php foreach($results->result() as $row) {?>
 <tr><td colspan="7" align="left"><b>SAWERI GADING CELL</b></td><td colspan="1" align="left"><b>Dari :</b></td></tr>		
 <tr><td colspan="7" align="left"><b><?php echo $row->nama_cabang;?></b></td> <td colspan="1" align="left"><b><?php echo $row->nama_supplier;?></b></td> </tr>
@@ -61,6 +71,7 @@
 
 	?>
 	<tr>
+		
 		<td colspan="8"></td>
 		<td colspan="1">Disc [%]</td>
 		<td colspan="1"><?=$row->diskon?> % </td>
@@ -76,4 +87,4 @@
 		<td colspan="1"><?=convert_rupiah($row->total)?></td>
 	</tr>
 
-	<?php  }?>
+	<?php print $footer;  }?>

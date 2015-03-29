@@ -44,9 +44,9 @@
 						<td align="left" valign="top"><?=$row->tanggal?> </td>
 						<td align="left" valign="top" class="table-actions">
 							<?php
-								if ($can_view == TRUE){
+								/*if ($can_view == TRUE){
 									echo anchor('request_order/view/'.$row->id_request, '<img src="'.base_url().'asset/admin/images/icons/fugue/application-blog.png" width="16" height="16">', array('class'=>'with-tip view'));
-								}
+								}*/
 								
 								if ($can_update == TRUE){
 									echo anchor('request_order/update/'.$row->id_request, '<img src="'.base_url().'asset/admin/images/icons/fugue/pencil.png" width="16" height="16">', array('class'=>'with-tip', 'title'=>'Edit'));

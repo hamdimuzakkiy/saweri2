@@ -108,10 +108,11 @@ class master_piutang extends My_Controller
 			$this->form_validation->set_message('required', 'Field %s harus diisi!');		
 			$this->form_validation->set_message('numeric', 'Field %s harus diisi hanya dengan angka!');						
 			if ($this->form_validation->run() == FALSE){						
-				$this->load->view('master_piutang/master_piutang_add',$data);					
+				$this->load->view('master_piutang/master_piutang_add',$data);			
 			}else{				
 				$this->master_piutang->insert($data);						
-				$this->session->set_flashdata('message', 'Data Penerimaan Kas Berhasil disimpan.');			
+				$this->session->set_flashdata('message', 'Data Penerimaan Kas Berhasil disimpan.');
+				
 				redirect('master_piutang');		
 			}				
 			$this->close();	

@@ -117,7 +117,30 @@
 										echo '<li class="icon_blog">'.anchor('pelanggan','Master Pelanggan').'</li>'; 
 									}else{
 										echo '<li class="icon_blog">Master Pelanggan</li>'; 
-									}																		if ($privilage['master_akun'][0] == 1){ 										echo '<li class="icon_blog">'.anchor('master_akun','Master Akun').'</li>'; 									}else{										echo '<li class="icon_blog">Master Akun</li>'; 									}																		if ($privilage['master_saldo_elektrik'][0] == 1){ 										echo '<li class="icon_blog">'.anchor('master_saldo_elektrik','Master Saldo Elektrik').'</li>'; 									}else{										echo '<li class="icon_blog">Master Saldo Elektrik</li>'; 									}																		if ($privilage['master_pulsa'][0] == 1){ 										echo '<li class="icon_blog">'.anchor('master_pulsa','Master Pulsa').'</li>'; 									}else{										echo '<li class="icon_blog">Master Pulsa</li>'; 									}
+									}																		
+									if ($privilage['master_akun'][0] == 1){ 										
+										echo '<li class="icon_blog">'.anchor('master_akun','Master Akun').'</li>'; 									}
+										else{										
+											echo '<li class="icon_blog">Master Akun</li>'; 									
+										}																		
+										if ($privilage['master_saldo_elektrik'][0] == 1){ 										
+											echo '<li class="icon_blog">'.anchor('master_saldo_elektrik','Master Saldo Elektrik').'</li>'; 									
+										}
+										else{										
+											echo '<li class="icon_blog">Master Saldo Elektrik</li>'; 
+										}																		
+										if ($privilage['master_pulsa'][0] == 1){ 										
+											echo '<li class="icon_blog">'.anchor('master_pulsa','Master Pulsa').'</li>'; 	
+										}
+										else{										
+											echo '<li class="icon_blog">Master Pulsa</li>'; 									
+										}
+										if ($privilage['master_kas'][0] == 1){ 										
+											echo '<li class="icon_blog">'.anchor('master_kas','Master Kas').'</li>'; 	
+										}
+										else{										
+											echo '<li class="icon_blog">Master Kas</li>'; 									
+										}
 									?>
 								</ul>
 							</div>

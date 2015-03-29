@@ -23,7 +23,19 @@ class MY_Controller extends CI_Controller{
 			redirect('auth/failed');
 		}
 		
-	}		private function ambilheader()	{		$data['result'] 		= $this->setting_view->getItemById($id);				$data['id'] = $id;		$data['name'] = $data['result']->row()->name;		$data['detail'] = $data['result']->row()->detail;		$data['judul'] = $data['result']->row()->judul;		$data['gambar1'] = $data['result']->row()->name_gambar1 ;		$data['gambar2'] = $data['result']->row()->name_gambar2 ;		$data['header1'] = $data['result']->row()->name_header1 ;		$data['header2'] = $data['result']->row()->name_header2 ;		}
+	}		
+	private function ambilheader()	
+	{	
+		$data['result'] 		= $this->setting_view->getItemById($id);				
+		$data['id'] = $id;		
+		$data['name'] = $data['result']->row()->name;		
+		$data['detail'] = $data['result']->row()->detail;		
+		$data['judul'] = $data['result']->row()->judul;		
+		$data['gambar1'] = $data['result']->row()->name_gambar1 ;		
+		$data['gambar2'] = $data['result']->row()->name_gambar2 ;		
+		$data['header1'] = $data['result']->row()->name_header1 ;		
+		$data['header2'] = $data['result']->row()->name_header2 ;		
+	}
 	
 	function open()
 	{

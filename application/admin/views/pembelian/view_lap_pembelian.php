@@ -28,6 +28,15 @@
 					<!--button type="submit" onclick="report_excel()"><img src="<?=base_url()?>asset/admin/images/icons/fugue/tick-circle.png" width="16" height="16">REKAP EXCEL</button-->
 					
 			</div>	
+			<?php
+
+			$query = $this->db->get('setting_laporan');
+
+			foreach($query->result() as $row)
+			{
+				$footer = $row->footer_pembelian;
+			}
+		?>
 			<!--
 <?php
 	$attributes = array('class' => 'formccs', 'id' => 'myform', 'name'=> 'myform');	
@@ -130,7 +139,10 @@
 			}
 	?>
 	<tr>
-		<td colspan="7"></td>
+
+		
+		<td colspan="3"><?php print $footer; ?></td>
+		<td colspan="4"></td>
 		<td colspan="1">Disc [%]</td>
 		<td colspan="2"><?=$row->diskon?> % </td>
 	</tr>
