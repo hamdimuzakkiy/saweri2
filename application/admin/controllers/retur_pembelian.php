@@ -254,6 +254,7 @@ class retur_pembelian extends My_Controller
 			$this->db->join('detail_pembelian', 'detail_pembelian.id_pembelian = pembelian.id_pembelian');
 			$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
 			$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');
+			$this->db->where('detail_pembelian.posisi_pusat =', 1);
 			$this->db->where('pembelian.id_pembelian', $id_pembelian);
 			$this->db->where_not_in('detail_pembelian.id_detail_pembelian', $arr2);
 			//$this->db->join_left('pembelian.id_pembelian', $id_pembelian);

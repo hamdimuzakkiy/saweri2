@@ -252,13 +252,13 @@
 								<ul>
 									<?php
 										if ($privilage['inventory_pusat'][0] == 1){ 
-											echo '<li class="icon_blog">'.anchor('inventory_pusat/index/pusat','Persediaan Pusat').'</li>'; 
+											echo '<li class="icon_blog">'.anchor('inventory_pusat','Persediaan Pusat').'</li>'; 
 										}else{
 											echo '<li class="icon_blog">Persediaan Pusat</li>'; 
 										}
 										
 										if ($privilage['inventory_cabang'][0] == 1){ 
-											echo '<li class="icon_blog">'.anchor('inventory_cabang/index/cabang','Persediaan Cabang').'</li>'; 
+											echo '<li class="icon_blog">'.anchor('inventory_cabang','Persediaan Cabang').'</li>'; 
 										}else{
 											echo '<li class="icon_blog">Persediaan Cabang</li>'; 
 										}

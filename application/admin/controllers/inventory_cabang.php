@@ -11,7 +11,8 @@ class inventory_cabang extends My_Controller
 		
 	}
 	
-	function index($sebagai='')
+	//function index($sebagai='')
+	function index()
 	{
 		if ($this->can_view() == FALSE){
 			redirect('auth/failed');

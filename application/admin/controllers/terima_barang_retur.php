@@ -205,14 +205,15 @@ class terima_barang_retur extends My_Controller
 		# ambil id pembelian berdasarkan no po di tabel pembelian
 		
 		$this->db->flush_cache();
-		$this->db->select('retur_pembelian.id_retur_pembelian, pembelian.po_no, supplier.kode_supplier, detail_pembelian.sn, supplier.nama AS nama_supplier, retur_pembelian.tanggal, barang.nama_barang, retur_pembelian.qty');
+		$this->db->select('retur_pembelian.id_retur_pembelian,detail_pembelian.id_detail_pembelian, pembelian.po_no, supplier.kode_supplier, detail_pembelian.sn, supplier.nama AS nama_supplier, retur_pembelian.tanggal, barang.nama_barang, retur_pembelian.qty');
 		$this->db->from('retur_pembelian');
 		$this->db->join('detail_pembelian', 'retur_pembelian.id_detail_pembelian = detail_pembelian.id_detail_pembelian');
 		$this->db->join('pembelian', 'pembelian.id_pembelian = detail_pembelian.id_pembelian');
 		$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
 		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');		
-		$this->db->where('retur_pembelian.id_retur_pembelian', $po);		
-		
+		$this->db->where('retur_pembelian.id_retur_pembelian', $po);
+				
+
 		$res =  $this->db->get();
 	 	$res = $res->result();
 	 	$i=0;

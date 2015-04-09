@@ -11,7 +11,7 @@ class inventory_pusat extends My_Controller
 		
 	}
 	
-	function index($sebagai='')
+	function index(/*$sebagai=''*/)
 	{
 		if ($this->can_view() == FALSE){
 			redirect('auth/failed');
@@ -57,9 +57,7 @@ class inventory_pusat extends My_Controller
 		$config['first_tag_close'] = '</li>';
 		
 		$this->pagination->initialize($config);	
-		
-		
-		
+				
 		$data['results'] = $this->inventory->getItem($config['per_page'], $this->uri->segment(3));
 		/*$data['sebagai'] = $sebagai;*/
 		
