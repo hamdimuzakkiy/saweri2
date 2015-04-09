@@ -115,7 +115,7 @@
 									{
 										foreach($query->result() as $row)
 										{
-											echo '<option value="'.$row->id_retur_pembelian.'">'.$row->po_no.'</option>';
+											echo '<option value="'.$row->id_retur_pembelian.'">'.$row->id_retur_pembelian.'</option>';
 										}
 									}
 								?>

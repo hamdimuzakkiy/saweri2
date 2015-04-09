@@ -63,6 +63,8 @@ class inventory_cabang extends My_Controller
 		$data['results'] = $this->inventory->getItem_cabang($config['per_page'], $this->uri->segment(3));
 		/*$data['sebagai'] = $sebagai; */
 		
+		
+
 		$this->load->view('inventory/inventory_cabang_list', $data);
 		
 		$this->close();

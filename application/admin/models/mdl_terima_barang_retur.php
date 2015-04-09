@@ -33,9 +33,43 @@ class mdl_terima_barang_retur extends CI_Model{
 
 	function insert($data)
 	{
+		$data['id_retur_penerimaan'] = $this->getID();
 		$this->db->flush_cache();
 		$this->db->insert('terima_barang_retur', $data);
 	}
+
+	function getID()
+	{
+		$kd_awal = 'TBR';
+		$code_user = get_userid();		
+		$code_user = str_pad($code_user, 3, '0', STR_PAD_LEFT);
+		
+		$this->db->flush_cache();
+		$this->db->select('users.*, cabang.*, karyawan.*');
+		$this->db->from('users');
+		$this->db->join('karyawan', 'karyawan.userid = users.userid');
+		$this->db->join('cabang', 'cabang.id_cabang = karyawan.id_cabang');
+		$this->db->where('users.userid', get_userid());
+		$kode_cabang = $this->db->get()->row()->kode_cabang;
+		
+		$tanggal = date('dmy');
+		
+		$this->db->flush_cache();
+		$this->db->from('terima_barang_retur');
+		//$this->db->like('po_no', $kd_awal . '-'.$kode_cabang.$code_user.$tanggal, 'after');
+		$this->db->like('id_retur_penerimaan', $kd_awal . '-'.$kode_cabang.$tanggal, 'after');
+		$query = $this->db->get();
+		
+		//print $this->db->last_query();
+
+		$no_po = $query->num_rows();
+		$no_po = (int) $no_po + 1;
+		$no_po = str_pad($no_po, 4, '0', STR_PAD_LEFT);
+		
+		/*return $kd_awal . '-'.$kode_cabang.$code_user.$tanggal.$no_po; */
+		return $kd_awal . '-'.$kode_cabang.$tanggal.$no_po; 
+	}
+
 	
 	function update($id, $data)
 	{

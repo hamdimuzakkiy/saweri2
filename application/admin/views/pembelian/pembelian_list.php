@@ -76,9 +76,9 @@
 									
 								}
 
-								if ($can_update == TRUE){
+								/*if ($can_update == TRUE){
 									echo anchor('pembelian/update/'.$row->id_pembelian, '<img src="'.base_url().'asset/admin/images/icons/fugue/pencil.png" width="16" height="16">', array('class'=>'with-tip', 'title'=>'Edit'));
-								}
+								}*/
 								
 								if ($can_delete == TRUE){
 									echo anchor('pembelian/delete/'.$row->id_pembelian, '<img src="'.base_url().'asset/admin/images/icons/fugue/cross-circle.png" width="16" height="16">', array('class'=>'with-tip', 'title'=>'Edit', 'onclick'=>"return confirm('Anda yakin akan menghapus data ini?')"));

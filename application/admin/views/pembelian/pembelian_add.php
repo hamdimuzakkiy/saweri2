@@ -9,8 +9,18 @@
 		$("#tanggal").datepicker({dateFormat: 'yy-mm-dd', yearRange: '2001:2021' });
 	})
 	function save_data(){
+		var jumlah = document.getElementById('sum_detail').value;
+		for (var i = 0; i < jumlah; i++) {
+			
+			if (document.getElementById('detail_sn'+i).value == '' && document.getElementById('sum_detail').hidden == false)
+			{
+				alert('Ada Serial Number Yang Belum Terisi');
+				return false;
+			}
 
+		};
 		var isi = document.getElementById('detail').innerHTML;		var detail_jatuh_tempo_text = document.getElementById('detail_jatuh_tempo').value;		 		var obj_sn = document.getElementsByName("detail[id_barang]");		/* var obj_idbarang = document.getElementById("detail_idbarang0").value;		 var obj_idjenis = document.getElementById("detail_idjenis0").value;*/		/*		for (var j=0;j<counter_list;j++){							if ((document.getElementById("detail_sn" + j).value == '' ) && (obj_idjenis = document.getElementById("detail_idjenis"+ j).value=='4')){					alert("List No " + (parseInt(j)+1) + " SN tidak boleh kosong");					var sn_id = document.getElementById("detail_sn"+j).focus();										return ;				}					}*/
+
 		if( isi == false){
 			document.getElementById('alert_yanto').innerHTML = '<ul class="message error grid_12"><li>List data barang tidak boleh kosong</li><li class="close-bt"></li></ul><br>';
 			$('html, body').stop().animate({
@@ -82,8 +92,7 @@
 	$(document).ready(function() {
 		$("#getbarang").fancybox();
 	});
-	function set_detail(){		
-
+	function set_detail(){			
 			var cara_bayar = document.getElementById("cara_bayar").value;		
 			var detail_qty = document.getElementById("detail_qty").value;		
 			var detail_idjenis = document.getElementById("detail_idjenis").value;		
@@ -205,8 +214,10 @@
 						<label for="complex-en-url">Tanggal Pembelian :</label>
 						<span class="relative">
 							<span class="input-type-text margin-right relative">
-								<input type="text" name="tanggal" id="tanggal" class="datepicker" value="<?=date('Y-m-d')?>">
-								<img onclick="javascript:klick_tanggal()" src="<?=base_url()?>asset/admin/images/icons/fugue/calendar-month.png" width="16" height="16">
+								<input type="text" name="tanggal" readonly value="<?=date('Y-m-d')?>">
+								<img src="<?=base_url()?>asset/admin/images/icons/fugue/calendar-month.png" width="16" height="16">
+								<!--input type="text" name="tanggal" id="tanggal" class="datepicker" readonly value="<?=date('Y-m-d')?>"-->
+								<!--img onclick="javascript:klick_tanggal()" src="<?=base_url()?>asset/admin/images/icons/fugue/calendar-month.png" width="16" height="16"-->
 							</span>
 						</span>
 					</p>

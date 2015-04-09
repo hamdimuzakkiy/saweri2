@@ -16,18 +16,23 @@
 	
 	
 	function print(){
-		/*<form>
+		<form>
 		<input type="button" value="Print This Page" onClick="window.print()" />
-		</form>*/
+		</form>
 	}
 	
 	
 </script>
-			<div id="tab-settings" class="tabs-content">
-					<button type="button" onclick="report_pdf()"><img src="<?=base_url()?>asset/admin/images/icons/fugue/tick-circle.png" width="16" height="16">REKAP PDF</button>
-					<!--button type="submit" onclick="report_excel()"><img src="<?=base_url()?>asset/admin/images/icons/fugue/tick-circle.png" width="16" height="16">REKAP EXCEL</button-->
-					
+<style type="text/css">
+	@media print{
+		.prins{
+			display: none;
+		}
+	}
+</style>
+
 			</div>	
+			
 			<?php
 
 			$query = $this->db->get('setting_laporan');
@@ -159,3 +164,8 @@
 
 </form>
 <?php } ?>
+<span class = "prins">
+			<div id="tab-settings" class="tabs-content">
+					<button type="button" onclick="print()"><img src="<?=base_url()?>asset/admin/images/icons/fugue/tick-circle.png" width="16" height="16">PRINT</button>
+					<!--button type="submit" onclick="report_excel()"><img src="<?=base_url()?>asset/admin/images/icons/fugue/tick-circle.png" width="16" height="16">REKAP EXCEL</button-->
+</span>					

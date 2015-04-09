@@ -4,8 +4,7 @@
 	
 	# memasukan detail barang ke list detail di form add barang
 	function add_detail_3($jum,$diskon) // pas add
-	{
-		
+	{		
 		$data['detail_idbarang'] 		= $_POST['detail_idbarang'];
 		$data['detail_namabarang'] 		= $_POST['detail_namabarang'];
 		$data['detail_harga']	 		= $_POST['detail_harga'];				$data['detail_idjenis']	 		= $_POST['detail_idjenis'];
@@ -20,10 +19,12 @@
 		$sum = 0;
 		//print_r($detail);
 		$max = 0;
+		$cd = 0;
 		if (isset($_POST['detail']))
 		{
 			$detail = $_POST['detail'];
 			$count_detail = count($detail);
+			$cd = $count_detail;
 			$sum  = 0;
 			$max = 0;
 			for($i=0; $i<$count_detail; $i++)
@@ -79,10 +80,11 @@
 			
 		}
 		
-		$xx=0;
+		$xx=0;		
+		$tot = $cd+$jum;
 		for($xx=0; $xx < $jum; $xx++){ 
 			$sum = $sum + ($data['detail_harga'] * $data['detail_qty']);
-			$tmp = $max + $xx+1;
+			$tmp = $max + $xx+1;			
 			echo '
 						<tr>
 							<td>'.($i + 1).'</td>
@@ -161,13 +163,14 @@
 						<td style = 'border-color:white;'> </td>
 						<td style = 'border-color:white;'> </td>
 						<td style = 'border-color:white;'> </td>
-						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> <input type='hidden' id = 'sum_detail' value = ".$tot."></td>
 						<td>Harga Akhir</td>
 						<td id = 'finall'>".convert_rupiah(($sum*(100-$diskon)/100))."
 						
 						</td>
 						<input type='hidden' id = 'sum' name='sum' value='".$sum."' />
 					</tr>";
+					
 	}
 
 
@@ -297,7 +300,8 @@
 								<a href="Javascript:remove_detail('.$i.')">Batal</a>
 							</td>
 						</tr>';
-			$i++;
+			$tot = $i++;
+			$tot = $tot+1;
 			print "
 					<tr>
 						<td style = 'border-color:white;'> </td>
@@ -333,14 +337,14 @@
 						<td style = 'border-color:white;'> </td>
 						<td style = 'border-color:white;'> </td>
 						<td style = 'border-color:white;'> </td>
-						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'><input type='hidden' id = 'sum_detail' value = ".$tot."></td>
 						<td>Harga Akhir</td>
 						<td id = 'finall'>".convert_rupiah(($sum*(100-$diskon)/100))."
 						
 						</td>
 						<input type='hidden' id = 'sum' name='sum' value='".$sum."' />
 					</tr>
-					";
+					";					
 		/*} */
 	}
 
@@ -515,7 +519,7 @@
 				}				
 				
 
-
+				$tot = $count_detail-1;
 			}
 			print "
 					<tr>
@@ -552,7 +556,7 @@
 						<td style = 'border-color:white;'> </td>
 						<td style = 'border-color:white;'> </td>
 						<td style = 'border-color:white;'> </td>
-						<td style = 'border-color:white;'> </td>
+						<td style = 'border-color:white;'> <input type='hidden' id = 'sum_detail' value = ".$tot."></td>
 						<td>Harga Akhir</td>
 						<td id = 'finall'>".convert_rupiah(($sum*(100-$diskon)/100))."
 						

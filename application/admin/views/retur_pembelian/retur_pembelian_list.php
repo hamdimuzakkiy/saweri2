@@ -21,7 +21,7 @@
 			
 				<thead>
 					<tr>
-						<th align="left" valign="top" scope="col">PO No</th>
+						<th align="left" valign="top" scope="col">No Retur</th>
 						<th align="left" valign="top" scope="col">Kode Supplier</th>
 						<th align="left" valign="top" scope="col">SN</th>
 						<th align="left" valign="top" scope="col">Nama Supplier</th>
@@ -36,7 +36,7 @@
 					
 					<?php foreach($results->result() as $row) {?>
 					<tr>
-						<td align="left" valign="top"><?=$row->po_no?> </td>
+						<td align="left" valign="top"><?=$row->id_retur_pembelian?> </td>
 						<td align="left" valign="top"><?=$row->kode_supplier?> </td>
 						<td align="left" valign="top"><?=$row->sn?> </td>
 						<td align="left" valign="top"><?=$row->nama_supplier?> </td>

@@ -6,8 +6,13 @@ class retur_pembelian extends My_Controller
 	function __construct()
 	{
 		parent::__construct();
-		
+		$this->load->model('mdl_pembelian', 'pembelian');				
+		$this->load->model('mdl_kode_trans', 'kode_trans');				
+		$this->load->model('mdl_hutang', 'hutang');		
 		$this->load->model('mdl_retur_pembelian', 'retur_pembelian');
+		$this->load->library('fungsi');
+		$this->load->library('pdf');
+		
 		
 	}
 	

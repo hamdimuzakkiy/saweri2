@@ -36,7 +36,7 @@
 					
 					<?php foreach($results->result() as $row) {?>
 					<tr>
-						<td align="left" valign="top"><?=$row->po_no?> </td>
+						<td align="left" valign="top"><?=$row->id_retur_penerimaan?> </td>
 						<td align="left" valign="top"><?=$row->kode_supplier?> </td>
 						<td align="left" valign="top"><?=$row->sn?> </td>
 						<td align="left" valign="top"><?=$row->nama_supplier?> </td>
