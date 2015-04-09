@@ -25,7 +25,7 @@ class pembelian extends My_Controller
 
 		$config['base_url'] = base_url().'index.php/pembelian/index/';
 		$config['total_rows'] = sizeof($this->pembelian->count()->result());
-		$config['per_page'] = '50';
+		$config['per_page'] = '10';
 		$config['num_links'] = '10';
 		$config['uri_segment'] = '3';
 		

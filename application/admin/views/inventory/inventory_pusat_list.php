@@ -21,8 +21,10 @@
 						<th align="left" valign="top" scope="col">Kategori</th>
 						<!--<th align="left" valign="top" scope="col">Tanggal</th>-->
 						<th align="left" valign="top" scope="col">Supplier</th>
-						<th align="left" valign="top" scope="col">Debit</th>
-						<th align="left" valign="top" scope="col">Kredit</th>
+						<!--th align="left" valign="top" scope="col">Debit</th>
+						<th align="left" valign="top" scope="col">Kredit</th-->
+						<th align="left" valign="top" scope="col">Stok</th>
+						<th align="left" valign="top" scope="col">Terjual</th>
 						<!--<th align="left" valign="top" scope="col">Saldo</th>-->
 					</tr>
 				</thead>
@@ -36,7 +38,9 @@
 						<td align="left" valign="top"><?=$row->kategori?> </td>
 						<!--<td align="left" valign="top"><?=$row->tanggal?> </td>-->
 						<td align="left" valign="top"><?=$row->nama?> </td>
-						<td align="left" valign="top"><?=$row->qty?> </td>
+						<td align="left" valign="top"><?=$row->qty-$row->jual?> </td>
+						<td align="left" valign="top"><?=$row->jual?> </td>
+						<!--td align="left" valign="top"><?=$row->qty?> </td>
 						<?php
 							$q = $this->inventory->getItempenjualan($row->id_barang);
 							$kredit=0;
@@ -44,7 +48,7 @@
 								$kredit= $q->row()->kredit;
 							}
 						?>
-						<td align="left" valign="top"><?=$kredit?></td>
+						<td align="left" valign="top"><?=$kredit?></td-->
 						<!--<td align="left" valign="top"> </td>-->
 					</tr>
 					<?php } ?>

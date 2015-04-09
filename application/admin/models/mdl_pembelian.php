@@ -15,8 +15,7 @@ class mdl_pembelian extends CI_Model{
 		$this->db->join('supplier', 'supplier.id_supplier = pembelian.id_supplier');
 		$this->db->join('cabang', 'cabang.id_cabang = pembelian.id_cabang');		
 		$this->db->where('cabang.id_cabang', $this->session->userdata('idcabang'));		$this->db->where('pembelian.posting', '0');
-		$this->db->limit($num, $offset);
-
+		$this->db->limit($num, $offset);				
 		//print $this->db->last_query();
 
 		return $this->db->get();
