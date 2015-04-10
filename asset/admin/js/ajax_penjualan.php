@@ -15,7 +15,8 @@
 			$count_detail = count($detail);
 			
 			for($i=0; $i<$count_detail; $i++)
-			{				$total = $detail[$i]['harga'] * $detail[$i]['qty'];
+			{				
+				$total = $detail[$i]['harga'] * $detail[$i]['qty'];
 				echo '
 						<tr id="ajaxpenjualan">
 							<td>'.($i + 1).'</td>
@@ -64,8 +65,14 @@
 								'.convert_rupiah($data[$xx]['harga']).'
 								<input type="hidden" name="detail['.$i.'][harga]" value="'.$data[$xx]['harga'].'" />
 							</td>
+							
 							<td align="right">
-								'.$data[$xx]['qty'].'
+								'.$data[$xx]['satuan'].'
+								<input type="hidden" name="detail['.$i.'][satuan]" value="'.$data[$xx]['satuan'].'" />
+							</td>
+
+							<td align="right">
+									'.$data[$xx]['qty'].'
 								<input type="hidden" name="detail['.$i.'][qty]" value="'.$data[$xx]['qty'].'" />
 							</td>
 							<td>

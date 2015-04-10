@@ -137,7 +137,6 @@
 	
 	$(document).ready(function() {		
 		$("#getbarang").fancybox();
-		
 		/*var saldo_piutang_text = document.getElementById("saldo_piutang_text").value;*/
 		/*
 		$("#id_pelanggan").click(function(){
@@ -220,6 +219,8 @@
 		tanggal.focus();
 	}
 	
+
+
 </script>
 
 <div id="alert_yanto"></div><br>
@@ -452,7 +453,8 @@
 									<th scope="col">SATUAN</th>
 									<th scope="col">Qty</th>
 									<th scope="col">DISKON</th>
-									<th scope="col">RUPIAH</th>					
+									<th scope="col">RUPIAH</th>
+									<th scope="col">AKSI</th>						
 								</tr>
 							</thead>
 

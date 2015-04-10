@@ -167,18 +167,19 @@ class mdl_penjualan extends CI_Model{
 	
 	function h_get_items($id_pembelian, $id_barang, $posisibarang, $nilaiposisi)
 	{
-		$this->db->flush_cache();
-		$this->db->select('detail_pembelian.id_barang, detail_pembelian.id_detail_pembelian, jenis.*, kategori.*, barang.nama_barang, detail_pembelian.harga, detail_pembelian.sn, 
-			barang.is_hargatoko, barang.is_hargapartai, barang.is_hargajual, barang.harga_cabang, barang.harga_toko, barang.harga_partai');
-		$this->db->from('detail_pembelian'); 		
+		$this->db->flush_cache();		
+		$this->db->select('pembelian.id_pembelian,detail_pembelian.id_barang, detail_pembelian.id_detail_pembelian, 			
+			jenis.*, kategori.*, barang.nama_barang, detail_pembelian.harga, barang.sn, detail_pembelian.qty, 			
+			barang.is_hargatoko, pembelian.diskon, satuan.satuan, barang.is_hargapartai, barang.is_hargajual, barang.harga_cabang, barang.harga_toko, barang.harga_partai');		
+		$this->db->from('pembelian');		
+		$this->db->join('detail_pembelian', 'detail_pembelian.id_pembelian = pembelian.id_pembelian');		
 		$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
-		$this->db->join('jenis', 'jenis.id_jenis = barang.id_jenis');
-		$this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori');				
+		$this->db->join('satuan', 'barang.id_satuan = satuan.id_satuan');
+		$this->db->join('jenis', 'jenis.id_jenis = barang.id_jenis');		
+		$this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori');			
 		$this->db->order_by('detail_pembelian.id_detail_pembelian', 'ASC');
-		$this->db->where('detail_pembelian.id_barang', $id_barang);
-		$this->db->where($posisibarang, $nilaiposisi);
-		//$this->db->group_by('detail_pembelian.id_barang');
-
+		$this->db->where('detail_pembelian.id_barang', $id_barang);		
+		$this->db->where($posisibarang, $nilaiposisi);									
 		return $this->db->get();
 	}	
 	
@@ -199,27 +200,26 @@ class mdl_penjualan extends CI_Model{
 		$this->db->where($posisibarang, $nilaiposisi);				/*$this->db->where('penjualan.id_pelanggan', get_idcabang());*/				
 		$this->db->group_by('detail_pembelian.id_barang');						
 		return $this->db->get();
-	}		
+	}
+
 	function get_items_hp($id_pembelian, $id_barang, $posisibarang, $nilaiposisi)
 	{		
-
 		$this->db->flush_cache();		
-		$this->db->select('pembelian.id_pembelian,			
-			detail_pembelian.id_barang, detail_pembelian.id_detail_pembelian, 			
-			jenis.*, kategori.*, barang.nama_barang, detail_pembelian.harga, detail_pembelian.sn, detail_pembelian.qty, 			
-			barang.is_hargatoko, barang.is_hargapartai, barang.is_hargajual, barang.harga_cabang, barang.harga_toko, barang.harga_partai');		
-		$this->db->from('pembelian');		$this->db->join('detail_pembelian', 'detail_pembelian.id_pembelian = pembelian.id_pembelian');		
-		$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');		$this->db->join('jenis', 'jenis.id_jenis = barang.id_jenis');		
-		$this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori');		/*$this->db->group_by('detail_pembelian.id_barang'); */		
-		$this->db->order_by('detail_pembelian.id_detail_pembelian', 'ASC');		/*$this->db->where('detail_pembelian.id_pembelian', $id_pembelian);*/		
-		$this->db->where('detail_pembelian.id_barang', $id_barang);		$this->db->where($posisibarang, $nilaiposisi);									
-		return $this->db->get();	
+		$this->db->select('pembelian.id_pembelian,detail_pembelian.id_barang, detail_pembelian.id_detail_pembelian, 			
+			jenis.*, kategori.*, barang.nama_barang, detail_pembelian.harga, barang.sn, detail_pembelian.qty, 			
+			barang.is_hargatoko, pembelian.diskon, satuan.satuan, barang.is_hargapartai, barang.is_hargajual, barang.harga_cabang, barang.harga_toko, barang.harga_partai');		
+		$this->db->from('pembelian');		
+		$this->db->join('detail_pembelian', 'detail_pembelian.id_pembelian = pembelian.id_pembelian');		
+		$this->db->join('barang', 'barang.id_barang = detail_pembelian.id_barang');
+		$this->db->join('satuan', 'barang.id_satuan = satuan.id_satuan');
+		$this->db->join('jenis', 'jenis.id_jenis = barang.id_jenis');		
+		$this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori');			
+		$this->db->order_by('detail_pembelian.id_detail_pembelian', 'ASC');
+		$this->db->where('detail_pembelian.id_barang', $id_barang);		
+		$this->db->where($posisibarang, $nilaiposisi);									
+		return $this->db->get();
 	}
-		/*
-	function updateBarangPembelian($nilai){
-		$this->db->flush_cache();
-		$this->db->update('detail_pembelian', array('soldout'=> $nilai));
-	} */			
+		
 	function updateBarangPembelian($id_detailpembelian, $idcabang, $posisibarang, $nilaiposisi)
 	{		
 		$this->db->flush_cache();		
