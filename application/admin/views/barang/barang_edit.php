@@ -44,7 +44,7 @@
 						</span>
 					</p>
 					<p class="colx2-right">
-						<label for="complex-en-url">Kategori :</label>
+						<label for="complex-en-url">Kategori Barang:</label>
 						<span class="relative">
 							<select name="id_kategori" id="id_kategori" lass="seperempat-width">
 								<?php
@@ -133,7 +133,11 @@
 							</select>
 						</span>
 					</p>
-					<p class="colx3-center">
+
+				</div>
+
+				<div class="columns">
+					<p class="colx2-left">
 						<label for="complex-en-url">Point Karyawan :</label>
 						<span class="relative">
 							<?php 
@@ -147,7 +151,7 @@
 							?>
 						</span>
 					</p>
-					<p class="colx3-right">
+					<p class="colx2-right">
 						<label for="complex-en-url">Point Member :</label>
 						<span class="relative">
 							<?php 
@@ -161,7 +165,8 @@
 							?>
 						</span>
 					</p>
-				</div>
+					</div>
+
 				<div class="columns">						
 					<p class="colx2-left">
 						<label for="complex-en-url">HPP :</label>
@@ -170,14 +175,34 @@
 								if (form_error('hpp') != null)
 								{
 									echo '<input type="text" name="hpp" id="hpp" value="'.set_value('hpp').'" class="duapertiga-width" >';
-								}else
+								}
+								else
 								{
 									echo '<input type="text" name="hpp" id="hpp" value="'.$hpp.'" class="duapertiga-width">';
 								}
 							?>
 						</span>
 					</p>
+
+					<p class="colx2-right">
+						<label for="complex-en-url">Serial Number :</label>
+						<span class="relative">
+
+							<?php 
+								if (form_error('hpp') != null)
+								{
+									echo '<input type="checkbox" name="sn" id="sn" value="'.set_value('sn').'" class="duapertiga-width" >';
+								}
+								else
+								{
+									echo '<input type="checkbox" name="sn" id="sn" value="'.$sn.'" class="duapertiga-width">';
+								}
+							?>
+							
+						</span>
+					</p>
 				</div>	
+
 				<div class="columns">		
 					<p class="colx3-left">
 						<label for="complex-en-url">Harga Toko :</label>

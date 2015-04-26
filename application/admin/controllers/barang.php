@@ -183,7 +183,8 @@ class barang extends My_Controller
 		$data['po_no'] = $data['result']->row()->po_no;
 		$data['is_hargatoko'] = $data['result']->row()->is_hargatoko;
 		$data['is_hargapartai'] = $data['result']->row()->is_hargapartai;
-		$data['is_hargajual'] = $data['result']->row()->is_hargajual;		
+		$data['is_hargajual'] = $data['result']->row()->is_hargajual;
+		$data['sn'] = $data['result']->row()->sn;		
 		
 		$this->load->view('barang/barang_edit', $data);
 		
@@ -192,7 +193,8 @@ class barang extends My_Controller
 	
 	function process_update()
 	{
-		if ($this->can_update() == FALSE){
+		if ($this->can_update() == FALSE)
+		{
 			redirect('auth/failed');
 		}
 		
@@ -214,9 +216,8 @@ class barang extends My_Controller
 		$data['is_hargajual'] = $this->input->post('is_hargajual');
 		$data['point_karyawan'] = $this->input->post('point_karyawan');
 		$data['point_member'] = $this->input->post('point_member');
+		$data['sn'] = $this->input->post('sn');
 		$data['userid'] = get_userid();
-		
-		
 		
 		$this->form_validation->set_rules('nama_barang', 'nama_barang');
 		$this->form_validation->set_rules('id_jenis', 'id_jenis', 'required');
@@ -231,29 +232,27 @@ class barang extends My_Controller
 		$this->form_validation->set_rules('is_hargapartai', 'is_hargapartai', 'trim');
 		$this->form_validation->set_rules('is_hargajual', 'is_hargajual', 'trim');
 		$this->form_validation->set_rules('point_karyawan', 'point_karyawan', 'trim|numeric');
+		$this->form_validation->set_rules('sn', 'sn');
 		$this->form_validation->set_rules('point_member', 'point_member', 'trim|numeric');
 		
 		
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		
-		
 		$this->form_validation->set_message('required', 'Field %s harus diisi!');
 		$this->form_validation->set_message('numeric', 'Field %s harus diisi hanya dengan angka!');
 		
-		
-		if ($this->form_validation->run() == FALSE){
+		if ($this->form_validation->run() == FALSE)
+		{
 			
 			$this->load->view('barang/barang_edit',$data);
 			
-		}else{	
+		}
+		else
+		{	
 			$this->barang->update($data['id_barang'], $data);
-			
 			$this->session->set_flashdata('message', 'Data Barang Berhasil diupdate.');
 			redirect('barang');
 		}
-		
 		$this->close();
-		
 	}
 	
 	function delete($id)
