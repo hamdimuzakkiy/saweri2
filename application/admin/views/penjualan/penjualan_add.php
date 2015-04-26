@@ -246,11 +246,11 @@
 						</span>
 					</p>
 					<p class="colx2-right">
-						<label for="complex-en-url">TANGGAL :</label>
+						<label for="complex-en-url">TANGGAL PENJUALAN:</label>
 						<span class="relative">
 							<span class="input-type-text margin-right relative">
-								<input type="text" name="tanggal" id="tanggal" class="datepicker" value="<?=date('Y-m-d')?>">
-								<img onclick="javascript:klick_tanggal()" src="<?=base_url()?>asset/admin/images/icons/fugue/calendar-month.png" width="16" height="16">
+								<input type="text" name="tanggal" readonly value="<?=date('Y-m-d')?>">
+								<img src="<?=base_url()?>asset/admin/images/icons/fugue/calendar-month.png" width="16" height="16">
 							</span>
 						</span>
 					</p>
