@@ -102,8 +102,8 @@
 						<label for="complex-en-url">Tanggal :</label>
 						<span class="relative">
 							<span class="input-type-text margin-right relative">
-								<input type="text" name="tanggal" id="tanggal" class="datepicker" value="<?=$result->row()->tanggal?>">
-								<img onclick="javascript:klick_tanggal()" src="<?=base_url()?>asset/admin/images/icons/fugue/calendar-month.png" width="16" height="16">
+								<input type="text" name="tanggal" readonly value="<?=$result->row()->tanggal?>">
+								<img src="<?=base_url()?>asset/admin/images/icons/fugue/calendar-month.png" width="16" height="16">
 							</span>
 						</span>
 					</p>
