@@ -272,64 +272,152 @@
 								<img src="asset/admin/images/menu-open-arrow.png" width="16" height="16">
 								<ul>
 									<?php
-										if ($privilage['penjualan'][0] == 1){ 
-											echo '<li class="icon_blog">'.anchor('penjualan','Penjualan').'</li>'; 
-										}else{
-											echo '<li class="icon_blog">Penjualan</li>'; 
+										if ($privilage['penjualan_toko'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('penjualan_toko','Penjualan Toko').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Penjualan Toko</li>'; 
 										}
 										
-										if ($privilage['retur_penjualan'][0] == 1){ 
+										if ($privilage['penjualan_partai'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('penjualan_partai','Penjualan Partai').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Penjualan Partai</li>'; 
+										}
+
+										if ($privilage['penjualan_cabang'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('penjualan_cabang','Penjualan Cabang').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Penjualan Cabang</li>'; 
+										}
+
+										if ($privilage['retur_penjualan'][0] == 1)
+										{ 
 											echo '<li class="icon_blog">'.anchor('retur_penjualan','Return Penjualan').'</li>'; 
-										}else{
+										}
+										else
+										{
 											echo '<li class="icon_blog">Return Penjualan</li>'; 
+										}
+
+										if ($privilage['tukar_tambah'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('tukar_tambah','Tukar Tambah').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Tukar Tambah</li>'; 
 										}																				
 										
-										if ($privilage['service'][0] == 1){ 
+										if ($privilage['service'][0] == 1)
+										{ 
 											echo '<li class="icon_blog">'.anchor('service','Penerimaan Service').'</li>'; 
-										}else{
+										}
+										else
+										{
 											echo '<li class="icon_blog">Penerimaan Service</li>'; 
-										}										
-										if ($privilage['penukaran_point'][0] == 1){ 
+										}
+
+										/*if ($privilage['penukaran_point'][0] == 1)
+										{ 
 											echo '<li class="icon_blog">'.anchor('penukaran_point','Penukaran Point').'</li>'; 
-										}else{
+										}
+										else
+										{
 											echo '<li class="icon_blog">Penukaran Point</li>'; 
 										}
 										
-										if ($privilage['so'][0] == 1){ 
+										if ($privilage['so'][0] == 1)
+										{ 
 											echo '<li class="icon_blog">'.anchor('so','Data SO').'</li>'; 
-										}else{
+										}
+										else
+										{
 											echo '<li class="icon_blog">Data SO</li>'; 
-										}									?>									<li class="sep"></li>
-									<?php
-										if ($privilage['laporan_penjualan'][0] == 1){ 
+										}*/									
+										?>
+
+										<li class="sep"></li>
+										<?php
+										if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
 											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_penjualan_periode','Laporan Penjualan [Periode]').'</li>'; 
-										}else{
+										}
+										else
+										{
 											echo '<li class="icon_blog">Laporan Penjualan [Periode]</li>'; 
 										}
 										
-										if ($privilage['laporan_penjualan'][0] == 1){ 
+										if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
 											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_penjualan_barang','Laporan Penjualan [Barang]').'</li>'; 
-										}else{
+										}
+										else
+										{
 											echo '<li class="icon_blog">Laporan Penjualan [Barang]</li>'; 
 										}
 										
-										if ($privilage['laporan_penjualan'][0] == 1){ 
+										if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
 											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_penjualan_pelanggan','Laporan Penjualan [Pelanggan]').'</li>'; 
-										}else{
+										}
+										else
+										{
 											echo '<li class="icon_blog">Laporan Penjualan [Pelanggan]</li>'; 
 										}
-									
-										if ($privilage['laporan_penjualan'][0] == 1){ 
-											echo '<li class="icon_blog">'.anchor('laporan_pembelian/form_lap_saldo_stok','Laporan Saldo Elektrik').'</li>'; 
-										}else{
-											echo '<li class="icon_blog">Laporan Saldo Elektrik</li>'; 
+
+										if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_penjualan_member','Laporan Penjualan [Member]').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Laporan Penjualan [Member]</li>'; 
+										}
+
+										if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_penjualan_cabang','Laporan Penjualan [Cabang]').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Laporan Penjualan [Cabang]</li>'; 
+										}
+
+										if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_penjualan_kategori','Laporan Penjualan [Kategori]').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Laporan Penjualan [Kategori]</li>'; 
+										}
+
+										if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_retur_penjualan','Laporan Return Penjualan').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Laporan Return Penjualan</li>'; 
 										}
 									
-										if ($privilage['laporan_penjualan'][0] == 1){ 
-											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_retur_penjualan','Laporan Return Penjualan').'</li>'; 
-										}else{
-											echo '<li class="icon_blog">Laporan Return Penjualan</li>'; 
-										} 
+										/*if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('laporan_pembelian/form_lap_saldo_stok','Laporan Saldo Elektrik').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Laporan Saldo Elektrik</li>'; 
+										}*/
 									?>
 								
 									<li class="icon_address"><a href="javascript:void(0)">Laporan Point</a> 
@@ -349,17 +437,23 @@
 												?>
 										</ul>
 									</li>
+
 									<?php
-										if ($privilage['laporan_penjualan'][0] == 1){ 
-											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_services','Laporan Services').'</li>'; 
-										}else{
-											echo '<li class="icon_blog">Laporan Services</li>'; 
+										if ($privilage['laporan_penjualan'][0] == 1)
+										{ 
+											echo '<li class="icon_blog">'.anchor('laporan_penjualan/form_lap_services','Laporan Service').'</li>'; 
+										}
+										else
+										{
+											echo '<li class="icon_blog">Laporan Service</li>'; 
 										}
 									?>
+
 								</ul>
 							</div>
 						</li>
-												<li class="with-menu"><a href="javascript:void(0)" title="My settings">Kas dan Bank</a>							<div class="menu">								<img src="asset/admin/images/menu-open-arrow.png" width="16" height="16">								<ul>									<?php																			if ($privilage['kas_awal'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('kas_awal/index','Kas Awal').'</li>'; 										}else{											echo '<li class="icon_blog">Kas Awal</li>'; 										}																						if ($privilage['penerimaan_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('penerimaan_kas/index','Penerimaan Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Penerimaan Kas</li>'; 										}																				if ($privilage['pengeluaran_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('pengeluaran_kas/index','Pengeluaran Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Pengeluaran Kas</li>'; 										}																														/*if ($privilage['pengeluaran_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('pengeluaran_kas/index','Pengeluaran Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Pengeluaran Kas</li>'; 										} */																														if ($privilage['mutasi_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('mutasi_kas/index','Mutasi Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Mutasi Kas</li>'; 										}																																								if ($privilage['refund'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('refund/index','Refund').'</li>'; 										}else{											echo '<li class="icon_blog">Refund</li>'; 										}																				?>										<li class="sep"></li>										<?php																				if ($privilage['hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('hutang/pembayaran','Pembayaran Hutang').'</li>'; 										}else{											echo '<li class="icon_blog">Pembayaran Hutang</li>'; 										}																				if ($privilage['posting_hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('posting_hutang/index','Posting Hutang').'</li>'; 										}else{											echo '<li class="icon_blog">Posting Hutang</li>'; 										}																			?>									<li class="sep"></li>									<?php																					if ($privilage['piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('piutang/pembayaran','Pembayaran Piutang').'</li>'; 										}else{											echo '<li class="icon_blog">Pembayaran Piutang</li>'; 										}																				if ($privilage['posting_piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('posting_piutang/index','Posting Piutang').'</li>'; 										}else{											echo '<li class="icon_blog">Posting Piutang</li>'; 										}																					?>																			<?php /*										if ($privilage['posting_mutasi_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('posting_mutasi_kas/index','Posting Mutasi Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Posting Mutasi Kas</li>'; 										}*/																			?>																	</ul>							</div>						</li>												<!--						<li class="with-menu"><a href="javascript:void(0)" title="My settings">Hutang</a>							<div class="menu">								<img src="images/menu-open-arrow.png" width="16" height="16">								<ul>									<?php/*										if ($privilage['master_hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('hutang/index','Master Hutang').'</li>'; 										}else{											echo '<li class="icon_blog">Master Hutang</li>'; 										}										*/																																												?>								</ul>							</div>						</li>-->											<!--	<li class="with-menu"><a href="javascript:void(0)" title="My settings">PIUTANG</a>							<div class="menu">								<img src="images/menu-open-arrow.png" width="16" height="16">								<ul>									<?php  /*										if ($privilage['piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('piutang/index','Master Piutang ').'</li>'; 										}else{											echo '<li class="icon_blog">Master Piutang</li>'; 										}																														*/									?>								</ul>							</div>						</li>-->																		<li class="with-menu"><a href="javascript:void(0)" title="My settings">Laporan</a>							<div class="menu">								<img src="asset/admin/images/menu-open-arrow.png" width="16" height="16">								<ul>									<?php										if ($privilage['laporan_biaya'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_biaya','Laporan Biaya').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Biaya</li>'; 										}																				if ($privilage['laporan_buku_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_buku_kas','Laporan Buku Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Buku Kas</li>'; 										}																				if ($privilage['laporan_laba_rugi'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_laba_rugi','Laporan Laba Rugi').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Laba Rugi</li>'; 										}																				if ($privilage['laporan_hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_hutang','Laporan Hutang [Supplier]').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Hutang [Supplier]</li>'; 										}																				if ($privilage['laporan_piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_piutang','Laporan Piutang [Pelanggan]').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Piutang [Pelanggan]</li>'; 										}																				if ($privilage['laporan_piutang_cabang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_piutang/laporan_piutang_cabang','Laporan Piutang [Cabang]').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Piutang [Cabang]</li>'; 										}									?>										<li class="sep"></li>									<?php																																						if ($privilage['laporan_pembayaran_hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_pembayaran_hutang','Laporan Pembayaran Hutang').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Pembayaran Hutang</li>'; 										}																														if ($privilage['laporan_pembayaran_piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_pembayaran_piutang','Laporan Pembayaran Piutang').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Pembayaran Piutang</li>'; 										}									?>								</ul>							</div>						</li>
+
+						<li class="with-menu"><a href="javascript:void(0)" title="My settings">Kas dan Bank</a>							<div class="menu">								<img src="asset/admin/images/menu-open-arrow.png" width="16" height="16">								<ul>									<?php																			if ($privilage['kas_awal'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('kas_awal/index','Kas Awal').'</li>'; 										}else{											echo '<li class="icon_blog">Kas Awal</li>'; 										}																						if ($privilage['penerimaan_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('penerimaan_kas/index','Penerimaan Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Penerimaan Kas</li>'; 										}																				if ($privilage['pengeluaran_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('pengeluaran_kas/index','Pengeluaran Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Pengeluaran Kas</li>'; 										}																														/*if ($privilage['pengeluaran_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('pengeluaran_kas/index','Pengeluaran Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Pengeluaran Kas</li>'; 										} */																														if ($privilage['mutasi_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('mutasi_kas/index','Mutasi Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Mutasi Kas</li>'; 										}																																								if ($privilage['refund'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('refund/index','Refund').'</li>'; 										}else{											echo '<li class="icon_blog">Refund</li>'; 										}																				?>										<li class="sep"></li>										<?php																				if ($privilage['hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('hutang/pembayaran','Pembayaran Hutang').'</li>'; 										}else{											echo '<li class="icon_blog">Pembayaran Hutang</li>'; 										}																				if ($privilage['posting_hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('posting_hutang/index','Posting Hutang').'</li>'; 										}else{											echo '<li class="icon_blog">Posting Hutang</li>'; 										}																			?>									<li class="sep"></li>									<?php																					if ($privilage['piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('piutang/pembayaran','Pembayaran Piutang').'</li>'; 										}else{											echo '<li class="icon_blog">Pembayaran Piutang</li>'; 										}																				if ($privilage['posting_piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('posting_piutang/index','Posting Piutang').'</li>'; 										}else{											echo '<li class="icon_blog">Posting Piutang</li>'; 										}																					?>																			<?php /*										if ($privilage['posting_mutasi_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('posting_mutasi_kas/index','Posting Mutasi Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Posting Mutasi Kas</li>'; 										}*/																			?>																	</ul>							</div>						</li>												<!--						<li class="with-menu"><a href="javascript:void(0)" title="My settings">Hutang</a>							<div class="menu">								<img src="images/menu-open-arrow.png" width="16" height="16">								<ul>									<?php/*										if ($privilage['master_hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('hutang/index','Master Hutang').'</li>'; 										}else{											echo '<li class="icon_blog">Master Hutang</li>'; 										}										*/																																												?>								</ul>							</div>						</li>-->											<!--	<li class="with-menu"><a href="javascript:void(0)" title="My settings">PIUTANG</a>							<div class="menu">								<img src="images/menu-open-arrow.png" width="16" height="16">								<ul>									<?php  /*										if ($privilage['piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('piutang/index','Master Piutang ').'</li>'; 										}else{											echo '<li class="icon_blog">Master Piutang</li>'; 										}																														*/									?>								</ul>							</div>						</li>-->																		<li class="with-menu"><a href="javascript:void(0)" title="My settings">Laporan</a>							<div class="menu">								<img src="asset/admin/images/menu-open-arrow.png" width="16" height="16">								<ul>									<?php										if ($privilage['laporan_biaya'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_biaya','Laporan Biaya').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Biaya</li>'; 										}																				if ($privilage['laporan_buku_kas'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_buku_kas','Laporan Buku Kas').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Buku Kas</li>'; 										}																				if ($privilage['laporan_laba_rugi'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_laba_rugi','Laporan Laba Rugi').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Laba Rugi</li>'; 										}																				if ($privilage['laporan_hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_hutang','Laporan Hutang [Supplier]').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Hutang [Supplier]</li>'; 										}																				if ($privilage['laporan_piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_piutang','Laporan Piutang [Pelanggan]').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Piutang [Pelanggan]</li>'; 										}																				if ($privilage['laporan_piutang_cabang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_piutang/laporan_piutang_cabang','Laporan Piutang [Cabang]').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Piutang [Cabang]</li>'; 										}									?>										<li class="sep"></li>									<?php																																						if ($privilage['laporan_pembayaran_hutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_pembayaran_hutang','Laporan Pembayaran Hutang').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Pembayaran Hutang</li>'; 										}																														if ($privilage['laporan_pembayaran_piutang'][0] == 1){ 											echo '<li class="icon_blog">'.anchor('laporan_pembayaran_piutang','Laporan Pembayaran Piutang').'</li>'; 										}else{											echo '<li class="icon_blog">Laporan Pembayaran Piutang</li>'; 										}									?>								</ul>							</div>						</li>
 						<li class="with-menu"><a href="javascript:void(0)" title="My settings">Grafik</a>
 							<div class="menu">
 								<img src="asset/admin/images/menu-open-arrow.png" width="16" height="16">

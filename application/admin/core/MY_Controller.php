@@ -19,14 +19,17 @@ class MY_Controller extends CI_Controller{
 		
 		// jika tidak diperbolehkan mengakses controller
 		$ctr = $this->uri->segment(1);
-		if ($this->can_access($ctr) == FALSE){
+		
+
+		if ($this->can_access($ctr) == FALSE)
+		{
 			redirect('auth/failed');
 		}
 		
 	}		
 	private function ambilheader()	
 	{	
-		$data['result'] 		= $this->setting_view->getItemById($id);				
+		$data['result'] = $this->setting_view->getItemById($id);				
 		$data['id'] = $id;		
 		$data['name'] = $data['result']->row()->name;		
 		$data['detail'] = $data['result']->row()->detail;		
@@ -101,13 +104,19 @@ class MY_Controller extends CI_Controller{
 	{	
 		$priv = $this->privilage_x;
 		$form = $ctr;
-		if($form){
-			if($priv[$form][0] == 1){
+		if($form)
+		{
+			if($priv[$form][0] == 1)
+			{
 				return TRUE;
-			}else{
+			}
+			else
+			{
 				return FALSE;
 			}
-		}else{
+		}
+		else
+		{
 			return TRUE;
 		}
 	}
@@ -118,7 +127,8 @@ class MY_Controller extends CI_Controller{
 		$form = $this->uri->segment(1);
 		
 		if($form){
-			if($priv[$form][1] == 1){
+			if($priv[$form][1] == 1)
+			{
 				return TRUE;
 			}else{
 				return FALSE;

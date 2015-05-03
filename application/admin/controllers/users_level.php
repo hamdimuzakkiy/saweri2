@@ -86,11 +86,14 @@ class users_level extends My_Controller
 		
 		$this->form_validation->set_message('required', 'Field Harus Diisi!');
 		
-		if ($this->form_validation->run() == FALSE){
+		if ($this->form_validation->run() == FALSE)
+		{
 			
 			$this->load->view('users_level/users_level_add',$data);
 			
-		}else{	
+		}
+		else
+		{	
 			
 			$fields = $this->db->field_data('users_level');
 			foreach($fields as $field){
